@@ -33,7 +33,23 @@
 <li><a href="#dev-ops">6. Dev Ops</a></li>
 <li><a href="#product-scope">Appendix A: Product Scope</a></li>
 <li><a href="#user-stories">Appendix B: User Stories</a></li>
-<li><a href="#use-cases">Appendix C: Use Cases</a></li>
+<li><a href="#use-cases">Appendix C: Use Cases</a>
+<ul class="sectlevel2">
+<li><a href="#use-case-add-a-spending">C.1. Use case: Add a spending</a></li>
+<li><a href="#use-case-update-a-spending">C.2. Use case: Update a spending</a></li>
+<li><a href="#use-case-delete-a-spending">C.3. Use case: Delete a spending</a></li>
+<li><a href="#use-case-find-a-spending">C.4. Use case: Find a spending</a></li>
+<li><a href="#use-case-set-a-monthly-budget">C.5. Use case: Set a monthly budget</a></li>
+<li><a href="#use-case-generate-statistics">C.6. Use case: Generate statistics</a></li>
+<li><a href="#use-case-list-all-the-tags">C.7. Use case: List all the tags</a></li>
+<li><a href="#use-case-import-external-data-from-a-csv-file">C.8. Use case: Import external data from a CSV file</a></li>
+<li><a href="#use-case-export-data-to-a-csv-file">C.9. Use case: Export data to a CSV file</a></li>
+<li><a href="#use-case-undo-a-command">C.10. Use case: Undo a command</a></li>
+<li><a href="#use-case-redo-a-command">C.11. Use case: Redo a command</a></li>
+<li><a href="#use-case-graphing-data">C.12. Use case: Graphing Data</a></li>
+<li><a href="#use-case-clear-all-spending">C.13. Use case: Clear all spending</a></li>
+</ul>
+</li>
 <li><a href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></li>
 <li><a href="#glossary">Appendix E: Glossary</a></li>
 <li><a href="#product-survey">Appendix F: Product Survey</a></li>
@@ -720,23 +736,44 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="paragraph">
 <p>(For all use cases below, the <strong>System</strong> is the <code>AddressBook</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
 </div>
-<h3 id="use-case-delete-person" class="discrete">Use case: Delete person</h3>
+<div class="sect2">
+<h3 id="use-case-add-a-spending"><a class="link" href="#use-case-add-a-spending">C.1. Use case: Add a spending</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to list persons</p>
+<p>User enters a spending</p>
 </li>
 <li>
-<p>AddressBook shows a list of persons</p>
+<p>MoneyGoWhere adds the specified spending inside the list of spending</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<hr>
+</div>
+<div class="sect2">
+<h3 id="use-case-update-a-spending"><a class="link" href="#use-case-update-a-spending">C.2. Use case: Update a spending</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to view the list of spending</p>
 </li>
 <li>
-<p>User requests to delete a specific person in the list</p>
+<p>MoneyGoWhere shows a list of spending</p>
 </li>
 <li>
-<p>AddressBook deletes the person</p>
+<p>User requests to update name/cost/date of purchase/tag/remark of a spending</p>
+</li>
+<li>
+<p>MoneyGoWhere updates the specified fields(s) of the spending</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -759,7 +796,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>3a1. AddressBook shows an error message.</p>
+<p>3a1. MoneyGoWhere shows an error message.</p>
 <div class="paragraph">
 <p>Use case resumes at step 2.</p>
 </div>
@@ -769,8 +806,378 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </li>
 </ul>
 </div>
+<hr>
+</div>
+<div class="sect2">
+<h3 id="use-case-delete-a-spending"><a class="link" href="#use-case-delete-a-spending">C.3. Use case: Delete a spending</a></h3>
 <div class="paragraph">
-<p><em>{More to be added}</em></p>
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to view the list of spending</p>
+</li>
+<li>
+<p>MoneyGoWhere shows a list of spending</p>
+</li>
+<li>
+<p>User requests to delete a specific spending from the list.</p>
+</li>
+<li>
+<p>MoneyGoWhere deletes the spending.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The list is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>3a. The given index is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. MoneyGoWhere shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+<div class="sect2">
+<h3 id="use-case-find-a-spending"><a class="link" href="#use-case-find-a-spending">C.4. Use case: Find a spending</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to find all occurrences of a keyword or within a cost range or date range in a spending.</p>
+</li>
+<li>
+<p>MoneyGoWhere returns any spending found with the keyword or within a cost range or date range specified.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<hr>
+</div>
+<div class="sect2">
+<h3 id="use-case-set-a-monthly-budget"><a class="link" href="#use-case-set-a-monthly-budget">C.5. Use case: Set a monthly budget</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to set a monthly budget</p>
+</li>
+<li>
+<p>MoneyGoWhere sets a specific monthly budget</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The given budget value is invalid</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. MoneyGoWhere shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 1.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+<div class="sect2">
+<h3 id="use-case-generate-statistics"><a class="link" href="#use-case-generate-statistics">C.6. Use case: Generate statistics</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to generate statistics</p>
+</li>
+<li>
+<p>MoneyGoWhere generate statistical analysis such as total spending of each tag</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<hr>
+</div>
+<div class="sect2">
+<h3 id="use-case-list-all-the-tags"><a class="link" href="#use-case-list-all-the-tags">C.7. Use case: List all the tags</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to list all the recorded tags</p>
+</li>
+<li>
+<p>MoneyGoWhere lists all the recorded tags</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<hr>
+</div>
+<div class="sect2">
+<h3 id="use-case-import-external-data-from-a-csv-file"><a class="link" href="#use-case-import-external-data-from-a-csv-file">C.8. Use case: Import external data from a CSV file</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to import data from CSV file by specifying the file path</p>
+</li>
+<li>
+<p>MoneyGoWhere import the data from the CSV file located at specified file path</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The file path is invalid</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. MoneyGoWhere shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 1.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+<div class="sect2">
+<h3 id="use-case-export-data-to-a-csv-file"><a class="link" href="#use-case-export-data-to-a-csv-file">C.9. Use case: Export data to a CSV file</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to export data from CSV file by specifying the file path</p>
+</li>
+<li>
+<p>MoneyGoWhere export the data into the CSV file located at specified file path</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The file path is invalid</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. MoneyGoWhere shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 1.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+<div class="sect2">
+<h3 id="use-case-undo-a-command"><a class="link" href="#use-case-undo-a-command">C.10. Use case: Undo a command</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to undo a command</p>
+</li>
+<li>
+<p>MoneyGoWhere restores the list of spending to the state before the previous undoable command was executed.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. There is no undoable commands executed previously.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. MoneyGoWhere shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+<div class="sect2">
+<h3 id="use-case-redo-a-command"><a class="link" href="#use-case-redo-a-command">C.11. Use case: Redo a command</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to redo a command</p>
+</li>
+<li>
+<p>MoneyGoWhere restores the most recent undo command.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. There is no undo commands executed previously.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. MoneyGoWhere shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+<div class="sect2">
+<h3 id="use-case-graphing-data"><a class="link" href="#use-case-graphing-data">C.12. Use case: Graphing Data</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to display spending in the form of a graph.</p>
+</li>
+<li>
+<p>MoneyGoWhere displays spending in graph form.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<hr>
+</div>
+<div class="sect2">
+<h3 id="use-case-clear-all-spending"><a class="link" href="#use-case-clear-all-spending">C.13. Use case: Clear all spending</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to clear all entries in the list of spending.</p>
+</li>
+<li>
+<p>MoneyGoWhere deletes all spending.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The list of spending is empty.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. MoneyGoWhere shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
@@ -958,4 +1365,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-09-26 18:58:50 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-09-26 19:09:39 UTC</div></div></div></body></html>
