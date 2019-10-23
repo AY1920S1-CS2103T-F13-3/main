@@ -21,7 +21,7 @@ By: `Team CS2103T-F13-3`      Since: `Sep 2019`      Licence: `MIT`
 *MoneyGoWhere* is a personal finance application targeted at students who have yet to earn a stable income.
 It allows students to keep track of all their spending and their related information such as date, cost and tags.
 Users can also set budget goals, view statistics, set reminders for bills and export their data to a .csv file.
-With an easy-to-use Graphical User Interface (GUI) and employment of Command Line Interface(CLI), users can easily navigate through the application, contributing to its user-friendliness and efficiency.
+With an easy-to-use Graphical User Interface (GUI) and employment of Command Line Interface (CLI), users can easily navigate through the application, contributing to its user-friendliness and efficiency.
 
 What are you waiting for? Start tracking your finances now!
 
@@ -298,9 +298,13 @@ The list is sorted in descending order based on cost. The tag with the highest c
 Format: `stats d/DATE_START d/DATE_END`
 
 ****
-* Generates statistics for all spending that fall between and including the STARTDATE and ENDDATE specified.
-* If no STARTDATE and ENDDATE parameters are specified, the statistics generated will be based on the whole list of spending.
+* Generates statistics for all spending that fall between and including the DATE_START and DATE_END specified.
+* If no DATE_START and DATE_END parameters are specified, the statistics generated will be based on the whole list of spending.
 ****
+
+[NOTE]
+DATE_START must be earlier or the same as DATE_END.
+
 [TIP]
 Date range can be input in the following ways: +
 `d/DATE_START d/DATE_END` +
@@ -308,7 +312,7 @@ Date range can be input in the following ways: +
 `d/DATE_START - DATE_END`
 
 .Output of Statistics
-image::statistics.png[width="500"]
+image::statistics.png[width="600"]
 
 Examples:
 
@@ -321,12 +325,14 @@ Generates statistics for all spending.
 === Graphing the data : `graph`
 Shows the cost spent in the form of a line graph as seen in Figure 4.
 
-Format: `graph d/STARTDATE d/ENDDATE`
+Format: `graph d/DATE_START d/DATE_END`
 
 ****
-* Generates a graph for all spending that fall between and including the STARTDATE and ENDDATE specified.
-* If no STARTDATE and ENDDATE parameters are specified, the statistics generated will be based on the whole list of spending.
+* Generates a graph for all spending that fall between and including the DATE_START and DATE_END specified.
+* If no DATE_START and DATE_END parameters are specified, the statistics generated will be based on the whole list of spending.
 ****
+[NOTE]
+DATE_START must be earlier or the same as DATE_END.
 
 [TIP]
 Date range can be input in the following ways: +
@@ -423,6 +429,8 @@ Format: `exit`
 * Spending: An expense incurred by the user.
 * Budget: The maximum amount of money set by the user to spend.
 * Cost: Money spent by the user.
+* Safe: The user has spent less or equal to his budget set.
+* Deficit: The user has spent more than his budget set.
 
 == Command Summary
 
