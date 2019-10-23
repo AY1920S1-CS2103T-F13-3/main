@@ -22,14 +22,15 @@
 <li><a href="#find-by-attribute-code-find-code">3.7. Find by attribute : <code>find</code></a></li>
 <li><a href="#setting-monthly-budget-code-budget-code">3.8. Setting monthly budget : <code>budget</code></a></li>
 <li><a href="#generating-statistics-code-stats-code">3.9. Generating statistics : <code>stats</code></a></li>
-<li><a href="#listing-all-tags-code-ltags-code">3.10. Listing all tags : <code>ltags</code></a></li>
-<li><a href="#importing-data-code-import-code">3.11. Importing data : <code>import</code></a></li>
-<li><a href="#exporting-data-code-export-code">3.12. Exporting data : <code>export</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">3.13. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.14. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#graphing-the-data-code-graph-code">3.15. Graphing the data : <code>graph</code></a></li>
-<li><a href="#clear-all-data-code-clear-code">3.16. Clear all data : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.17. Exiting the program : <code>exit</code></a></li>
+<li><a href="#sorting-spending-entries-code-sort-code">3.10. Sorting spending entries : <code>sort</code></a></li>
+<li><a href="#listing-all-tags-code-ltags-code">3.11. Listing all tags : <code>ltags</code></a></li>
+<li><a href="#importing-data-code-import-code">3.12. Importing data : <code>import</code></a></li>
+<li><a href="#exporting-data-code-export-code">3.13. Exporting data : <code>export</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">3.14. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.15. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#graphing-the-data-code-graph-code">3.16. Graphing the data : <code>graph</code></a></li>
+<li><a href="#clear-all-data-code-clear-code">3.17. Clear all data : <code>clear</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.18. Exiting the program : <code>exit</code></a></li>
 </ul>
 </li>
 <li><a href="#command-summary">4. Command Summary</a></li>
@@ -558,14 +559,53 @@ Generates statistics for all spending.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-all-tags-code-ltags-code"><a class="link" href="#listing-all-tags-code-ltags-code">3.10. Listing all tags : <code>ltags</code></a></h3>
+<h3 id="sorting-spending-entries-code-sort-code"><a class="link" href="#sorting-spending-entries-code-sort-code">3.10. Sorting spending entries : <code>sort</code></a></h3>
+<div class="paragraph">
+<p>Sorts all spending based on a given order. Note that the input entered is order-sensitive.<br>
+Format: <code>sort [PREFIX/SORT_ORDER]</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Valid prefixes are: Cost (<code>c</code>), Date (<code>d</code>), Name (<code>n</code>), Remarks (<code>r</code>).</p>
+</li>
+<li>
+<p>Valid sort orders are: <code>ASC</code>, <code>DESC</code>.</p>
+</li>
+<li>
+<p>At least one of the optional fields must be provided.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>sort d/ASC c/DESC</code><br>
+Sorts current spending displayed by Date in ascending order. If they are the same, sort by Cost in descending order.</p>
+</li>
+<li>
+<p><code>sort n/DESC</code><br>
+Sorts current spending displayed by Name in descending order.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-all-tags-code-ltags-code"><a class="link" href="#listing-all-tags-code-ltags-code">3.11. Listing all tags : <code>ltags</code></a></h3>
 <div class="paragraph">
 <p>Displays a list of all available tags.<br>
 Format: <code>ltags</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="importing-data-code-import-code"><a class="link" href="#importing-data-code-import-code">3.11. Importing data : <code>import</code></a></h3>
+<h3 id="importing-data-code-import-code"><a class="link" href="#importing-data-code-import-code">3.12. Importing data : <code>import</code></a></h3>
 <div class="paragraph">
 <p>Imports data from a CSV file specified by file path.<br>
 Format: <code>import p/FILE_PATH</code><br></p>
@@ -588,7 +628,7 @@ Format: <code>import p/FILE_PATH</code><br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exporting-data-code-export-code"><a class="link" href="#exporting-data-code-export-code">3.12. Exporting data : <code>export</code></a></h3>
+<h3 id="exporting-data-code-export-code"><a class="link" href="#exporting-data-code-export-code">3.13. Exporting data : <code>export</code></a></h3>
 <div class="paragraph">
 <p>Exports data to a CSV file specified by file path.<br>
 Format: export <code>p/FILE_PATH</code><br></p>
@@ -611,7 +651,7 @@ Format: export <code>p/FILE_PATH</code><br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.13. Undoing previous command : <code>undo</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.14. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Restores the list of spending to the state before the previous undoable command was executed.<br>
 Format: <code>undo</code><br></p>
@@ -655,7 +695,7 @@ Format: <code>undo</code><br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.14. Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.15. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Reverses the most recent undo command.<br>
 Format: <code>redo</code><br></p>
@@ -686,7 +726,7 @@ Format: <code>redo</code><br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="graphing-the-data-code-graph-code"><a class="link" href="#graphing-the-data-code-graph-code">3.15. Graphing the data : <code>graph</code></a></h3>
+<h3 id="graphing-the-data-code-graph-code"><a class="link" href="#graphing-the-data-code-graph-code">3.16. Graphing the data : <code>graph</code></a></h3>
 <div class="paragraph">
 <p>Shows the spending in the form of a line graph.</p>
 </div>
@@ -724,14 +764,14 @@ Generates a graph for all spending.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="clear-all-data-code-clear-code"><a class="link" href="#clear-all-data-code-clear-code">3.16. Clear all data : <code>clear</code></a></h3>
+<h3 id="clear-all-data-code-clear-code"><a class="link" href="#clear-all-data-code-clear-code">3.17. Clear all data : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries from the application.<br>
 Format: <code>clear</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.17. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.18. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
@@ -800,6 +840,11 @@ e.g. <code>export p/C:\Users\User\Documents\importfile.csv</code><br></p></td>
 e.g. <code>stats d/01/01/2019 d/07/01/2019</code><br></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Sort</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sort [PREFIX/SORT_ORDER]</code><br>
+e.g. <code>sort d/DESC c/ASC</code><br></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>List all tags</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>ltags</code><br></p></td>
 </tr>
@@ -831,4 +876,4 @@ e.g. <code>graph d/01/01/2019 d/07/01/2019</code><br></p></td>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-23 09:50:29 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-23 10:40:08 UTC</div></div></div></body></html>
