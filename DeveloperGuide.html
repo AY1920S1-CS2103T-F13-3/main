@@ -26,6 +26,7 @@
 <li><a href="#proposed-data-encryption">3.2. [Proposed] Data Encryption</a></li>
 <li><a href="#logging">3.3. Logging</a></li>
 <li><a href="#Implementation-Configuration">3.4. Configuration</a></li>
+<li><a href="#reminder-feature">3.5. Reminder feature</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a></li>
@@ -39,7 +40,7 @@
 <li><a href="#instructions-for-manual-testing">Appendix F: Instructions for Manual Testing</a>
 <ul class="sectlevel2">
 <li><a href="#launch-and-shutdown">F.1. Launch and Shutdown</a></li>
-<li><a href="#deleting-a-person">F.2. Deleting a person</a></li>
+<li><a href="#deleting-a-spending">F.2. Deleting a Spending</a></li>
 <li><a href="#saving-data">F.3. Saving data</a></li>
 </ul>
 </li>
@@ -82,7 +83,7 @@ Refer to the <a href="UsingPlantUml.html">Using PlantUML guide</a> to learn how 
 </table>
 </div>
 <div class="paragraph">
-<p><code>Main</code> has two classes called <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/tree/master/src/main/java/seedu/address/Main.java"><code>Main</code></a> and <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/tree/master/src/main/java/seedu/address/MainApp.java"><code>MainApp</code></a>. It is responsible for,</p>
+<p><code>Main</code> has two classes called <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/tree/master/src/main/java/seedu/moneygowhere/Main.java"><code>Main</code></a> and <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/tree/master/src/main/java/seedu/moneygowhere/MainApp.java"><code>MainApp</code></a>. It is responsible for,</p>
 </div>
 <div class="ulist">
 <ul>
@@ -169,13 +170,13 @@ The following class plays an important role at the architecture level:</p>
 <div class="title">Figure 4. Structure of the UI Component</div>
 </div>
 <div class="paragraph">
-<p><strong>API</strong> : <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/tree/master/src/main/java/seedu/address/ui/Ui.java"><code>Ui.java</code></a></p>
+<p><strong>API</strong> : <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/tree/master/src/main/java/seedu/moneygowhere/ui/Ui.java"><code>Ui.java</code></a></p>
 </div>
 <div class="paragraph">
-<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>PersonListPanel</code>, <code>StatusBarFooter</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
+<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>SpendingListPanel</code>, <code>StatusBarFooter</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
 </div>
 <div class="paragraph">
-<p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/tree/master/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/tree/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
+<p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/tree/master/src/main/java/seedu/moneygowhere/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/tree/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
 </div>
 <div class="paragraph">
 <p>The <code>UI</code> component,</p>
@@ -201,18 +202,18 @@ The following class plays an important role at the architecture level:</p>
 </div>
 <div class="paragraph">
 <p><strong>API</strong> :
-<a href="https://github.com/AY1920S1-CS2103T-F13-3/main/tree/master/src/main/java/seedu/address/logic/Logic.java"><code>Logic.java</code></a></p>
+<a href="https://github.com/AY1920S1-CS2103T-F13-3/main/tree/master/src/main/java/seedu/moneygowhere/logic/Logic.java"><code>Logic.java</code></a></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>Logic</code> uses the <code>AddressBookParser</code> class to parse the user command.</p>
+<p><code>Logic</code> uses the <code>SpendingBookParser</code> class to parse the user command.</p>
 </li>
 <li>
 <p>This results in a <code>Command</code> object which is executed by the <code>LogicManager</code>.</p>
 </li>
 <li>
-<p>The command execution can affect the <code>Model</code> (e.g. adding a person).</p>
+<p>The command execution can affect the <code>Model</code> (e.g. adding a Spending).</p>
 </li>
 <li>
 <p>The result of the command execution is encapsulated as a <code>CommandResult</code> object which is passed back to the <code>Ui</code>.</p>
@@ -253,7 +254,7 @@ The lifeline for <code>DeleteCommandParser</code> should end at the destroy mark
 <div class="title">Figure 7. Structure of the Model Component</div>
 </div>
 <div class="paragraph">
-<p><strong>API</strong> : <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/tree/master/src/main/java/seedu/address/model/Model.java"><code>Model.java</code></a></p>
+<p><strong>API</strong> : <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/tree/master/src/main/java/seedu/moneygowhere/model/Model.java"><code>Model.java</code></a></p>
 </div>
 <div class="paragraph">
 <p>The <code>Model</code>,</p>
@@ -264,10 +265,10 @@ The lifeline for <code>DeleteCommandParser</code> should end at the destroy mark
 <p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences.</p>
 </li>
 <li>
-<p>stores the Address Book data.</p>
+<p>stores the Spending Book data.</p>
 </li>
 <li>
-<p>exposes an unmodifiable <code>ObservableList&lt;Person&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
+<p>exposes an unmodifiable <code>ObservableList&lt;Spending&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
 </li>
 <li>
 <p>does not depend on any of the other three components.</p>
@@ -281,7 +282,7 @@ The lifeline for <code>DeleteCommandParser</code> should end at the destroy mark
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book</code>, which <code>Person</code> can reference. This would allow <code>Address Book</code> to only require one <code>Tag</code> object per unique <code>Tag</code>, instead of each <code>Person</code> needing their own <code>Tag</code> object. An example of how such a model may look like is given below.<br>
+As a more OOP model, we can store a <code>Tag</code> list in <code>Spending Book</code>, which <code>Spending</code> can reference. This would allow <code>Spending Book</code> to only require one <code>Tag</code> object per unique <code>Tag</code>, instead of each <code>Spending</code> needing their own <code>Tag</code> object. An example of how such a model may look like is given below.<br>
 <br>
 <span class="image"><img src="images/BetterModelClassDiagram.png" alt="BetterModelClassDiagram"></span>
 </td>
@@ -298,7 +299,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <div class="title">Figure 8. Structure of the Storage Component</div>
 </div>
 <div class="paragraph">
-<p><strong>API</strong> : <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/tree/master/src/main/java/seedu/address/storage/Storage.java"><code>Storage.java</code></a></p>
+<p><strong>API</strong> : <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/tree/master/src/main/java/seedu/moneygowhere/storage/Storage.java"><code>Storage.java</code></a></p>
 </div>
 <div class="paragraph">
 <p>The <code>Storage</code> component,</p>
@@ -309,7 +310,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <p>can save <code>UserPref</code> objects in json format and read it back.</p>
 </li>
 <li>
-<p>can save the Address Book data in json format and read it back.</p>
+<p>can save the Spending Book data in json format and read it back.</p>
 </li>
 </ul>
 </div>
@@ -317,7 +318,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <div class="sect2">
 <h3 id="Design-Commons"><a class="link" href="#Design-Commons">2.6. Common classes</a></h3>
 <div class="paragraph">
-<p>Classes used by multiple components are in the <code>seedu.addressbook.commons</code> package.</p>
+<p>Classes used by multiple components are in the <code>seedu.moneygowhere.commons</code> package.</p>
 </div>
 </div>
 </div>
@@ -333,31 +334,31 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <div class="sect3">
 <h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.1.1. Proposed Implementation</a></h4>
 <div class="paragraph">
-<p>The undo/redo mechanism is facilitated by <code>VersionedAddressBook</code>.
-It extends <code>AddressBook</code> with an undo/redo history, stored internally as an <code>addressBookStateList</code> and <code>currentStatePointer</code>.
+<p>The undo/redo mechanism is facilitated by <code>VersionedSpendingBook</code>.
+It extends <code>SpendingBook</code> with an undo/redo history, stored internally as an <code>spendingBookStateList</code> and <code>currentStatePointer</code>.
 Additionally, it implements the following operations:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>VersionedAddressBook#commit()</code>&#8201;&#8212;&#8201;Saves the current address book state in its history.</p>
+<p><code>VersionedSpendingBook#commit()</code>&#8201;&#8212;&#8201;Saves the current spending book state in its history.</p>
 </li>
 <li>
-<p><code>VersionedAddressBook#undo()</code>&#8201;&#8212;&#8201;Restores the previous address book state from its history.</p>
+<p><code>VersionedSpendingBook#undo()</code>&#8201;&#8212;&#8201;Restores the previous spending book state from its history.</p>
 </li>
 <li>
-<p><code>VersionedAddressBook#redo()</code>&#8201;&#8212;&#8201;Restores a previously undone address book state from its history.</p>
+<p><code>VersionedSpendingBook#redo()</code>&#8201;&#8212;&#8201;Restores a previously undone spending book state from its history.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>These operations are exposed in the <code>Model</code> interface as <code>Model#commitAddressBook()</code>, <code>Model#undoAddressBook()</code> and <code>Model#redoAddressBook()</code> respectively.</p>
+<p>These operations are exposed in the <code>Model</code> interface as <code>Model#commitSpendingBook()</code>, <code>Model#undoSpendingBook()</code> and <code>Model#redoSpendingBook()</code> respectively.</p>
 </div>
 <div class="paragraph">
 <p>Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.</p>
 </div>
 <div class="paragraph">
-<p>Step 1. The user launches the application for the first time. The <code>VersionedAddressBook</code> will be initialized with the initial address book state, and the <code>currentStatePointer</code> pointing to that single address book state.</p>
+<p>Step 1. The user launches the application for the first time. The <code>VersionedSpendingBook</code> will be initialized with the initial spending book state, and the <code>currentStatePointer</code> pointing to that single spending book state.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -365,7 +366,7 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Step 2. The user executes <code>delete 5</code> command to delete the 5th person in the address book. The <code>delete</code> command calls <code>Model#commitAddressBook()</code>, causing the modified state of the address book after the <code>delete 5</code> command executes to be saved in the <code>addressBookStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted address book state.</p>
+<p>Step 2. The user executes <code>delete 5</code> command to delete the 5th Spending in the spending book. The <code>delete</code> command calls <code>Model#commitSpendingBook()</code>, causing the modified state of the spending book after the <code>delete 5</code> command executes to be saved in the <code>spendingBookStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted spending book state.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -373,7 +374,7 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Step 3. The user executes <code>add n/David &#8230;&#8203;</code> to add a new person. The <code>add</code> command also calls <code>Model#commitAddressBook()</code>, causing another modified address book state to be saved into the <code>addressBookStateList</code>.</p>
+<p>Step 3. The user executes <code>add n/David &#8230;&#8203;</code> to add a new Spending. The <code>add</code> command also calls <code>Model#commitSpendingBook()</code>, causing another modified spending book state to be saved into the <code>spendingBookStateList</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -387,13 +388,13 @@ Additionally, it implements the following operations:</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If a command fails its execution, it will not call <code>Model#commitAddressBook()</code>, so the address book state will not be saved into the <code>addressBookStateList</code>.
+If a command fails its execution, it will not call <code>Model#commitSpendingBook()</code>, so the spending book state will not be saved into the <code>spendingBookStateList</code>.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>Model#undoAddressBook()</code>, which will shift the <code>currentStatePointer</code> once to the left, pointing it to the previous address book state, and restores the address book to that state.</p>
+<p>Step 4. The user now decides that adding the Spending was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>Model#spendingBook()</code>, which will shift the <code>currentStatePointer</code> once to the left, pointing it to the previous spending book state, and restores the spending book to that state.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -407,7 +408,7 @@ If a command fails its execution, it will not call <code>Model#commitAddressBook
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If the <code>currentStatePointer</code> is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The <code>undo</code> command uses <code>Model#canUndoAddressBook()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+If the <code>currentStatePointer</code> is at index 0, pointing to the initial spending book state, then there are no previous spending book states to restore. The <code>undo</code> command uses <code>Model#canUndoSpendingBook()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
 </td>
 </tr>
 </table>
@@ -433,7 +434,7 @@ The lifeline for <code>UndoCommand</code> should end at the destroy marker (X) b
 </table>
 </div>
 <div class="paragraph">
-<p>The <code>redo</code> command does the opposite&#8201;&#8212;&#8201;it calls <code>Model#redoAddressBook()</code>, which shifts the <code>currentStatePointer</code> once to the right, pointing to the previously undone state, and restores the address book to that state.</p>
+<p>The <code>redo</code> command does the opposite&#8201;&#8212;&#8201;it calls <code>Model#redoSpendingBook()</code>, which shifts the <code>currentStatePointer</code> once to the right, pointing to the previously undone state, and restores the spending book to that state.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -442,13 +443,13 @@ The lifeline for <code>UndoCommand</code> should end at the destroy marker (X) b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If the <code>currentStatePointer</code> is at index <code>addressBookStateList.size() - 1</code>, pointing to the latest address book state, then there are no undone address book states to restore. The <code>redo</code> command uses <code>Model#canRedoAddressBook()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+If the <code>currentStatePointer</code> is at index <code>spendingBookStateList.size() - 1</code>, pointing to the latest spending book state, then there are no undone spending book states to restore. The <code>redo</code> command uses <code>Model#canRedoSpendingBook()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Step 5. The user then decides to execute the command <code>list</code>. Commands that do not modify the address book, such as <code>list</code>, will usually not call <code>Model#commitAddressBook()</code>, <code>Model#undoAddressBook()</code> or <code>Model#redoAddressBook()</code>. Thus, the <code>addressBookStateList</code> remains unchanged.</p>
+<p>Step 5. The user then decides to execute the command <code>list</code>. Commands that do not modify the spending book, such as <code>list</code>, will usually not call <code>Model#commitSpendingBook()</code>, <code>Model#undoSpendingBook()</code> or <code>Model#redoSpendingBook()</code>. Thus, the <code>SpendingBookStateList</code> remains unchanged.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -456,7 +457,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="paragraph">
-<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commitAddressBook()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>addressBookStateList</code>, all address book states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add n/David &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
+<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commitSpendingBook()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>SpendingBookStateList</code>, all spending book states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add n/David &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -479,7 +480,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Saves the entire address book.</p>
+<p><strong>Alternative 1 (current choice):</strong> Saves the entire spending book.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -496,7 +497,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Will use less memory (e.g. for <code>delete</code>, just save the person being deleted).</p>
+<p>Pros: Will use less memory (e.g. for <code>delete</code>, just save the Spending being deleted).</p>
 </li>
 <li>
 <p>Cons: We must ensure that the implementation of each individual command are correct.</p>
@@ -512,14 +513,14 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Use a list to store the history of address book states.</p>
+<p><strong>Alternative 1 (current choice):</strong> Use a list to store the history of spending book states.</p>
 <div class="ulist">
 <ul>
 <li>
 <p>Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.</p>
 </li>
 <li>
-<p>Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both <code>HistoryManager</code> and <code>VersionedAddressBook</code>.</p>
+<p>Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both <code>HistoryManager</code> and <code>VersionedSpendingBook</code>.</p>
 </li>
 </ul>
 </div>
@@ -590,6 +591,138 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.4. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="reminder-feature"><a class="link" href="#reminder-feature">3.5. Reminder feature</a></h3>
+<div class="paragraph">
+<p>With this reminder feature, users can set the reminders of their tasks with deadlines and delete them when completed.</p>
+</div>
+<div class="sect3">
+<h4 id="implementation-2"><a class="link" href="#implementation-2">3.5.1. Implementation</a></h4>
+<div class="paragraph">
+<p>A reminder is constructed with</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Deadline <code>d/DATE</code></p>
+</li>
+<li>
+<p>Reminder Message <code>m/MESSAGE</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The recorded reminders sorted with deadline in descending order, are displayed on the User Interface(UI) for notification.</p>
+</div>
+<div class="paragraph">
+<p>This feature is implemented with the following operations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Adding a reminder <code>reminder d/DATE m/MESSAGE</code><br>
+e.g. <code>reminder d/30/08/2020 m/Pay school fee</code> - set reminder to pay school fee by 30th of August 2020</p>
+</li>
+<li>
+<p>Deleting a reminder <code>dreminder INDEX</code><br>
+e.g. <code>dreminder 1</code> - delete the first reminder in the reminder list shown in UI.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Below is the activity diagram describing the steps take by MoneyGoWhere when it receives <code>AddReminderCommand</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AddReminderActivityDiagram.png" alt="AddReminderActivityDiagram">
+</div>
+</div>
+<div class="paragraph">
+<p>Figure 11. Activity diagram for adding a reminder</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In the above diagram, it can be seen that respective error messages will be shown for invalid inputs.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Shown below is the sequence diagram containing the interactions between respective components in MoneyGoWHere when user inputs <code>AddReminderCommand</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AddReminderSequenceDiagram.png" alt="AddReminderSequenceDiagram">
+</div>
+</div>
+<div class="paragraph">
+<p>Figure 12. Sequence diagram while user attempts to add a new reminder</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The above sequence diagram demonstrates how a new reminder is constructed from valid user input.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Following is the activity diagram including the series of actions performed by MoneyGoWhere when it receives <code>DeleteReminderCommand</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/DeleteReminderActivityDiagram.png" alt="DeleteReminderActivityDiagram">
+</div>
+</div>
+<div class="paragraph">
+<p>Figure 13. Activity diagram for removing a reminder</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The negative index from user input will leads to invalid command format error.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The below sequence diagram summarize the interactions between different components when user enter <code>DeleteReminderCommand</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/DeleteReminderSequenceDiagram.png" alt="DeleteReminderSequenceDiagram">
+</div>
+</div>
+<div class="paragraph">
+<p>Figure 14. Sequence diagram while user attempt to remove a reminder</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The above diagram also highlights how logic and model components interact with each other while deleting a reminder.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 </div>
@@ -1079,7 +1212,73 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </ol>
 </div>
 <hr>
-<h3 id="uc08-import-external-data-from-a-csv-file" class="discrete">UC08 Import external data from a CSV file</h3>
+<h3 id="uc08-add-a-reminder" class="discrete">UC08 Add a reminder</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User enters a reminder.</p>
+</li>
+<li>
+<p>MoneyGoWhere adds the specified reminder inside the list of reminders.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<hr>
+<h3 id="uc09-delete-a-reminder" class="discrete">UC09 Delete a reminder</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to view the list of spending.</p>
+</li>
+<li>
+<p>MoneyGoWhere shows a list of spending.</p>
+</li>
+<li>
+<p>User requests to delete a specific spending from the list.</p>
+</li>
+<li>
+<p>MoneyGoWhere deletes the reminder.
+Use case ends.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The list is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>3a. The given index is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. MoneyGoWhere shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+<h3 id="uc10-import-external-data-from-a-csv-file" class="discrete">UC10 Import external data from a CSV file</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -1117,7 +1316,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </ul>
 </div>
 <hr>
-<h3 id="uc09-export-data-to-a-csv-file" class="discrete">UC09 Export data to a CSV file</h3>
+<h3 id="uc11-export-data-to-a-csv-file" class="discrete">UC11 Export data to a CSV file</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -1155,7 +1354,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </ul>
 </div>
 <hr>
-<h3 id="uc10-undo-a-command" class="discrete">UC10 Undo a command</h3>
+<h3 id="uc12-undo-a-command" class="discrete">UC12 Undo a command</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -1193,7 +1392,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </ul>
 </div>
 <hr>
-<h3 id="uc11-redo-a-command" class="discrete">UC11 Redo a command</h3>
+<h3 id="uc13-redo-a-command" class="discrete">UC13 Redo a command</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -1231,7 +1430,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </ul>
 </div>
 <hr>
-<h3 id="uc12-graphing-the-data" class="discrete">UC12 Graphing the data</h3>
+<h3 id="uc14-graphing-the-data" class="discrete">UC14 Graphing the data</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -1249,7 +1448,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </ol>
 </div>
 <hr>
-<h3 id="uc13-clear-all-spending" class="discrete">UC13 Clear all spending</h3>
+<h3 id="uc15-clear-all-spending" class="discrete">UC15 Clear all spending</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -1388,15 +1587,15 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-person"><a class="link" href="#deleting-a-person">F.2. Deleting a person</a></h3>
+<h3 id="deleting-a-spending"><a class="link" href="#deleting-a-spending">F.2. Deleting a Spending</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Deleting a person while all persons are listed</p>
+<p>Deleting a spending while all spending are listed</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Prerequisites: List all persons using the <code>list</code> command. Multiple persons in the list.</p>
+<p>Prerequisites: List all Spending using the <code>list</code> command. Multiple spending in the list.</p>
 </li>
 <li>
 <p>Test case: <code>delete 1</code><br>
@@ -1404,7 +1603,7 @@ Expected: First contact is deleted from the list. Details of the deleted contact
 </li>
 <li>
 <p>Test case: <code>delete 0</code><br>
-Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.</p>
+Expected: No Spending is deleted. Error details shown in the status message. Status bar remains the same.</p>
 </li>
 <li>
 <p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size) <em>{give more}</em><br>
@@ -1440,4 +1639,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-24 06:26:57 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-24 07:23:26 UTC</div></div></div></body></html>
