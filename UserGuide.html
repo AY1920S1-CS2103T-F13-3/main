@@ -16,10 +16,10 @@
 <li><a href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></li>
 <li><a href="#flexible-date-format">3.2. Flexible date format</a></li>
 <li><a href="#adding-a-spending-code-add-code">3.3. Adding a spending : <code>add</code></a></li>
-<li><a href="#updating-a-spending-code-update-code">3.4. Updating a spending : <code>update</code></a></li>
+<li><a href="#editing-a-spending-code-edit-code">3.4. Editing a spending : <code>edit</code></a></li>
 <li><a href="#deleting-a-spending-code-delete-code">3.5. Deleting a spending : <code>delete</code></a></li>
 <li><a href="#listing-all-spending-code-list-code">3.6. Listing all spending : <code>list</code></a></li>
-<li><a href="#find-by-attribute-code-find-code">3.7. Find by attribute : <code>find</code></a></li>
+<li><a href="#finding-a-spending-code-find-code">3.7. Finding a spending : <code>find</code></a></li>
 <li><a href="#setting-monthly-budget-code-budget-code">3.8. Setting monthly budget : <code>budget</code></a></li>
 <li><a href="#generating-statistics-code-stats-code">3.9. Generating statistics : <code>stats</code></a></li>
 <li><a href="#sorting-spending-entries-code-sort-code">3.10. Sorting spending entries : <code>sort</code></a></li>
@@ -274,17 +274,17 @@ A spending can have any number of tags (including 0).
 </div>
 </div>
 <div class="sect2">
-<h3 id="updating-a-spending-code-update-code"><a class="link" href="#updating-a-spending-code-update-code">3.4. Updating a spending : <code>update</code></a></h3>
+<h3 id="editing-a-spending-code-edit-code"><a class="link" href="#editing-a-spending-code-edit-code">3.4. Editing a spending : <code>edit</code></a></h3>
 <div class="paragraph">
-<p>Updates a spending in the specified index in the list.<br>
-Format: <code>update i/INDEX [n/NAME] [c/COST] [d/DATE] [t/TAG]&#8230;&#8203; [r/REMARKS]</code></p>
+<p>Edits a spending in the specified index in the list.<br>
+Format: <code>edit i/INDEX [n/NAME] [c/COST] [d/DATE] [t/TAG]&#8230;&#8203; [r/REMARKS]</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Updates the spending at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed spending list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+<p>Edits the spending at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed spending list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 <li>
 <p>At least one of the optional fields must be provided.</p>
@@ -308,7 +308,7 @@ Format: <code>update i/INDEX [n/NAME] [c/COST] [d/DATE] [t/TAG]&#8230;&#8203; [r
 <div class="ulist">
 <ul>
 <li>
-<p><code>update 1 c/100</code><br>
+<p><code>edit 1 c/100</code><br>
 Updates the cost of the first spending to <code>100</code>.</p>
 </li>
 <li>
@@ -316,11 +316,11 @@ Updates the cost of the first spending to <code>100</code>.</p>
 Updates the name of the third spending to <code>chicken rice</code>.</p>
 </li>
 <li>
-<p><code>update 5 c/500 n/flight tickets</code><br>
+<p><code>edit 5 c/500 n/flight tickets</code><br>
 Updates both the cost of the fifth spending to <code>500</code> and its name to <code>flight tickets</code>.</p>
 </li>
 <li>
-<p><code>update 10 t/vegetable</code><br>
+<p><code>edit 10 t/vegetable</code><br>
 Overwrites existing tags of the tenth spending to <code>vegetable</code>.</p>
 </li>
 </ul>
@@ -392,10 +392,9 @@ Displays the list of all spending sorted by date in descending order (most recen
 </div>
 </div>
 <div class="sect2">
-<h3 id="find-by-attribute-code-find-code"><a class="link" href="#find-by-attribute-code-find-code">3.7. Find by attribute : <code>find</code></a></h3>
+<h3 id="finding-a-spending-code-find-code"><a class="link" href="#finding-a-spending-code-find-code">3.7. Finding a spending : <code>find</code></a></h3>
 <div class="paragraph">
-<p>Searches for spending based on given keywords, cost range, date range, remarks or tags.<br>
-At least one search field must be present.</p>
+<p>Finds a spending based on given keywords, cost range, date range, remarks or tags.<br></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -404,39 +403,50 @@ At least one search field must be present.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-When searching for multiple tags, any tag listed will be matched.
+At least one search field must be present.
 </td>
 </tr>
 </table>
 </div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Date range can be input in the following ways:<br>
-<code>d/DATE_START d/DATE_END</code><br>
-<code>d/DATE_START to DATE_END</code><br>
-<code>d/DATE_START - DATE_END</code>
-</td>
-</tr>
-</table>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>When searching for multiple tags, any tag specified will be matched.</p>
+</li>
+<li>
+<p>Date range can be input in the following ways:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>d/DATE_START d/DATE_END</code></p>
+</li>
+<li>
+<p><code>d/DATE_START to DATE_END</code></p>
+</li>
+<li>
+<p><code>d/DATE_START - DATE_END</code></p>
+</li>
+</ul>
 </div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Cost range can be input in the following ways:<br>
-<code>c/COST_MIN c/COST_MAX</code><br>
-<code>c/COST_MIN-COST_MAX</code>
-</td>
-</tr>
-</table>
+</li>
+<li>
+<p>Cost range can be input in the following ways:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>c/COST_MIN c/COST_MAX</code></p>
+</li>
+<li>
+<p><code>c/COST_MIN-COST_MAX</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p>Format: <code>find [n/NAME_KEYWORDS] [c/COST_MIN] [c/COST_MAX] [d/DATE_START] [d/DATE_END] [r/REMARK_KEYWORDS] [t/TAG]&#8230;&#8203;</code></p>
@@ -494,7 +504,7 @@ Overwrites existing budget of current month if budget has already been set.
 <ul>
 <li>
 <p><code>budget m/500000</code><br>
-Sets a budget of <code>$500,000</code> for this month</p>
+Sets a budget of $<code>500,000</code> for this month</p>
 </li>
 </ul>
 </div>
@@ -859,7 +869,7 @@ e.g. <code>add n/apple c/2.50 d/yesterday t/fruits r/expensive apple</code></p><
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Update</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>update i/INDEX [n/NAME] [c/COST] [t/TAG]&#8230;&#8203; [r/REMARKS]</code><br>
-e.g. <code>update i/123 n/apple c/2.50 d/yesterday t/fruits r/expensive apple</code><br></p></td>
+e.g. <code>edit i/123 n/apple c/2.50 d/yesterday t/fruits r/expensive apple</code><br></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Delete</strong></p></td>
@@ -943,4 +953,4 @@ e.g. <code>graph d/01/01/2019 d/07/01/2019</code><br></p></td>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-24 08:00:06 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-24 08:09:19 UTC</div></div></div></body></html>

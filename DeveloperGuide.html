@@ -26,8 +26,10 @@
 <li><a href="#proposed-data-encryption">3.2. [Proposed] Data Encryption</a></li>
 <li><a href="#logging">3.3. Logging</a></li>
 <li><a href="#Implementation-Configuration">3.4. Configuration</a></li>
-<li><a href="#reminder-feature">3.5. Reminder feature</a></li>
-<li><a href="#import-feature">3.6. Import Feature</a></li>
+<li><a href="#Implementation-Find">3.5. Find feature</a></li>
+<li><a href="#Implementation-Sort">3.6. Sort feature</a></li>
+<li><a href="#reminder-feature">3.7. Reminder feature</a></li>
+<li><a href="#import-feature">3.8. Import Feature</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a></li>
@@ -595,12 +597,192 @@ If the <code>currentStatePointer</code> is at index <code>spendingBookStateList.
 </div>
 </div>
 <div class="sect2">
-<h3 id="reminder-feature"><a class="link" href="#reminder-feature">3.5. Reminder feature</a></h3>
+<h3 id="Implementation-Find"><a class="link" href="#Implementation-Find">3.5. Find feature</a></h3>
+<div class="paragraph">
+<p>The find feature allows the user to search for a spending based on specified field. If search results are too broad, fields may be combined to increase specificity.</p>
+</div>
+<div class="paragraph">
+<p>For example, <code>find n/Apple c/2.50-3.00</code> will find an <code>Apple</code> of cost range <code>2.00</code> to <code>3.00</code>.</p>
+</div>
+<div class="sect3">
+<h4 id="implementation-2"><a class="link" href="#implementation-2">3.5.1. Implementation</a></h4>
+<div class="paragraph">
+<p>Find is supported by having a <code>Predicate</code> implemented for every field in Spending. Predicates are added based on valid input entered by the user.</p>
+</div>
+<div class="paragraph">
+<p>The <code>FindCommandParser</code> class stores these predicates, which are combined using Java 8 streams with an <code>AND</code> operation to form a more specific search query.</p>
+</div>
+<div class="paragraph">
+<p>The sequence diagram below demonstrates how the <code>find</code> command is executed:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/FindSequenceDiagram.png" alt="Find Sequence Diagram">
+</div>
+<div class="title">Figure 9. Sequence diagram for an example find command</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The lifeline for <code>FindCommandParser</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The following activity diagram summarises what happens when the user uses the <code>find</code> command:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/FindActivityDiagram.png" alt="Find Activity Diagram">
+</div>
+<div class="title">Figure 10. Activity diagram for an example find command</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.5.2. Design Considerations</a></h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Aspect</th>
+<th class="tableblock halign-left valign-top">Alternative 1</th>
+<th class="tableblock halign-left valign-top">Alternative 2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How find is executed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Save all predicates to a list<br>
+Pros: Easy to implement<br>
+Cons: All fields require a predicate</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Search the underlying list directly without using a predicate<br>
+Pros: Able to manipulate object easily<br>
+Cons: Poor abstraction</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Implementation-Sort"><a class="link" href="#Implementation-Sort">3.6. Sort feature</a></h3>
+<div class="paragraph">
+<p>The sort feature allows users to sort all currently displayed Spending entries automatically. The default sorting sequence is by Date, followed by Cost. Both are in descending order.</p>
+</div>
+<div class="paragraph">
+<p>The user may choose to modify how the displayed entries are sorted using the <code>sort</code> command.</p>
+</div>
+<div class="paragraph">
+<p>For example, <code>sort n/ASC d/DESC</code> applies sorting by name in ascending order, followed by Date in descending order. This applies to any future commands entered.</p>
+</div>
+<div class="sect3">
+<h4 id="implementation-3"><a class="link" href="#implementation-3">3.6.1. Implementation</a></h4>
+<div class="paragraph">
+<p>The sorting feature is supported by <code>SpendingComparator</code>, a custom comparator to facilitate different sort ordering, and implements the following operation:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>updateSortedSpendingList(comparator)</code>&#8201;&#8212;&#8201;Updates the sorted spending list with a new comparator.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This operation is exposed in the <code>Model</code> interface as <code>Model#updateSortedSpendingList(comparator)</code>.</p>
+</div>
+<div class="paragraph">
+<p>At a high level view, <code>SpendingComparator</code> and <code>SortField</code> interacts in the manner shown below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SortPackageDiagram.png" alt="Sort Package Diagram">
+</div>
+<div class="title">Figure 11. High-level view of package interaction</div>
+</div>
+<div class="paragraph">
+<p>The sequence diagram below demonstrates how the <code>sort</code> command is executed:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SortSequenceDiagram.png" alt="Sort Sequence Diagram">
+</div>
+<div class="title">Figure 12. Sequence diagram for an example sort command</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The lifeline for <code>SortCommandParser</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The following activity diagram summarises what happens when the user uses the <code>sort</code> command:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SortActivityDiagram.png" alt="Sort Activity Diagram">
+</div>
+<div class="title">Figure 13. Activity diagram for an example sort command</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.6.2. Design Considerations</a></h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Aspect</th>
+<th class="tableblock halign-left valign-top">Alternative 1</th>
+<th class="tableblock halign-left valign-top">Alternative 2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How sort is executed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set a new comparator<br>
+Pros: Easy to implement<br>
+Cons: None</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sort the underlying list without a comparator<br>
+Pros: Able to manipulate objects directly<br>
+Cons: Poor abstraction</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Method design for sort</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Create filtered list from sorted list<br>
+Pros: Easy to implement<br>
+Cons: Minor structure changes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Create sorted list from filtered list<br>
+Pros: Able to test large sorting side effects<br>
+Cons: Large code structure changes</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="reminder-feature"><a class="link" href="#reminder-feature">3.7. Reminder feature</a></h3>
 <div class="paragraph">
 <p>With this reminder feature, users can set the reminders of their tasks with deadlines and delete them when completed.</p>
 </div>
 <div class="sect3">
-<h4 id="implementation-2"><a class="link" href="#implementation-2">3.5.1. Implementation</a></h4>
+<h4 id="implementation-4"><a class="link" href="#implementation-4">3.7.1. Implementation</a></h4>
 <div class="paragraph">
 <p>A reminder is constructed with</p>
 </div>
@@ -727,9 +909,9 @@ The above diagram also highlights how logic and model components interact with e
 </div>
 </div>
 <div class="sect2">
-<h3 id="import-feature"><a class="link" href="#import-feature">3.6. Import Feature</a></h3>
+<h3 id="import-feature"><a class="link" href="#import-feature">3.8. Import Feature</a></h3>
 <div class="sect3">
-<h4 id="implementation-3"><a class="link" href="#implementation-3">3.6.1. Implementation</a></h4>
+<h4 id="implementation-5"><a class="link" href="#implementation-5">3.8.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The Import feature allows our users to import data from a comma-separated values (<code>.csv</code>) files.
 It allows users who would like to add their spending in bulk.</p>
@@ -742,7 +924,7 @@ It allows users who would like to add their spending in bulk.</p>
 <div class="content">
 <img src="images/importSequenceDiagram.png" alt="importSequenceDiagram">
 </div>
-<div class="title">Figure 9. Interactions Inside the Logic Component for the <code>import</code> Command</div>
+<div class="title">Figure 14. Interactions Inside the Logic Component for the <code>import</code> Command</div>
 </div>
 <div class="paragraph">
 <p>The Import Feature has one main component, which is the <code>ImportCommand.java</code> file. This file contains the main logic behind the feature.
@@ -759,14 +941,14 @@ Following that, the application will then prints an output, showing the result o
 <div class="content">
 <img src="images/importActivityDiagram.png" alt="importActivityDiagram">
 </div>
-<div class="title">Figure 10. Import Feature Activity Diagram</div>
+<div class="title">Figure 15. Import Feature Activity Diagram</div>
 </div>
 <div class="paragraph">
 <p>When a user calls the <code>import</code> command and inputs a valid <code>.csv</code> file, the application will read and parses all the data inside the file and save them to the <code>SpendingBookList</code> and <code>moneygowhere.json</code>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="csv-file-format-and-constraints"><a class="link" href="#csv-file-format-and-constraints">3.6.2. CSV File Format and Constraints</a></h4>
+<h4 id="csv-file-format-and-constraints"><a class="link" href="#csv-file-format-and-constraints">3.8.2. CSV File Format and Constraints</a></h4>
 <div class="paragraph">
 <p>In order for data to be imported into MoneyGoWhere, it must be in a properly formatted CSV file.
 There should be 5 columns specified for <code>Name</code>, <code>Cost</code>, <code>Date</code>, <code>Tag</code> and <code>Remark</code></p>
@@ -1232,7 +1414,25 @@ There should be 5 columns specified for <code>Name</code>, <code>Cost</code>, <c
 </ol>
 </div>
 <hr>
-<h3 id="uc05-set-a-monthly-budget" class="discrete">UC05 Set a monthly budget</h3>
+<h3 id="uc05-sort-displayed-spending" class="discrete">UC05 Sort displayed spending</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to sort based on optionally provided fields such as spending name, cost range, date range or remark, in ascending or descending order.</p>
+</li>
+<li>
+<p>MoneyGoWhere returns spending entries using the given order.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<hr>
+<h3 id="uc06-set-a-monthly-budget" class="discrete">UC06 Set a monthly budget</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -1270,7 +1470,7 @@ There should be 5 columns specified for <code>Name</code>, <code>Cost</code>, <c
 </ul>
 </div>
 <hr>
-<h3 id="uc06-generate-statistics" class="discrete">UC06 Generate statistics</h3>
+<h3 id="uc07-generate-statistics" class="discrete">UC07 Generate statistics</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -1288,7 +1488,7 @@ There should be 5 columns specified for <code>Name</code>, <code>Cost</code>, <c
 </ol>
 </div>
 <hr>
-<h3 id="uc07-list-all-tags" class="discrete">UC07 List all tags</h3>
+<h3 id="uc08-list-all-tags" class="discrete">UC08 List all tags</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -1306,7 +1506,7 @@ There should be 5 columns specified for <code>Name</code>, <code>Cost</code>, <c
 </ol>
 </div>
 <hr>
-<h3 id="uc08-add-a-reminder" class="discrete">UC08 Add a reminder</h3>
+<h3 id="uc09-add-a-reminder" class="discrete">UC09 Add a reminder</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -1324,7 +1524,7 @@ There should be 5 columns specified for <code>Name</code>, <code>Cost</code>, <c
 </ol>
 </div>
 <hr>
-<h3 id="uc09-delete-a-reminder" class="discrete">UC09 Delete a reminder</h3>
+<h3 id="uc10-delete-a-reminder" class="discrete">UC10 Delete a reminder</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -1372,7 +1572,7 @@ Use case ends.</p>
 </ul>
 </div>
 <hr>
-<h3 id="uc10-import-external-data-from-a-csv-file" class="discrete">UC10 Import external data from a CSV file</h3>
+<h3 id="uc11-import-external-data-from-a-csv-file" class="discrete">UC11 Import external data from a CSV file</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -1410,7 +1610,7 @@ Use case ends.</p>
 </ul>
 </div>
 <hr>
-<h3 id="uc11-export-data-to-a-csv-file" class="discrete">UC11 Export data to a CSV file</h3>
+<h3 id="uc12-export-data-to-a-csv-file" class="discrete">UC12 Export data to a CSV file</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -1448,7 +1648,7 @@ Use case ends.</p>
 </ul>
 </div>
 <hr>
-<h3 id="uc12-undo-a-command" class="discrete">UC12 Undo a command</h3>
+<h3 id="uc13-undo-a-command" class="discrete">UC13 Undo a command</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -1486,7 +1686,7 @@ Use case ends.</p>
 </ul>
 </div>
 <hr>
-<h3 id="uc13-redo-a-command" class="discrete">UC13 Redo a command</h3>
+<h3 id="uc14-redo-a-command" class="discrete">UC14 Redo a command</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -1524,7 +1724,7 @@ Use case ends.</p>
 </ul>
 </div>
 <hr>
-<h3 id="uc14-graphing-the-data" class="discrete">UC14 Graphing the data</h3>
+<h3 id="uc15-graphing-the-data" class="discrete">UC15 Graphing the data</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -1542,7 +1742,7 @@ Use case ends.</p>
 </ol>
 </div>
 <hr>
-<h3 id="uc15-clear-all-spending" class="discrete">UC15 Clear all spending</h3>
+<h3 id="uc16-clear-all-spending" class="discrete">UC16 Clear all spending</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -1733,4 +1933,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-24 08:00:06 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-24 08:09:19 UTC</div></div></div></body></html>
