@@ -9,7 +9,14 @@
 <div id="toc" class="toc">
 <div id="toctitle"></div>
 <ul class="sectlevel1">
-<li><a href="#setting-up">1. Setting up</a></li>
+<li><a href="#setting-up">1. Setting up</a>
+<ul class="sectlevel2">
+<li><a href="#prerequisites">1.1. Prerequisites</a></li>
+<li><a href="#setting-up-the-project-in-your-computer">1.2. Setting up the project in your computer</a></li>
+<li><a href="#verifying-the-setup">1.3. Verifying the setup</a></li>
+<li><a href="#configurations-to-do-before-writing-code">1.4. Configurations to do before writing code</a></li>
+</ul>
+</li>
 <li><a href="#design">2. Design</a>
 <ul class="sectlevel2">
 <li><a href="#Design-Architecture">2.1. Architecture</a></li>
@@ -22,14 +29,15 @@
 </li>
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#proposed-undo-redo-feature">3.1. [Proposed] Undo/Redo feature</a></li>
-<li><a href="#proposed-data-encryption">3.2. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.3. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.4. Configuration</a></li>
-<li><a href="#Implementation-Find">3.5. Find feature</a></li>
-<li><a href="#Implementation-Sort">3.6. Sort feature</a></li>
-<li><a href="#reminder-feature">3.7. Reminder feature</a></li>
-<li><a href="#import-feature">3.8. Import Feature</a></li>
+<li><a href="#statistics-feature">3.1. Statistics feature</a></li>
+<li><a href="#proposed-undo-redo-feature">3.2. [Proposed] Undo/Redo feature</a></li>
+<li><a href="#proposed-data-encryption">3.3. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">3.4. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.5. Configuration</a></li>
+<li><a href="#Implementation-Find">3.6. Find feature</a></li>
+<li><a href="#Implementation-Sort">3.7. Sort feature</a></li>
+<li><a href="#reminder-feature">3.8. Reminder feature</a></li>
+<li><a href="#import-feature">3.9. Import Feature</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a></li>
@@ -53,8 +61,178 @@
 <div class="sect1">
 <h2 id="setting-up"><a class="link" href="#setting-up">1. Setting up</a></h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="prerequisites"><a class="link" href="#prerequisites">1.1. Prerequisites</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>JDK <code>11</code></strong> or above</p>
+</li>
+<li>
+<p><strong>IntelliJ</strong> IDE</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+IntelliJ by default has Gradle and JavaFx plugins installed.<br>
+Do not disable them. If you have disabled them, go to <code>File</code> &gt; <code>Settings</code> &gt; <code>Plugins</code> to re-enable them.
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="setting-up-the-project-in-your-computer"><a class="link" href="#setting-up-the-project-in-your-computer">1.2. Setting up the project in your computer</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Fork this repo, and clone the fork to your computer</p>
+</li>
+<li>
+<p>Open IntelliJ (if you are not in the welcome screen, click <code>File</code> &gt; <code>Close Project</code> to close the existing project dialog first)</p>
+</li>
+<li>
+<p>Set up the correct JDK version for Gradle</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Click <code>Configure</code> &gt; <code>Project Defaults</code> &gt; <code>Project Structure</code></p>
+</li>
+<li>
+<p>Click <code>New&#8230;&#8203;</code> and find the directory of the JDK</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Click <code>Import Project</code></p>
+</li>
+<li>
+<p>Locate the <code>build.gradle</code> file and select it. Click <code>OK</code></p>
+</li>
+<li>
+<p>Click <code>Open as Project</code></p>
+</li>
+<li>
+<p>Click <code>OK</code> to accept the default settings.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="verifying-the-setup"><a class="link" href="#verifying-the-setup">1.3. Verifying the setup</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Run the <code>seedu.moneygowhere.Main</code> and try a few commands</p>
+</li>
+<li>
+<p><a href="#testing">Run the tests</a> to ensure they all pass.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="configurations-to-do-before-writing-code"><a class="link" href="#configurations-to-do-before-writing-code">1.4. Configurations to do before writing code</a></h3>
+<div class="sect3">
+<h4 id="configuring-the-coding-style"><a class="link" href="#configuring-the-coding-style">1.4.1. Configuring the coding style</a></h4>
 <div class="paragraph">
-<p>Refer to the guide <a href="SettingUp.html">here</a>.</p>
+<p>This project follows <a href="https://github.com/oss-generic/process/blob/master/docs/CodingStandards.adoc">oss-generic coding standards</a>. IntelliJ&#8217;s default style is mostly compliant with ours but it uses a different import order from ours. To rectify,</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Go to <code>File</code> &gt; <code>Settings&#8230;&#8203;</code> (Windows/Linux), or <code>IntelliJ IDEA</code> &gt; <code>Preferences&#8230;&#8203;</code> (macOS)</p>
+</li>
+<li>
+<p>Select <code>Editor</code> &gt; <code>Code Style</code> &gt; <code>Java</code></p>
+</li>
+<li>
+<p>Click on the <code>Imports</code> tab to set the order</p>
+<div class="ulist">
+<ul>
+<li>
+<p>For <code>Class count to use import with '*'</code> and <code>Names count to use static import with '*'</code>: Set to <code>999</code> to prevent IntelliJ from contracting the import statements</p>
+</li>
+<li>
+<p>For <code>Import Layout</code>: The order is <code>import static all other imports</code>, <code>import java.*</code>, <code>import javax.*</code>, <code>import org.*</code>, <code>import com.*</code>, <code>import all other imports</code>. Add a <code>&lt;blank line&gt;</code> between each <code>import</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Optionally, you can follow the <a href="UsingCheckstyle.html">UsingCheckstyle.adoc</a> document to configure Intellij to check style-compliance as you write code.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="updating-documentation-to-match-your-fork"><a class="link" href="#updating-documentation-to-match-your-fork">1.4.2. Updating documentation to match your fork</a></h4>
+<div class="paragraph">
+<p>After forking the repo, the documentation will still have the SE-EDU branding and refer to the <code>AY1920S1-CS2103T-F13-3/main</code> repo.</p>
+</div>
+<div class="paragraph">
+<p>If you plan to develop this fork as a separate product (i.e. instead of contributing to <code>AY1920S1-CS2103T-F13-3/main</code>), you should do the following:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Configure the <a href="Documentation.html#Docs-SiteWideDocSettings">site-wide documentation settings</a> in <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/blob/master/build.gradle"><code>build.gradle</code></a>, such as the <code>site-name</code>, to suit your own project.</p>
+</li>
+<li>
+<p>Replace the URL in the attribute <code>repoURL</code> in <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/blob/master/docs/DeveloperGuide.adoc"><code>DeveloperGuide.adoc</code></a> and <a href="https://github.com/ay1920s1-cs2103t-f13-3/main/blob/master/docs/UserGuide.adoc"><code>UserGuide.adoc</code></a> with the URL of your fork.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="setting-up-ci"><a class="link" href="#setting-up-ci">1.4.3. Setting up CI</a></h4>
+<div class="paragraph">
+<p>Set up Travis to perform Continuous Integration (CI) for your fork. See <a href="UsingTravis.html">UsingTravis.adoc</a> to learn how to set it up.</p>
+</div>
+<div class="paragraph">
+<p>After setting up Travis, you can optionally set up coverage reporting for your team fork (see <a href="UsingCoveralls.html">UsingCoveralls.adoc</a>).</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Coverage reporting could be useful for a team repository that hosts the final version but it is not that useful for your personal fork.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Optionally, you can set up AppVeyor as a second CI (see <a href="UsingAppVeyor.html">UsingAppVeyor.adoc</a>).</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Having both Travis and AppVeyor ensures your App works on both Unix-based platforms and Windows-based platforms (Travis is Unix-based and AppVeyor is Windows-based)
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="getting-started-with-coding"><a class="link" href="#getting-started-with-coding">1.4.4. Getting started with coding</a></h4>
+<div class="paragraph">
+<p>When you are ready to start coding, we recommend that you get some sense of the overall design by reading about <a href="#Design-Architecture">Section 2.1 Architecture</a>.</p>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -333,9 +511,134 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Spending Book
 <p>This section describes some noteworthy details on how certain features are implemented.</p>
 </div>
 <div class="sect2">
-<h3 id="proposed-undo-redo-feature"><a class="link" href="#proposed-undo-redo-feature">3.1. [Proposed] Undo/Redo feature</a></h3>
+<h3 id="statistics-feature"><a class="link" href="#statistics-feature">3.1. Statistics feature</a></h3>
 <div class="sect3">
-<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.1.1. Proposed Implementation</a></h4>
+<h4 id="current-implementation"><a class="link" href="#current-implementation">3.1.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>For the current <code>statistics</code> feature, there are 2 main commands that the user can execute.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>stats</code> - display statistics for all spending</p>
+</li>
+<li>
+<p><code>stats d/DATE_START d/DATE_END</code> - display statistics for spending within a date range</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The <code>StatsCommandParser</code> differentiates these 2 commands based on whether a valid date range is provided as illustrated in the diagram below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/statsactivitydiagram.png" alt="statsactivitydiagram" width="600">
+</div>
+<div class="title">Figure 9. Activity Diagram showing behaviour of StatsCommandParser</div>
+</div>
+<div class="paragraph">
+<p>The implementation of the Statistics feature can be split into 2 phases, preparation and execution. Given below is an explanation of how the Statistics mechanism behaves at each phase.</p>
+</div>
+<div class="sect4">
+<h5 id="preparation"><a class="link" href="#preparation">Preparation</a></h5>
+<div class="paragraph">
+<p>During the preparation phase, the program parses the command for Statistics and prepares to open a new Statistics Window.
+The following sequence diagram shows how <code>stats d/01/01/2019 d/07/01/2019</code> works during the preparation phase.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/StatsSequenceDiagram.png" alt="StatsSequenceDiagram">
+</div>
+<div class="title">Figure 10. Sequence Diagram demonstrating the preparation stage of Statistics feature</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User executes <code>stats d/01/01/2019 d/07/01/2019</code> to generate statistics for spending within <code>01/01/2019</code> and <code>07/01/2019</code>.</p>
+</li>
+<li>
+<p>SpendingBookParser will parse and identify the command as a StatsCommand and pass on the argument <code>d/ 01/01/2019 d/07/01/2019</code> to StatsCommandParser.</p>
+</li>
+<li>
+<p>StatsCommandParser will check whether the date range parameters provided are valid.</p>
+</li>
+<li>
+<p><code>StatsCommand#execute()</code> is executed, returning a message which tells the user that the Stats Window will be opened and set a boolean <code>isShowStats</code> = true to indicate that a new window to display the statistics will be opened.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect4">
+<h5 id="execution"><a class="link" href="#execution">Execution</a></h5>
+<div class="paragraph">
+<p>In the execution phase, the program processes and retrieves the data to be displayed and finally displaying it.</p>
+</div>
+<div class="paragraph">
+<p>There are 2 types of data that the program require, <code>statsMessage</code> for displaying the statistics in text and <code>statsData</code> for displaying the data in a piechart.
+Below is the UML sequence diagram and a step-by-step explanation for the retrieval of <code>statsData</code>. <code>statsMessage</code> is retrieved in the same manner.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/StatsMessageSequenceDiagram.png" alt="StatsMessageSequenceDiagram">
+</div>
+<div class="title">Figure 11. Sequence Diagram of Execution Phase showing retrieving of <code>statsData</code></div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Upon checking that the boolean <code>isShowStats</code> = true, the MainWindow calls <code>LogicManager#getStatsData()</code>.</p>
+</li>
+<li>
+<p>SpendingBookParser will parse and identify the command as a StatsCommand and pass on the argument <code>d/ 01/01/2019 d/07/01/2019</code> to StatsCommandParser.</p>
+</li>
+<li>
+<p>StatsCommandParser will check whether the date range parameters provided are valid.</p>
+</li>
+<li>
+<p><code>StatsCommand#getStatsData()</code> is executed. Spending with date range within <code>01/01/2019</code> and <code>07/01/2019</code> is filtered.
+The filtering is done through a predicate parameter which checks through the dates of the spending in the application.</p>
+</li>
+<li>
+<p>Finally, the <code>statsData</code> will be displayed on the Ui through <code>StatsWindow#loadData()</code> call.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="how-to-pass-statistics-data-parameters-from-logic-to-ui"><a class="link" href="#how-to-pass-statistics-data-parameters-from-logic-to-ui">How to pass statistics data parameters from Logic to UI</a></h5>
+<div class="paragraph">
+<p>Alternative 1 (current choice): UI gets all data and parameters from Logic, which gets data from Model.</p>
+</div>
+<div class="paragraph">
+<p>Pros: Easy to implement. Aligned with architecture.</p>
+</div>
+<div class="paragraph">
+<p>Cons: A lot of method calls</p>
+</div>
+<div class="paragraph">
+<p>Alternative 2: Pass data and parameters through event</p>
+</div>
+<div class="paragraph">
+<p>Pros: Less method calls. Easier to read.</p>
+</div>
+<div class="paragraph">
+<p>Cons: Not in alignment with architecture. Need to consider application startup when there are no events posted.</p>
+</div>
+<div class="paragraph">
+<p>Alternative 1 was chosen due to the ease of implementation.
+As the current statistics feature does not require a large amount of data, the number of method calls is not too large.
+Alternative 2 requires a change in the architecture which may result in higher complexity.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="proposed-undo-redo-feature"><a class="link" href="#proposed-undo-redo-feature">3.2. [Proposed] Undo/Redo feature</a></h3>
+<div class="sect3">
+<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.2.1. Proposed Implementation</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by <code>VersionedSpendingBook</code>.
 It extends <code>SpendingBook</code> with an undo/redo history, stored internally as an <code>spendingBookStateList</code> and <code>currentStatePointer</code>.
@@ -477,7 +780,7 @@ If the <code>currentStatePointer</code> is at index <code>spendingBookStateList.
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.2. Design Considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
 <div class="ulist">
@@ -547,20 +850,20 @@ If the <code>currentStatePointer</code> is at index <code>spendingBookStateList.
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.2. [Proposed] Data Encryption</a></h3>
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.3. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.3. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.4. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.4, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.5, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -591,13 +894,13 @@ If the <code>currentStatePointer</code> is at index <code>spendingBookStateList.
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.4. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.5. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Find"><a class="link" href="#Implementation-Find">3.5. Find feature</a></h3>
+<h3 id="Implementation-Find"><a class="link" href="#Implementation-Find">3.6. Find feature</a></h3>
 <div class="paragraph">
 <p>The find feature allows the user to search for a spending based on specified field. If search results are too broad, fields may be combined to increase specificity.</p>
 </div>
@@ -605,7 +908,7 @@ If the <code>currentStatePointer</code> is at index <code>spendingBookStateList.
 <p>For example, <code>find n/Apple c/2.50-3.00</code> will find an <code>Apple</code> of cost range <code>2.00</code> to <code>3.00</code>.</p>
 </div>
 <div class="sect3">
-<h4 id="implementation-2"><a class="link" href="#implementation-2">3.5.1. Implementation</a></h4>
+<h4 id="implementation-2"><a class="link" href="#implementation-2">3.6.1. Implementation</a></h4>
 <div class="paragraph">
 <p>Find is supported by having a <code>Predicate</code> implemented for every field in Spending. Predicates are added based on valid input entered by the user.</p>
 </div>
@@ -619,7 +922,7 @@ If the <code>currentStatePointer</code> is at index <code>spendingBookStateList.
 <div class="content">
 <img src="images/FindSequenceDiagram.png" alt="Find Sequence Diagram">
 </div>
-<div class="title">Figure 9. Sequence diagram for an example find command</div>
+<div class="title">Figure 12. Sequence diagram for an example find command</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -640,11 +943,11 @@ The lifeline for <code>FindCommandParser</code> should end at the destroy marker
 <div class="content">
 <img src="images/FindActivityDiagram.png" alt="Find Activity Diagram">
 </div>
-<div class="title">Figure 10. Activity diagram for an example find command</div>
+<div class="title">Figure 13. Activity diagram for an example find command</div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.5.2. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.6.2. Design Considerations</a></h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 20%;">
@@ -673,7 +976,7 @@ Cons: Poor abstraction</p></td>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Sort"><a class="link" href="#Implementation-Sort">3.6. Sort feature</a></h3>
+<h3 id="Implementation-Sort"><a class="link" href="#Implementation-Sort">3.7. Sort feature</a></h3>
 <div class="paragraph">
 <p>The sort feature allows users to sort all currently displayed Spending entries automatically. The default sorting sequence is by Date, followed by Cost. Both are in descending order.</p>
 </div>
@@ -684,7 +987,7 @@ Cons: Poor abstraction</p></td>
 <p>For example, <code>sort n/ASC d/DESC</code> applies sorting by name in ascending order, followed by Date in descending order. This applies to any future commands entered.</p>
 </div>
 <div class="sect3">
-<h4 id="implementation-3"><a class="link" href="#implementation-3">3.6.1. Implementation</a></h4>
+<h4 id="implementation-3"><a class="link" href="#implementation-3">3.7.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The sorting feature is supported by <code>SpendingComparator</code>, a custom comparator to facilitate different sort ordering, and implements the following operation:</p>
 </div>
@@ -705,7 +1008,7 @@ Cons: Poor abstraction</p></td>
 <div class="content">
 <img src="images/SortPackageDiagram.png" alt="Sort Package Diagram">
 </div>
-<div class="title">Figure 11. High-level view of package interaction</div>
+<div class="title">Figure 14. High-level view of package interaction</div>
 </div>
 <div class="paragraph">
 <p>The sequence diagram below demonstrates how the <code>sort</code> command is executed:</p>
@@ -714,7 +1017,7 @@ Cons: Poor abstraction</p></td>
 <div class="content">
 <img src="images/SortSequenceDiagram.png" alt="Sort Sequence Diagram">
 </div>
-<div class="title">Figure 12. Sequence diagram for an example sort command</div>
+<div class="title">Figure 15. Sequence diagram for an example sort command</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -735,11 +1038,11 @@ The lifeline for <code>SortCommandParser</code> should end at the destroy marker
 <div class="content">
 <img src="images/SortActivityDiagram.png" alt="Sort Activity Diagram">
 </div>
-<div class="title">Figure 13. Activity diagram for an example sort command</div>
+<div class="title">Figure 16. Activity diagram for an example sort command</div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.6.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.7.2. Design Considerations</a></h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 20%;">
@@ -777,12 +1080,12 @@ Cons: Large code structure changes</p></td>
 </div>
 </div>
 <div class="sect2">
-<h3 id="reminder-feature"><a class="link" href="#reminder-feature">3.7. Reminder feature</a></h3>
+<h3 id="reminder-feature"><a class="link" href="#reminder-feature">3.8. Reminder feature</a></h3>
 <div class="paragraph">
 <p>With this reminder feature, users can set the reminders of their tasks with deadlines and delete them when completed.</p>
 </div>
 <div class="sect3">
-<h4 id="implementation-4"><a class="link" href="#implementation-4">3.7.1. Implementation</a></h4>
+<h4 id="implementation-4"><a class="link" href="#implementation-4">3.8.1. Implementation</a></h4>
 <div class="paragraph">
 <p>A reminder is constructed with</p>
 </div>
@@ -909,9 +1212,9 @@ The above diagram also highlights how logic and model components interact with e
 </div>
 </div>
 <div class="sect2">
-<h3 id="import-feature"><a class="link" href="#import-feature">3.8. Import Feature</a></h3>
+<h3 id="import-feature"><a class="link" href="#import-feature">3.9. Import Feature</a></h3>
 <div class="sect3">
-<h4 id="implementation-5"><a class="link" href="#implementation-5">3.8.1. Implementation</a></h4>
+<h4 id="implementation-5"><a class="link" href="#implementation-5">3.9.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The Import feature allows our users to import data from a comma-separated values (<code>.csv</code>) files.
 It allows users who would like to add their spending in bulk.</p>
@@ -924,7 +1227,7 @@ It allows users who would like to add their spending in bulk.</p>
 <div class="content">
 <img src="images/importSequenceDiagram.png" alt="importSequenceDiagram">
 </div>
-<div class="title">Figure 14. Interactions Inside the Logic Component for the <code>import</code> Command</div>
+<div class="title">Figure 17. Interactions Inside the Logic Component for the <code>import</code> Command</div>
 </div>
 <div class="paragraph">
 <p>The Import Feature has one main component, which is the <code>ImportCommand.java</code> file. This file contains the main logic behind the feature.
@@ -941,14 +1244,14 @@ Following that, the application will then prints an output, showing the result o
 <div class="content">
 <img src="images/importActivityDiagram.png" alt="importActivityDiagram">
 </div>
-<div class="title">Figure 15. Import Feature Activity Diagram</div>
+<div class="title">Figure 18. Import Feature Activity Diagram</div>
 </div>
 <div class="paragraph">
 <p>When a user calls the <code>import</code> command and inputs a valid <code>.csv</code> file, the application will read and parses all the data inside the file and save them to the <code>SpendingBookList</code> and <code>moneygowhere.json</code>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="csv-file-format-and-constraints"><a class="link" href="#csv-file-format-and-constraints">3.8.2. CSV File Format and Constraints</a></h4>
+<h4 id="csv-file-format-and-constraints"><a class="link" href="#csv-file-format-and-constraints">3.9.2. CSV File Format and Constraints</a></h4>
 <div class="paragraph">
 <p>In order for data to be imported into MoneyGoWhere, it must be in a properly formatted CSV file.
 There should be 5 columns specified for <code>Name</code>, <code>Cost</code>, <code>Date</code>, <code>Tag</code> and <code>Remark</code></p>
@@ -1036,7 +1339,7 @@ There should be 5 columns specified for <code>Name</code>, <code>Cost</code>, <c
 <div class="ulist">
 <ul>
 <li>
-<p>is finance-oriented</p>
+<p>students who have yet to earn a stable income</p>
 </li>
 <li>
 <p>has a need to store and track personal finances</p>
@@ -1062,7 +1365,7 @@ There should be 5 columns specified for <code>Name</code>, <code>Cost</code>, <c
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Value proposition</strong>: manage budget quickly compared to a typical mouse/GUI driven app</p>
+<p><strong>Value proposition</strong>: manage budget quickly compared to a typical mouse/GUI driven app which saves time and makes it more convenient.</p>
 </div>
 </div>
 </div>
@@ -1128,7 +1431,7 @@ There should be 5 columns specified for <code>Name</code>, <code>Cost</code>, <c
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">new user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">view more information about a particular command</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">learn how to various commands</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">learn how to use the command</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
@@ -1146,7 +1449,7 @@ There should be 5 columns specified for <code>Name</code>, <code>Cost</code>, <c
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">export data</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">view my spending in another application</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view my spending in another device</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
@@ -1162,7 +1465,7 @@ There should be 5 columns specified for <code>Name</code>, <code>Cost</code>, <c
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">financial analyst</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">view daily/monthly/yearly expenditure</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">have a projected view of all my spending</p></td>
 </tr>
@@ -1240,33 +1543,9 @@ There should be 5 columns specified for <code>Name</code>, <code>Cost</code>, <c
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user who travels often</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">see the exchange rates of other countries</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">view my spending with respect to my currency</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">forgetful user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">set a reminder</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">reminded of my payment deadlines</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">housewife</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">view the cheapest price of an item</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">improve my savings</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user who loves rewards</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">see how much more I should spend</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">earn rewards from places I spend at</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">investor</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">see how much I should invest</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">earn more money</p></td>
 </tr>
 </tbody>
 </table>
@@ -1477,7 +1756,7 @@ There should be 5 columns specified for <code>Name</code>, <code>Cost</code>, <c
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to generate statistics.</p>
+<p>User requests to generate statistics for a specific date range.</p>
 </li>
 <li>
 <p>MoneyGoWhere generates statistical analysis such as total spending of each tag.</p>
@@ -1486,6 +1765,26 @@ There should be 5 columns specified for <code>Name</code>, <code>Cost</code>, <c
 </div>
 </li>
 </ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The given date range is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. MoneyGoWhere shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 1.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 <hr>
 <h3 id="uc08-list-all-tags" class="discrete">UC08 List all tags</h3>
@@ -1731,7 +2030,7 @@ Use case ends.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to display spending in the form of a graph.</p>
+<p>User requests to display spending in the form of a graph for a specific date range.</p>
 </li>
 <li>
 <p>MoneyGoWhere displays spending in graph form.</p>
@@ -1740,6 +2039,26 @@ Use case ends.</p>
 </div>
 </li>
 </ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The given date range is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. MoneyGoWhere shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 1.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 <hr>
 <h3 id="uc16-clear-all-spending" class="discrete">UC16 Clear all spending</h3>
@@ -1933,4 +2252,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-24 08:09:19 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-24 08:13:24 UTC</div></div></div></body></html>
