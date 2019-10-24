@@ -15,7 +15,7 @@
 <li><a href="#Features">4. Features</a>
 <ul class="sectlevel2">
 <li><a href="#viewing-help-code-help-code">4.1. Viewing help : <code>help</code></a></li>
-<li><a href="#flexible-date-format">4.2. Flexible date format</a></li>
+<li><a href="#flexible-date-formats">4.2. Flexible date formats</a></li>
 <li><a href="#adding-a-spending-code-add-code">4.3. Adding a spending : <code>add</code></a></li>
 <li><a href="#editing-a-spending-code-edit-code">4.4. Editing a spending : <code>edit</code></a></li>
 <li><a href="#deleting-a-spending-code-delete-code">4.5. Deleting a spending : <code>delete</code></a></li>
@@ -46,7 +46,7 @@
 <h2 id="introduction"><a class="link" href="#introduction">1. Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>MoneyGoWhere</strong> is a personal finance application targeted at students who have yet to earn a stable income.
+<p><strong>MoneyGoWhere</strong> is a personal finance application targeted to students at the National University of Singapore (NUS).
 It allows students to keep track of all their spending and their related information such as date, cost and tags.
 Users can also set budget goals, view statistics, set reminders for bills and export their data to a .csv file.
 With an easy-to-use Graphical User Interface (GUI) and employment of Command Line Interface (CLI), users can easily navigate through the application, contributing to its user-friendliness and efficiency.</p>
@@ -115,7 +115,7 @@ Tips that can help you better navigate the application.
 <p>Copy the file to the folder you want to use as the home folder for MoneyGoWhere.</p>
 </li>
 <li>
-<p>Double-click the file to start the app. The GUI should appear in a few seconds as shown below.</p>
+<p>Double-click the file to start the app. The GUI should appear in a few seconds as shown in <code>Figure 1</code>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="images/Ui.png" alt="Ui" width="790">
@@ -199,22 +199,28 @@ Optionally, you can press <kbd>F1</kbd> or click <code>help</code> which can be 
 </tr>
 </table>
 </div>
-<div class="imageblock">
+<div class="paragraph">
+<p>The following image shows how the help bar can be accessed:</p>
+</div>
+<div class="imageblock text-center">
 <div class="content">
 <img src="images/help.png" alt="help" width="300">
 </div>
 <div class="title">Figure 2. Accessing Help from Menu Bar</div>
 </div>
+<div class="paragraph">
+<p>Help can be accessed from the menu bar by clicking on the <code>Help</code> button.</p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="flexible-date-format"><a class="link" href="#flexible-date-format">4.2. Flexible date format</a></h3>
+<h3 id="flexible-date-formats"><a class="link" href="#flexible-date-formats">4.2. Flexible date formats</a></h3>
 <div class="paragraph">
 <p>Whenever a particular command requires a <code>DATE</code> field, you can choose either of the following formats.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Formal Dates</p>
+<p><strong>Formal Dates</strong></p>
 <div class="ulist">
 <ul>
 <li>
@@ -233,7 +239,7 @@ Optionally, you can press <kbd>F1</kbd> or click <code>help</code> which can be 
 </div>
 </li>
 <li>
-<p>Relaxed Dates</p>
+<p><strong>Relaxed Dates</strong></p>
 <div class="ulist">
 <ul>
 <li>
@@ -255,7 +261,7 @@ Optionally, you can press <kbd>F1</kbd> or click <code>help</code> which can be 
 </div>
 </li>
 <li>
-<p>Relative Dates</p>
+<p><strong>Relative Dates</strong></p>
 <div class="ulist">
 <ul>
 <li>
@@ -277,7 +283,7 @@ Optionally, you can press <kbd>F1</kbd> or click <code>help</code> which can be 
 </div>
 </li>
 <li>
-<p>Date Alternatives</p>
+<p><strong>Date Alternatives</strong></p>
 <div class="ulist">
 <ul>
 <li>
@@ -290,7 +296,7 @@ Optionally, you can press <kbd>F1</kbd> or click <code>help</code> which can be 
 </div>
 </li>
 <li>
-<p>Prefixes</p>
+<p><strong>Prefixes</strong></p>
 <div class="ulist">
 <ul>
 <li>
@@ -314,7 +320,7 @@ Optionally, you can press <kbd>F1</kbd> or click <code>help</code> which can be 
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-You do not need to specify which date format you would like to use as the application will be able to differentiate it from the input received.
+You do not need to specify which date format you would like to use as MoneyGoWhere will be able to differentiate it from the input received.
 </td>
 </tr>
 </table>
@@ -326,7 +332,7 @@ You do not need to specify which date format you would like to use as the applic
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The application will also automatically check whether a given date is valid.
+MoneyGoWhere will also automatically check whether a given date is valid.
 Should you accidentally provide an invalid date such as 31/02/2019, it will be rejected as there are only 28 days in February 2019.
 </td>
 </tr>
@@ -642,7 +648,7 @@ COST_MIN must be smaller or the same as COST_MAX.
 </div>
 </div>
 <div class="paragraph">
-<p>Example:</p>
+<p>Examples:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -681,7 +687,7 @@ Returns a list of spending with <code>food</code> or <code>leisure</code> tags.<
 <div class="sect2">
 <h3 id="setting-monthly-budget-code-budget-code"><a class="link" href="#setting-monthly-budget-code-budget-code">4.10. Setting monthly budget : <code>budget</code></a></h3>
 <div class="paragraph">
-<p>Sets a monthly budget for the current month in Singapore dollars.<br>
+<p>Sets a budget for the current month in Singapore dollars.<br>
 Format: <code>budget MONTHLY_BUDGET</code><br></p>
 </div>
 <div class="admonitionblock note">
@@ -1089,14 +1095,9 @@ Format: <code>exit</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Spending: An expense incurred by the user.</p>
-</li>
-<li>
 <p>Budget: The maximum amount of money set by the user to spend.</p>
-</li>
-<li>
-<p>Cost: Money spent by the user.</p>
-</li>
+<div class="ulist">
+<ul>
 <li>
 <p>Safe: The user has spent less or equal to his budget set.</p>
 </li>
@@ -1105,12 +1106,25 @@ Format: <code>exit</code></p>
 </li>
 </ul>
 </div>
+</li>
+<li>
+<p>Cost: Money spent by the user.</p>
+</li>
+<li>
+<p>Spending: An expense incurred by the user.</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="command-summary"><a class="link" href="#command-summary">6. Command Summary</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Listed below is a summary of all available commands.</p>
+</div>
 <table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 1. Command Summary table</caption>
 <colgroup>
 <col style="width: 40%;">
 <col style="width: 60%;">
@@ -1218,5 +1232,8 @@ e.g. <code>dreminder 2</code></p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>The command summary above displays all commands available in MoneyGoWhere.</p>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-24 14:04:59 UTC</div></div></div></body></html>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-24 15:45:03 UTC</div></div></div></body></html>

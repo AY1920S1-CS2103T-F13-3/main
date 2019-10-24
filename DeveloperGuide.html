@@ -30,14 +30,14 @@
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
 <li><a href="#statistics-feature">3.1. Statistics feature</a></li>
-<li><a href="#proposed-undo-redo-feature">3.2. [Proposed] Undo/Redo feature</a></li>
-<li><a href="#proposed-data-encryption">3.3. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.4. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.5. Configuration</a></li>
-<li><a href="#Implementation-Find">3.6. Find feature</a></li>
-<li><a href="#Implementation-Sort">3.7. Sort feature</a></li>
-<li><a href="#reminder-feature">3.8. Reminder feature</a></li>
-<li><a href="#import-feature">3.9. Import Feature</a></li>
+<li><a href="#logging">3.2. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.3. Configuration</a></li>
+<li><a href="#Implementation-Find">3.4. Find feature</a></li>
+<li><a href="#Implementation-Sort">3.5. Sort feature</a></li>
+<li><a href="#reminder-feature">3.6. Reminder feature</a></li>
+<li><a href="#import-feature">3.7. Import Feature</a></li>
+<li><a href="#proposed-undo-redo-feature">3.8. [Proposed] Undo/Redo feature</a></li>
+<li><a href="#proposed-data-encryption">3.9. [Proposed] Data Encryption</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a></li>
@@ -375,7 +375,10 @@ The following class plays an important role at the architecture level:</p>
 </div>
 <div class="sect2">
 <h3 id="Design-Logic"><a class="link" href="#Design-Logic">2.3. Logic component</a></h3>
-<div id="fig-LogicClassDiagram" class="imageblock">
+<div id="fig-LogicClassDiagram" class="paragraph">
+<p>The following class diagram shows the structure of the Logic component.</p>
+</div>
+<div class="imageblock">
 <div class="content">
 <img src="images/LogicClassDiagram.png" alt="LogicClassDiagram">
 </div>
@@ -428,6 +431,9 @@ The lifeline for <code>DeleteCommandParser</code> should end at the destroy mark
 </div>
 <div class="sect2">
 <h3 id="Design-Model"><a class="link" href="#Design-Model">2.4. Model component</a></h3>
+<div class="paragraph">
+<p>The following class diagram shows the structure of the Model component.</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/ModelClassDiagram.png" alt="ModelClassDiagram">
@@ -473,6 +479,9 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Spending Book
 </div>
 <div class="sect2">
 <h3 id="Design-Storage"><a class="link" href="#Design-Storage">2.5. Storage component</a></h3>
+<div class="paragraph">
+<p>The following class diagram below displays the structure of the Storage Component.</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/StorageClassDiagram.png" alt="StorageClassDiagram">
@@ -636,9 +645,546 @@ Alternative 2 requires a change in the architecture which may result in higher c
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-undo-redo-feature"><a class="link" href="#proposed-undo-redo-feature">3.2. [Proposed] Undo/Redo feature</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.2. Logging</a></h3>
+<div class="paragraph">
+<p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.3, &#8220;Configuration&#8221;</a>)</p>
+</li>
+<li>
+<p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
+</li>
+<li>
+<p>Currently log messages are output through: <code>Console</code> and to a <code>.log</code> file.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Logging Levels</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>SEVERE</code> : Critical problem detected which may possibly cause the termination of the application</p>
+</li>
+<li>
+<p><code>WARNING</code> : Can continue, but with caution</p>
+</li>
+<li>
+<p><code>INFO</code> : Information showing the noteworthy actions by the App</p>
+</li>
+<li>
+<p><code>FINE</code> : Details that is not usually noteworthy but may be useful in debugging e.g. print the actual list instead of just its size</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.3. Configuration</a></h3>
+<div class="paragraph">
+<p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Implementation-Find"><a class="link" href="#Implementation-Find">3.4. Find feature</a></h3>
+<div class="paragraph">
+<p>The find feature allows the user to search for a spending based on specified field. If search results are too broad, fields may be combined to increase specificity.</p>
+</div>
+<div class="paragraph">
+<p>For example, <code>find n/Apple c/2.50-3.00</code> will find an <code>Apple</code> of cost range $<code>2.50</code> to $<code>3.00</code>.</p>
+</div>
 <div class="sect3">
-<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.2.1. Proposed Implementation</a></h4>
+<h4 id="implementation-2"><a class="link" href="#implementation-2">3.4.1. Implementation</a></h4>
+<div class="paragraph">
+<p>Find is supported by having a <code>Predicate</code> implemented for every field in Spending. Predicates are added based on valid input entered by the user.</p>
+</div>
+<div class="paragraph">
+<p>The <code>FindCommandParser</code> class stores these predicates, which are combined using Java 8 streams with an <code>AND</code> operation to form a more specific search query.</p>
+</div>
+<div class="paragraph">
+<p>The sequence diagram below demonstrates how the <code>find</code> command is executed:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/FindSequenceDiagram.png" alt="Find Sequence Diagram" width="75%">
+</div>
+<div class="title">Figure 12. Sequence diagram for an example <code>find</code> command</div>
+</div>
+<div class="paragraph">
+<p>The following steps explain the sequence diagram:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The user enters <code>find n/apple</code>.</p>
+</li>
+<li>
+<p><code>LogicManager</code> calls <code>SpendingBookParser#parseCommand()</code>.</p>
+</li>
+<li>
+<p><code>FindCommandParser</code> is created and validates user input, creating a list of <code>predicates</code>.</p>
+</li>
+<li>
+<p><code>FindCommand</code> receives <code>predicates</code> and stores it in a list.</p>
+</li>
+<li>
+<p>On <code>execute()</code>, <code>predicates</code> are reduced and <code>Model#updateFilteredSpendingList(predicate)</code> is called to refresh the displayed list.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The lifeline for <code>FindCommandParser</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To summarise what happens when the user uses the <code>find</code> command, the following activity diagram is shown below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/FindActivityDiagram.png" alt="Find Activity Diagram" width="75%">
+</div>
+<div class="title">Figure 13. Activity diagram for an example <code>find</code> command</div>
+</div>
+<div class="paragraph">
+<p>The following steps explain the activity diagram:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The user executes the <code>find</code> command.</p>
+</li>
+<li>
+<p>If there are valid inputs, each field from the input is saved as predicates into a predicate list.</p>
+</li>
+<li>
+<p>Else, there are two cases.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>If there is an invalid field, display an error message for the invalid field.</p>
+</li>
+<li>
+<p>If there is a missing field, display an error message for the missing field.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.4.2. Design Considerations</a></h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Aspect</th>
+<th class="tableblock halign-left valign-top">Alternative 1</th>
+<th class="tableblock halign-left valign-top">Alternative 2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How find is executed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Save all predicates to a list<br>
+Pros: Easy to implement<br>
+Cons: All fields require a predicate</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Search the underlying list directly without using a predicate<br>
+Pros: Able to manipulate object easily<br>
+Cons: Poor abstraction</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Implementation-Sort"><a class="link" href="#Implementation-Sort">3.5. Sort feature</a></h3>
+<div class="paragraph">
+<p>The sort feature allows users to sort all currently displayed Spending entries automatically. The default sorting sequence is by Date, followed by Cost. Both are in descending order.</p>
+</div>
+<div class="paragraph">
+<p>The user may choose to modify how the displayed entries are sorted using the <code>sort</code> command.</p>
+</div>
+<div class="paragraph">
+<p>For example, <code>sort n/ASC d/DESC</code> applies sorting by name in ascending order, followed by Date in descending order. This applies to any future commands entered.</p>
+</div>
+<div class="sect3">
+<h4 id="implementation-3"><a class="link" href="#implementation-3">3.5.1. Implementation</a></h4>
+<div class="paragraph">
+<p>The sorting feature is supported by <code>SpendingComparator</code>, a custom comparator to facilitate different sort ordering, and implements the following operation:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>updateSortedSpendingList(comparator)</code>&#8201;&#8212;&#8201;Updates the sorted spending list with a new comparator.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This operation is exposed in the <code>Model</code> interface as <code>Model#updateSortedSpendingList(comparator)</code>.</p>
+</div>
+<div class="paragraph">
+<p>At a high level view, <code>SpendingComparator</code> and <code>SortField</code> interacts in the manner shown below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SortPackageDiagram.png" alt="Sort Package Diagram">
+</div>
+<div class="title">Figure 14. High-level view of package interaction</div>
+</div>
+<div class="paragraph">
+<p>The sequence diagram below demonstrates how the <code>sort</code> command is executed:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SortSequenceDiagram.png" alt="Sort Sequence Diagram" width="75%">
+</div>
+<div class="title">Figure 15. Sequence diagram for an example <code>sort</code> command</div>
+</div>
+<div class="paragraph">
+<p>The following steps explain the sequence diagram:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The user enters <code>sort n/ASC</code>.</p>
+</li>
+<li>
+<p><code>LogicManager</code> calls <code>SpendingBookParser#parseCommand()</code>.</p>
+</li>
+<li>
+<p><code>SortCommandParser</code> is created and validates user input, creating a set of <code>fields</code>.</p>
+</li>
+<li>
+<p><code>SortCommand</code> receives <code>fields</code> and stores it.</p>
+</li>
+<li>
+<p>On <code>execute()</code>, <code>fields</code> are passed into a <code>SpendingComparator</code> object and <code>Model#updateSortedSpendingList(comparator)</code> is called to refresh the displayed list.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The lifeline for <code>SortCommandParser</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The following activity diagram summarises what happens when the user uses the <code>sort</code> command:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SortActivityDiagram.png" alt="Sort Activity Diagram" width="75%">
+</div>
+<div class="title">Figure 16. Activity diagram for an example <code>sort</code> command</div>
+</div>
+<div class="paragraph">
+<p>The following steps explain the activity diagram:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The user executes the <code>sort</code> command.</p>
+</li>
+<li>
+<p>If there are valid fields from the input, each field is saved into a list and determines sort order for <code>Model</code>.</p>
+</li>
+<li>
+<p>Else, there are two cases.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>If there is an invalid field, display an error message for the invalid field.</p>
+</li>
+<li>
+<p>If there is a missing field, display an error message for the missing field.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.5.2. Design Considerations</a></h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Aspect</th>
+<th class="tableblock halign-left valign-top">Alternative 1</th>
+<th class="tableblock halign-left valign-top">Alternative 2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How sort is executed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set a new comparator<br>
+Pros: Easy to implement<br>
+Cons: None</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sort the underlying list without a comparator<br>
+Pros: Able to manipulate objects directly<br>
+Cons: Poor abstraction</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Method design for sort</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Create filtered list from sorted list<br>
+Pros: Easy to implement<br>
+Cons: Minor structure changes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Create sorted list from filtered list<br>
+Pros: Able to test large sorting side effects<br>
+Cons: Large code structure changes</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="reminder-feature"><a class="link" href="#reminder-feature">3.6. Reminder feature</a></h3>
+<div class="paragraph">
+<p>With this reminder feature, users can set the reminders of their tasks with deadlines and delete them when completed.</p>
+</div>
+<div class="sect3">
+<h4 id="implementation-4"><a class="link" href="#implementation-4">3.6.1. Implementation</a></h4>
+<div class="paragraph">
+<p>A reminder is constructed with</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Deadline <code>d/DATE</code></p>
+</li>
+<li>
+<p>Reminder Message <code>m/MESSAGE</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The recorded reminders sorted with deadline in descending order, are displayed on the User Interface(UI) for notification.</p>
+</div>
+<div class="paragraph">
+<p>This feature is implemented with the following operations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Adding a reminder <code>reminder d/DATE m/MESSAGE</code><br>
+e.g. <code>reminder d/30/08/2020 m/Pay school fee</code> - set reminder to pay school fee by 30th of August 2020</p>
+</li>
+<li>
+<p>Deleting a reminder <code>dreminder INDEX</code><br>
+e.g. <code>dreminder 1</code> - delete the first reminder in the reminder list shown in UI.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Below is the activity diagram describing the steps take by MoneyGoWhere when it receives <code>AddReminderCommand</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AddReminderActivityDiagram.png" alt="AddReminderActivityDiagram" width="75%">
+</div>
+<div class="title">Figure 17. Activity diagram for adding a reminder</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In the above diagram, it can be seen that respective error messages will be shown for invalid inputs.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Shown below is the sequence diagram containing the interactions between respective components in MoneyGoWHere when user inputs <code>AddReminderCommand</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AddReminderSequenceDiagram.png" alt="AddReminderSequenceDiagram" width="75%">
+</div>
+<div class="title">Figure 18. Sequence diagram while user attempts to add a new reminder</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The above sequence diagram demonstrates how a new reminder is constructed from valid user input.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Following is the activity diagram including the series of actions performed by MoneyGoWhere when it receives <code>DeleteReminderCommand</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/DeleteReminderActivityDiagram.png" alt="DeleteReminderActivityDiagram" width="75%">
+</div>
+<div class="title">Figure 19. Activity diagram for removing a reminder</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The negative index from user input will leads to invalid command format error.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The below sequence diagram summarize the interactions between different components when user enter <code>DeleteReminderCommand</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/DeleteReminderSequenceDiagram.png" alt="DeleteReminderSequenceDiagram" width="75%">
+</div>
+<div class="title">Figure 20. Sequence diagram while user attempt to remove a reminder</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The above diagram also highlights how logic and model components interact with each other while deleting a reminder.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="import-feature"><a class="link" href="#import-feature">3.7. Import Feature</a></h3>
+<div class="sect3">
+<h4 id="implementation-5"><a class="link" href="#implementation-5">3.7.1. Implementation</a></h4>
+<div class="paragraph">
+<p>The Import feature allows our users to import data from a comma-separated values (<code>.csv</code>) files.
+It allows users who would like to add their spending in bulk.</p>
+</div>
+<div class="paragraph">
+<p>Given below is the Sequence Diagram for interactions within the <code>Logic</code> component for the
+<code>execute("import p/validSpending.csv")</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ImportSequenceDiagram.png" alt="ImportSequenceDiagram" width="75%">
+</div>
+<div class="title">Figure 21. Interactions Inside the Logic Component for the <code>import</code> Command</div>
+</div>
+<div class="paragraph">
+<p>The Import Feature has one main component, which is the <code>ImportCommand.java</code> file. This file contains the main logic behind the feature.
+The <code>ImportCommand#readSpendingFromCsv()</code> method utilises the <code>FasterXML/jackson</code> library to read in <code>.csv</code> files and convert it into maps of objects.
+The maps will then be processed and parsed into <code>Spending</code> objects which will be added into a <code>Spending</code> list.
+Those maps that do not pass the parse conditions will then be thrown as an exception and its message will be saved inside an error list.
+After all the maps are processed, the application will then go through the valid spending list and save them by calling the <code>Model#addSpending()</code> method.
+Following that, the application will then prints an output, showing the result of the command execution.</p>
+</div>
+<div class="paragraph">
+<p>The following activity diagram summarizes what happens when a user executes an import command:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ImportActivityDiagram.png" alt="ImportActivityDiagram" width="25%">
+</div>
+<div class="title">Figure 22. Import Feature Activity Diagram</div>
+</div>
+<div class="paragraph">
+<p>When a user calls the <code>import</code> command and inputs a valid <code>.csv</code> file, the application will read and parses all the data inside the file and save them to the <code>SpendingBookList</code> and <code>moneygowhere.json</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="csv-file-format-and-constraints"><a class="link" href="#csv-file-format-and-constraints">3.7.2. CSV File Format and Constraints</a></h4>
+<div class="paragraph">
+<p>In order for data to be imported into MoneyGoWhere, it must be in a properly formatted CSV file.
+There should be 5 columns specified for <code>Name</code>, <code>Cost</code>, <code>Date</code>, <code>Tag</code> and <code>Remark</code></p>
+</div>
+<div class="paragraph">
+<p>Header Constraints</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The first row is considered a column header and is required.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Cell Formatting</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>There should not be any leading and trailing spaces in a cell.</p>
+</li>
+<li>
+<p>To specify a comma within a cell, the value of the cell should be inside double quotes. Eg:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>"yummy, juicy"</p>
+</li>
+<li>
+<p>"fresh, clean"</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>To specify double quotes within a cell, in addition to start and end double quotes, escape the double quote with another double quote. Eg:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>"""yummy"", ""juicy"""</p>
+</li>
+<li>
+<p>"""fresh"", ""clean"""</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="proposed-undo-redo-feature"><a class="link" href="#proposed-undo-redo-feature">3.8. [Proposed] Undo/Redo feature</a></h3>
+<div class="sect3">
+<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.8.1. Proposed Implementation</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by <code>VersionedSpendingBook</code>.
 It extends <code>SpendingBook</code> with an undo/redo history, stored internally as an <code>spendingBookStateList</code> and <code>currentStatePointer</code>.
@@ -780,7 +1326,7 @@ If the <code>currentStatePointer</code> is at index <code>spendingBookStateList.
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.8.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
 <div class="ulist">
@@ -850,450 +1396,9 @@ If the <code>currentStatePointer</code> is at index <code>spendingBookStateList.
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.3. [Proposed] Data Encryption</a></h3>
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.9. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.4. Logging</a></h3>
-<div class="paragraph">
-<p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.5, &#8220;Configuration&#8221;</a>)</p>
-</li>
-<li>
-<p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
-</li>
-<li>
-<p>Currently log messages are output through: <code>Console</code> and to a <code>.log</code> file.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><strong>Logging Levels</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>SEVERE</code> : Critical problem detected which may possibly cause the termination of the application</p>
-</li>
-<li>
-<p><code>WARNING</code> : Can continue, but with caution</p>
-</li>
-<li>
-<p><code>INFO</code> : Information showing the noteworthy actions by the App</p>
-</li>
-<li>
-<p><code>FINE</code> : Details that is not usually noteworthy but may be useful in debugging e.g. print the actual list instead of just its size</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.5. Configuration</a></h3>
-<div class="paragraph">
-<p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="Implementation-Find"><a class="link" href="#Implementation-Find">3.6. Find feature</a></h3>
-<div class="paragraph">
-<p>The find feature allows the user to search for a spending based on specified field. If search results are too broad, fields may be combined to increase specificity.</p>
-</div>
-<div class="paragraph">
-<p>For example, <code>find n/Apple c/2.50-3.00</code> will find an <code>Apple</code> of cost range <code>2.00</code> to <code>3.00</code>.</p>
-</div>
-<div class="sect3">
-<h4 id="implementation-2"><a class="link" href="#implementation-2">3.6.1. Implementation</a></h4>
-<div class="paragraph">
-<p>Find is supported by having a <code>Predicate</code> implemented for every field in Spending. Predicates are added based on valid input entered by the user.</p>
-</div>
-<div class="paragraph">
-<p>The <code>FindCommandParser</code> class stores these predicates, which are combined using Java 8 streams with an <code>AND</code> operation to form a more specific search query.</p>
-</div>
-<div class="paragraph">
-<p>The sequence diagram below demonstrates how the <code>find</code> command is executed:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/FindSequenceDiagram.png" alt="Find Sequence Diagram">
-</div>
-<div class="title">Figure 12. Sequence diagram for an example find command</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The lifeline for <code>FindCommandParser</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The following activity diagram summarises what happens when the user uses the <code>find</code> command:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/FindActivityDiagram.png" alt="Find Activity Diagram">
-</div>
-<div class="title">Figure 13. Activity diagram for an example find command</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.6.2. Design Considerations</a></h4>
-<table class="tableblock frame-all grid-all" style="width: 90%;">
-<colgroup>
-<col style="width: 20%;">
-<col style="width: 40%;">
-<col style="width: 40%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Aspect</th>
-<th class="tableblock halign-left valign-top">Alternative 1</th>
-<th class="tableblock halign-left valign-top">Alternative 2</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">How find is executed</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Save all predicates to a list<br>
-Pros: Easy to implement<br>
-Cons: All fields require a predicate</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Search the underlying list directly without using a predicate<br>
-Pros: Able to manipulate object easily<br>
-Cons: Poor abstraction</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="Implementation-Sort"><a class="link" href="#Implementation-Sort">3.7. Sort feature</a></h3>
-<div class="paragraph">
-<p>The sort feature allows users to sort all currently displayed Spending entries automatically. The default sorting sequence is by Date, followed by Cost. Both are in descending order.</p>
-</div>
-<div class="paragraph">
-<p>The user may choose to modify how the displayed entries are sorted using the <code>sort</code> command.</p>
-</div>
-<div class="paragraph">
-<p>For example, <code>sort n/ASC d/DESC</code> applies sorting by name in ascending order, followed by Date in descending order. This applies to any future commands entered.</p>
-</div>
-<div class="sect3">
-<h4 id="implementation-3"><a class="link" href="#implementation-3">3.7.1. Implementation</a></h4>
-<div class="paragraph">
-<p>The sorting feature is supported by <code>SpendingComparator</code>, a custom comparator to facilitate different sort ordering, and implements the following operation:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>updateSortedSpendingList(comparator)</code>&#8201;&#8212;&#8201;Updates the sorted spending list with a new comparator.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>This operation is exposed in the <code>Model</code> interface as <code>Model#updateSortedSpendingList(comparator)</code>.</p>
-</div>
-<div class="paragraph">
-<p>At a high level view, <code>SpendingComparator</code> and <code>SortField</code> interacts in the manner shown below.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/SortPackageDiagram.png" alt="Sort Package Diagram">
-</div>
-<div class="title">Figure 14. High-level view of package interaction</div>
-</div>
-<div class="paragraph">
-<p>The sequence diagram below demonstrates how the <code>sort</code> command is executed:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/SortSequenceDiagram.png" alt="Sort Sequence Diagram">
-</div>
-<div class="title">Figure 15. Sequence diagram for an example sort command</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The lifeline for <code>SortCommandParser</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The following activity diagram summarises what happens when the user uses the <code>sort</code> command:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/SortActivityDiagram.png" alt="Sort Activity Diagram">
-</div>
-<div class="title">Figure 16. Activity diagram for an example sort command</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.7.2. Design Considerations</a></h4>
-<table class="tableblock frame-all grid-all" style="width: 90%;">
-<colgroup>
-<col style="width: 20%;">
-<col style="width: 40%;">
-<col style="width: 40%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Aspect</th>
-<th class="tableblock halign-left valign-top">Alternative 1</th>
-<th class="tableblock halign-left valign-top">Alternative 2</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">How sort is executed</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Set a new comparator<br>
-Pros: Easy to implement<br>
-Cons: None</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Sort the underlying list without a comparator<br>
-Pros: Able to manipulate objects directly<br>
-Cons: Poor abstraction</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Method design for sort</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Create filtered list from sorted list<br>
-Pros: Easy to implement<br>
-Cons: Minor structure changes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Create sorted list from filtered list<br>
-Pros: Able to test large sorting side effects<br>
-Cons: Large code structure changes</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="reminder-feature"><a class="link" href="#reminder-feature">3.8. Reminder feature</a></h3>
-<div class="paragraph">
-<p>With this reminder feature, users can set the reminders of their tasks with deadlines and delete them when completed.</p>
-</div>
-<div class="sect3">
-<h4 id="implementation-4"><a class="link" href="#implementation-4">3.8.1. Implementation</a></h4>
-<div class="paragraph">
-<p>A reminder is constructed with</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Deadline <code>d/DATE</code></p>
-</li>
-<li>
-<p>Reminder Message <code>m/MESSAGE</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>The recorded reminders sorted with deadline in descending order, are displayed on the User Interface(UI) for notification.</p>
-</div>
-<div class="paragraph">
-<p>This feature is implemented with the following operations:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Adding a reminder <code>reminder d/DATE m/MESSAGE</code><br>
-e.g. <code>reminder d/30/08/2020 m/Pay school fee</code> - set reminder to pay school fee by 30th of August 2020</p>
-</li>
-<li>
-<p>Deleting a reminder <code>dreminder INDEX</code><br>
-e.g. <code>dreminder 1</code> - delete the first reminder in the reminder list shown in UI.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Below is the activity diagram describing the steps take by MoneyGoWhere when it receives <code>AddReminderCommand</code>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/AddReminderActivityDiagram.png" alt="AddReminderActivityDiagram">
-</div>
-<div class="title">Figure 17. Activity diagram for adding a reminder</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-In the above diagram, it can be seen that respective error messages will be shown for invalid inputs.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Shown below is the sequence diagram containing the interactions between respective components in MoneyGoWHere when user inputs <code>AddReminderCommand</code>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/AddReminderSequenceDiagram.png" alt="AddReminderSequenceDiagram">
-</div>
-<div class="title">Figure 18. Sequence diagram while user attempts to add a new reminder</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The above sequence diagram demonstrates how a new reminder is constructed from valid user input.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Following is the activity diagram including the series of actions performed by MoneyGoWhere when it receives <code>DeleteReminderCommand</code></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/DeleteReminderActivityDiagram.png" alt="DeleteReminderActivityDiagram">
-</div>
-<div class="title">Figure 19. Activity diagram for removing a reminder</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The negative index from user input will leads to invalid command format error.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The below sequence diagram summarize the interactions between different components when user enter <code>DeleteReminderCommand</code>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/DeleteReminderSequenceDiagram.png" alt="DeleteReminderSequenceDiagram">
-</div>
-<div class="title">Figure 20. Sequence diagram while user attempt to remove a reminder</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The above diagram also highlights how logic and model components interact with each other while deleting a reminder.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="import-feature"><a class="link" href="#import-feature">3.9. Import Feature</a></h3>
-<div class="sect3">
-<h4 id="implementation-5"><a class="link" href="#implementation-5">3.9.1. Implementation</a></h4>
-<div class="paragraph">
-<p>The Import feature allows our users to import data from a comma-separated values (<code>.csv</code>) files.
-It allows users who would like to add their spending in bulk.</p>
-</div>
-<div class="paragraph">
-<p>Given below is the Sequence Diagram for interactions within the <code>Logic</code> component for the
-<code>execute("import p/validSpending.csv")</code></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/ImportSequenceDiagram.png" alt="ImportSequenceDiagram">
-</div>
-<div class="title">Figure 21. Interactions Inside the Logic Component for the <code>import</code> Command</div>
-</div>
-<div class="paragraph">
-<p>The Import Feature has one main component, which is the <code>ImportCommand.java</code> file. This file contains the main logic behind the feature.
-The <code>ImportCommand#readSpendingFromCsv()</code> method utilises the <code>FasterXML/jackson</code> library to read in <code>.csv</code> files and convert it into maps of objects.
-The maps will then be processed and parsed into <code>Spending</code> objects which will be added into a <code>Spending</code> list.
-Those maps that do not pass the parse conditions will then be thrown as an exception and its message will be saved inside an error list.
-After all the maps are processed, the application will then go through the valid spending list and save them by calling the <code>Model#addSpending()</code> method.
-Following that, the application will then prints an output, showing the result of the command execution.</p>
-</div>
-<div class="paragraph">
-<p>The following activity diagram summarizes what happens when a user executes an import command:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/ImportActivityDiagram.png" alt="ImportActivityDiagram">
-</div>
-<div class="title">Figure 22. Import Feature Activity Diagram</div>
-</div>
-<div class="paragraph">
-<p>When a user calls the <code>import</code> command and inputs a valid <code>.csv</code> file, the application will read and parses all the data inside the file and save them to the <code>SpendingBookList</code> and <code>moneygowhere.json</code>.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="csv-file-format-and-constraints"><a class="link" href="#csv-file-format-and-constraints">3.9.2. CSV File Format and Constraints</a></h4>
-<div class="paragraph">
-<p>In order for data to be imported into MoneyGoWhere, it must be in a properly formatted CSV file.
-There should be 5 columns specified for <code>Name</code>, <code>Cost</code>, <code>Date</code>, <code>Tag</code> and <code>Remark</code></p>
-</div>
-<div class="paragraph">
-<p>Header Constraints</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>The first row is considered a column header and is required.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Cell Formatting</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>There should not be any leading and trailing spaces in a cell.</p>
-</li>
-<li>
-<p>To specify a comma within a cell, the value of the cell should be inside double quotes. Eg:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>"yummy, juicy"</p>
-</li>
-<li>
-<p>"fresh, clean"</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>To specify double quotes within a cell, in addition to start and end double quotes, escape the double quote with another double quote. Eg:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>"""yummy"", ""juicy"""</p>
-</li>
-<li>
-<p>"""fresh"", ""clean"""</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
 </div>
 </div>
 </div>
@@ -2244,4 +2349,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-24 14:04:59 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-24 15:45:03 UTC</div></div></div></body></html>
