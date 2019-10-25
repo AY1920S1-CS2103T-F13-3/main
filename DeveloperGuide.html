@@ -29,13 +29,13 @@
 </li>
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#statistics-feature">3.1. Statistics feature</a></li>
-<li><a href="#logging">3.2. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.3. Configuration</a></li>
-<li><a href="#Implementation-Find">3.4. Find feature</a></li>
-<li><a href="#Implementation-Sort">3.5. Sort feature</a></li>
-<li><a href="#reminder-feature">3.6. Reminder feature</a></li>
-<li><a href="#import-feature">3.7. Import Feature</a></li>
+<li><a href="#logging">3.1. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.2. Configuration</a></li>
+<li><a href="#Implementation-Find">3.3. Find feature</a></li>
+<li><a href="#Implementation-Sort">3.4. Sort feature</a></li>
+<li><a href="#reminder-feature">3.5. Reminder feature</a></li>
+<li><a href="#import-feature">3.6. Import Feature</a></li>
+<li><a href="#statistics-feature">3.7. Statistics feature</a></li>
 <li><a href="#proposed-undo-redo-feature">3.8. [Proposed] Undo/Redo feature</a></li>
 <li><a href="#proposed-data-encryption">3.9. [Proposed] Data Encryption</a></li>
 </ul>
@@ -520,139 +520,14 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Spending Book
 <p>This section describes some noteworthy details on how certain features are implemented.</p>
 </div>
 <div class="sect2">
-<h3 id="statistics-feature"><a class="link" href="#statistics-feature">3.1. Statistics feature</a></h3>
-<div class="sect3">
-<h4 id="current-implementation"><a class="link" href="#current-implementation">3.1.1. Current Implementation</a></h4>
-<div class="paragraph">
-<p>For the current <code>statistics</code> feature, there are 2 main commands that the user can execute.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><code>stats</code> - display statistics for all spending</p>
-</li>
-<li>
-<p><code>stats d/DATE_START d/DATE_END</code> - display statistics for spending within a date range</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>The <code>StatsCommandParser</code> differentiates these 2 commands based on whether a valid date range is provided as illustrated in the diagram below.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/statsactivitydiagram.png" alt="statsactivitydiagram" width="600">
-</div>
-<div class="title">Figure 9. Activity Diagram showing behaviour of StatsCommandParser</div>
-</div>
-<div class="paragraph">
-<p>The implementation of the Statistics feature can be split into 2 phases, preparation and execution. Given below is an explanation of how the Statistics mechanism behaves at each phase.</p>
-</div>
-<div class="sect4">
-<h5 id="preparation"><a class="link" href="#preparation">Preparation</a></h5>
-<div class="paragraph">
-<p>During the preparation phase, the program parses the command for Statistics and prepares to open a new Statistics Window.
-The following sequence diagram shows how <code>stats d/01/01/2019 d/07/01/2019</code> works during the preparation phase.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/StatsSequenceDiagram.png" alt="StatsSequenceDiagram">
-</div>
-<div class="title">Figure 10. Sequence Diagram demonstrating the preparation stage of Statistics feature</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User executes <code>stats d/01/01/2019 d/07/01/2019</code> to generate statistics for spending within <code>01/01/2019</code> and <code>07/01/2019</code>.</p>
-</li>
-<li>
-<p>SpendingBookParser will parse and identify the command as a StatsCommand and pass on the argument <code>d/ 01/01/2019 d/07/01/2019</code> to StatsCommandParser.</p>
-</li>
-<li>
-<p>StatsCommandParser will check whether the date range parameters provided are valid.</p>
-</li>
-<li>
-<p><code>StatsCommand#execute()</code> is executed, returning a message which tells the user that the Stats Window will be opened and set a boolean <code>isShowStats</code> = true to indicate that a new window to display the statistics will be opened.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect4">
-<h5 id="execution"><a class="link" href="#execution">Execution</a></h5>
-<div class="paragraph">
-<p>In the execution phase, the program processes and retrieves the data to be displayed and finally displaying it.</p>
-</div>
-<div class="paragraph">
-<p>There are 2 types of data that the program require, <code>statsMessage</code> for displaying the statistics in text and <code>statsData</code> for displaying the data in a piechart.
-Below is the UML sequence diagram and a step-by-step explanation for the retrieval of <code>statsData</code>. <code>statsMessage</code> is retrieved in the same manner.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/StatsMessageSequenceDiagram.png" alt="StatsMessageSequenceDiagram">
-</div>
-<div class="title">Figure 11. Sequence Diagram of Execution Phase showing retrieving of <code>statsData</code></div>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Upon checking that the boolean <code>isShowStats</code> = true, the MainWindow calls <code>LogicManager#getStatsData()</code>.</p>
-</li>
-<li>
-<p>SpendingBookParser will parse and identify the command as a StatsCommand and pass on the argument <code>d/ 01/01/2019 d/07/01/2019</code> to StatsCommandParser.</p>
-</li>
-<li>
-<p>StatsCommandParser will check whether the date range parameters provided are valid.</p>
-</li>
-<li>
-<p><code>StatsCommand#getStatsData()</code> is executed. Spending with date range within <code>01/01/2019</code> and <code>07/01/2019</code> is filtered.
-The filtering is done through a predicate parameter which checks through the dates of the spending in the application.</p>
-</li>
-<li>
-<p>Finally, the <code>statsData</code> will be displayed on the Ui through <code>StatsWindow#loadData()</code> call.</p>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.2. Design Considerations</a></h4>
-<div class="sect4">
-<h5 id="how-to-pass-statistics-data-parameters-from-logic-to-ui"><a class="link" href="#how-to-pass-statistics-data-parameters-from-logic-to-ui">How to pass statistics data parameters from Logic to UI</a></h5>
-<div class="paragraph">
-<p>Alternative 1 (current choice): UI gets all data and parameters from Logic, which gets data from Model.</p>
-</div>
-<div class="paragraph">
-<p>Pros: Easy to implement. Aligned with architecture.</p>
-</div>
-<div class="paragraph">
-<p>Cons: A lot of method calls</p>
-</div>
-<div class="paragraph">
-<p>Alternative 2: Pass data and parameters through event</p>
-</div>
-<div class="paragraph">
-<p>Pros: Less method calls. Easier to read.</p>
-</div>
-<div class="paragraph">
-<p>Cons: Not in alignment with architecture. Need to consider application startup when there are no events posted.</p>
-</div>
-<div class="paragraph">
-<p>Alternative 1 was chosen due to the ease of implementation.
-As the current statistics feature does not require a large amount of data, the number of method calls is not too large.
-Alternative 2 requires a change in the architecture which may result in higher complexity.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.2. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.1. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.3, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.2, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -683,13 +558,13 @@ Alternative 2 requires a change in the architecture which may result in higher c
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.3. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.2. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Find"><a class="link" href="#Implementation-Find">3.4. Find feature</a></h3>
+<h3 id="Implementation-Find"><a class="link" href="#Implementation-Find">3.3. Find feature</a></h3>
 <div class="paragraph">
 <p>The find feature allows the user to search for a spending based on specified field. If search results are too broad, fields may be combined to increase specificity.</p>
 </div>
@@ -697,7 +572,7 @@ Alternative 2 requires a change in the architecture which may result in higher c
 <p>For example, <code>find n/Apple c/2.50-3.00</code> will find an <code>Apple</code> of cost range $<code>2.50</code> to $<code>3.00</code>.</p>
 </div>
 <div class="sect3">
-<h4 id="implementation-2"><a class="link" href="#implementation-2">3.4.1. Implementation</a></h4>
+<h4 id="implementation-2"><a class="link" href="#implementation-2">3.3.1. Implementation</a></h4>
 <div class="paragraph">
 <p>Find is supported by having a <code>Predicate</code> implemented for every field in Spending. Predicates are added based on valid input entered by the user.</p>
 </div>
@@ -711,7 +586,7 @@ Alternative 2 requires a change in the architecture which may result in higher c
 <div class="content">
 <img src="images/FindSequenceDiagram.png" alt="Find Sequence Diagram" width="75%">
 </div>
-<div class="title">Figure 12. Sequence diagram for an example <code>find</code> command</div>
+<div class="title">Figure 9. Sequence diagram for an example <code>find</code> command</div>
 </div>
 <div class="paragraph">
 <p>The following steps explain the sequence diagram:</p>
@@ -754,7 +629,7 @@ The lifeline for <code>FindCommandParser</code> should end at the destroy marker
 <div class="content">
 <img src="images/FindActivityDiagram.png" alt="Find Activity Diagram" width="75%">
 </div>
-<div class="title">Figure 13. Activity diagram for an example <code>find</code> command</div>
+<div class="title">Figure 10. Activity diagram for an example <code>find</code> command</div>
 </div>
 <div class="paragraph">
 <p>The following steps explain the activity diagram:</p>
@@ -784,7 +659,7 @@ The lifeline for <code>FindCommandParser</code> should end at the destroy marker
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.4.2. Design Considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">3.3.2. Design Considerations</a></h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 20%;">
@@ -813,7 +688,7 @@ Cons: Poor abstraction</p></td>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Sort"><a class="link" href="#Implementation-Sort">3.5. Sort feature</a></h3>
+<h3 id="Implementation-Sort"><a class="link" href="#Implementation-Sort">3.4. Sort feature</a></h3>
 <div class="paragraph">
 <p>The sort feature allows users to sort all currently displayed Spending entries automatically. The default sorting sequence is by Date, followed by Cost. Both are in descending order.</p>
 </div>
@@ -824,7 +699,7 @@ Cons: Poor abstraction</p></td>
 <p>For example, <code>sort n/ASC d/DESC</code> applies sorting by name in ascending order, followed by Date in descending order. This applies to any future commands entered.</p>
 </div>
 <div class="sect3">
-<h4 id="implementation-3"><a class="link" href="#implementation-3">3.5.1. Implementation</a></h4>
+<h4 id="implementation-3"><a class="link" href="#implementation-3">3.4.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The sorting feature is supported by <code>SpendingComparator</code>, a custom comparator to facilitate different sort ordering, and implements the following operation:</p>
 </div>
@@ -845,7 +720,7 @@ Cons: Poor abstraction</p></td>
 <div class="content">
 <img src="images/SortPackageDiagram.png" alt="Sort Package Diagram">
 </div>
-<div class="title">Figure 14. High-level view of package interaction</div>
+<div class="title">Figure 11. High-level view of package interaction</div>
 </div>
 <div class="paragraph">
 <p>The sequence diagram below demonstrates how the <code>sort</code> command is executed:</p>
@@ -854,7 +729,7 @@ Cons: Poor abstraction</p></td>
 <div class="content">
 <img src="images/SortSequenceDiagram.png" alt="Sort Sequence Diagram" width="75%">
 </div>
-<div class="title">Figure 15. Sequence diagram for an example <code>sort</code> command</div>
+<div class="title">Figure 12. Sequence diagram for an example <code>sort</code> command</div>
 </div>
 <div class="paragraph">
 <p>The following steps explain the sequence diagram:</p>
@@ -897,7 +772,7 @@ The lifeline for <code>SortCommandParser</code> should end at the destroy marker
 <div class="content">
 <img src="images/SortActivityDiagram.png" alt="Sort Activity Diagram" width="75%">
 </div>
-<div class="title">Figure 16. Activity diagram for an example <code>sort</code> command</div>
+<div class="title">Figure 13. Activity diagram for an example <code>sort</code> command</div>
 </div>
 <div class="paragraph">
 <p>The following steps explain the activity diagram:</p>
@@ -927,7 +802,7 @@ The lifeline for <code>SortCommandParser</code> should end at the destroy marker
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.5.2. Design Considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.4.2. Design Considerations</a></h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 20%;">
@@ -965,12 +840,12 @@ Cons: Large code structure changes</p></td>
 </div>
 </div>
 <div class="sect2">
-<h3 id="reminder-feature"><a class="link" href="#reminder-feature">3.6. Reminder feature</a></h3>
+<h3 id="reminder-feature"><a class="link" href="#reminder-feature">3.5. Reminder feature</a></h3>
 <div class="paragraph">
 <p>With this reminder feature, users can set the reminders of their tasks with deadlines and delete them when completed.</p>
 </div>
 <div class="sect3">
-<h4 id="implementation-4"><a class="link" href="#implementation-4">3.6.1. Implementation</a></h4>
+<h4 id="implementation-4"><a class="link" href="#implementation-4">3.5.1. Implementation</a></h4>
 <div class="paragraph">
 <p>A reminder is constructed with</p>
 </div>
@@ -1009,7 +884,7 @@ e.g. <code>dreminder 1</code> - delete the first reminder in the reminder list s
 <div class="content">
 <img src="images/AddReminderActivityDiagram.png" alt="AddReminderActivityDiagram" width="75%">
 </div>
-<div class="title">Figure 17. Activity diagram for adding a reminder</div>
+<div class="title">Figure 14. Activity diagram for adding a reminder</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1030,7 +905,7 @@ In the above diagram, it can be seen that respective error messages will be show
 <div class="content">
 <img src="images/AddReminderSequenceDiagram.png" alt="AddReminderSequenceDiagram" width="75%">
 </div>
-<div class="title">Figure 18. Sequence diagram while user attempts to add a new reminder</div>
+<div class="title">Figure 15. Sequence diagram while user attempts to add a new reminder</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1051,7 +926,7 @@ The above sequence diagram demonstrates how a new reminder is constructed from v
 <div class="content">
 <img src="images/DeleteReminderActivityDiagram.png" alt="DeleteReminderActivityDiagram" width="75%">
 </div>
-<div class="title">Figure 19. Activity diagram for removing a reminder</div>
+<div class="title">Figure 16. Activity diagram for removing a reminder</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1072,7 +947,7 @@ The negative index from user input will leads to invalid command format error.
 <div class="content">
 <img src="images/DeleteReminderSequenceDiagram.png" alt="DeleteReminderSequenceDiagram" width="75%">
 </div>
-<div class="title">Figure 20. Sequence diagram while user attempt to remove a reminder</div>
+<div class="title">Figure 17. Sequence diagram while user attempt to remove a reminder</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1089,9 +964,9 @@ The above diagram also highlights how logic and model components interact with e
 </div>
 </div>
 <div class="sect2">
-<h3 id="import-feature"><a class="link" href="#import-feature">3.7. Import Feature</a></h3>
+<h3 id="import-feature"><a class="link" href="#import-feature">3.6. Import Feature</a></h3>
 <div class="sect3">
-<h4 id="implementation-5"><a class="link" href="#implementation-5">3.7.1. Implementation</a></h4>
+<h4 id="implementation-5"><a class="link" href="#implementation-5">3.6.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The Import feature allows our users to import data from a comma-separated values (<code>.csv</code>) files.
 It allows users who would like to add their spending in bulk.</p>
@@ -1104,7 +979,7 @@ It allows users who would like to add their spending in bulk.</p>
 <div class="content">
 <img src="images/ImportSequenceDiagram.png" alt="ImportSequenceDiagram" width="75%">
 </div>
-<div class="title">Figure 21. Interactions Inside the Logic Component for the <code>import</code> Command</div>
+<div class="title">Figure 18. Interactions Inside the Logic Component for the <code>import</code> Command</div>
 </div>
 <div class="paragraph">
 <p>The Import Feature has one main component, which is the <code>ImportCommand.java</code> file. This file contains the main logic behind the feature.
@@ -1121,14 +996,14 @@ Following that, the application will then prints an output, showing the result o
 <div class="content">
 <img src="images/ImportActivityDiagram.png" alt="ImportActivityDiagram" width="25%">
 </div>
-<div class="title">Figure 22. Import Feature Activity Diagram</div>
+<div class="title">Figure 19. Import Feature Activity Diagram</div>
 </div>
 <div class="paragraph">
 <p>When a user calls the <code>import</code> command and inputs a valid <code>.csv</code> file, the application will read and parses all the data inside the file and save them to the <code>SpendingBookList</code> and <code>moneygowhere.json</code>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="csv-file-format-and-constraints"><a class="link" href="#csv-file-format-and-constraints">3.7.2. CSV File Format and Constraints</a></h4>
+<h4 id="csv-file-format-and-constraints"><a class="link" href="#csv-file-format-and-constraints">3.6.2. CSV File Format and Constraints</a></h4>
 <div class="paragraph">
 <p>In order for data to be imported into MoneyGoWhere, it must be in a properly formatted CSV file.
 There should be 5 columns specified for <code>Name</code>, <code>Cost</code>, <code>Date</code>, <code>Tag</code> and <code>Remark</code></p>
@@ -1178,6 +1053,155 @@ There should be 5 columns specified for <code>Name</code>, <code>Cost</code>, <c
 </div>
 </li>
 </ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="statistics-feature"><a class="link" href="#statistics-feature">3.7. Statistics feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">3.7.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>For the current <code>statistics</code> feature, there are 2 main commands that the user can execute.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>stats</code> - display statistics for all spending</p>
+</li>
+<li>
+<p><code>stats d/DATE_START d/DATE_END</code> - display statistics for spending within a date range</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The <code>StatsCommandParser</code> differentiates these 2 commands based on whether a valid date range is provided as illustrated in the diagram below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/StatsActivityDiagram.png" alt="StatsActivityDiagram" width="600">
+</div>
+<div class="title">Figure 20. Activity Diagram showing behaviour of StatsCommandParser</div>
+</div>
+<div class="paragraph">
+<p>The implementation of the Statistics feature can be split into 2 phases, preparation and execution. Given below is an explanation of how the Statistics mechanism behaves at each phase.</p>
+</div>
+<div class="sect4">
+<h5 id="preparation"><a class="link" href="#preparation">Preparation</a></h5>
+<div class="paragraph">
+<p>During the preparation phase, the program parses the command for Statistics and prepares to open a new Statistics Window.
+The following sequence diagram shows how <code>stats d/01/01/2019 d/07/01/2019</code> works during the preparation phase.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/StatsSequenceDiagram.png" alt="StatsSequenceDiagram">
+</div>
+<div class="title">Figure 21. Sequence Diagram demonstrating the preparation stage of Statistics feature</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The lifeline for <code>StatsCommandParser</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User executes <code>stats d/01/01/2019 d/07/01/2019</code> to generate statistics for spending within <code>01/01/2019</code> and <code>07/01/2019</code>.</p>
+</li>
+<li>
+<p>SpendingBookParser will parse and identify the command as a StatsCommand and pass on the argument <code>d/01/01/2019 d/07/01/2019</code> to StatsCommandParser.</p>
+</li>
+<li>
+<p>StatsCommandParser will check whether the date range parameters provided are valid.</p>
+</li>
+<li>
+<p><code>StatsCommand#execute()</code> is executed, returning a message which tells the user that the Stats Window will be opened and set a boolean <code>isShowStats</code> = true to indicate that a new window to display the statistics will be opened.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect4">
+<h5 id="execution"><a class="link" href="#execution">Execution</a></h5>
+<div class="paragraph">
+<p>In the execution phase, the program processes and retrieves the data to be displayed and finally displaying it.</p>
+</div>
+<div class="paragraph">
+<p>There are 2 types of data that the program require, <code>statsMessage</code> for displaying the statistics in text and <code>statsData</code> for displaying the data in a piechart.
+Below is the UML sequence diagram and a step-by-step explanation for the retrieval of <code>statsData</code>. <code>statsMessage</code> is retrieved in the same manner.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/StatsDataSequenceDiagram.png" alt="StatsDataSequenceDiagram">
+</div>
+<div class="title">Figure 22. Sequence Diagram of Execution Phase showing retrieving of <code>statsData</code></div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The lifeline for <code>StatsCommandParser</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Upon checking that the boolean <code>isShowStats</code> = true, the MainWindow calls <code>LogicManager#getStatsData()</code>.</p>
+</li>
+<li>
+<p>SpendingBookParser will parse and identify the command as a StatsCommand and pass on the argument <code>d/01/01/2019 d/07/01/2019</code> to StatsCommandParser.</p>
+</li>
+<li>
+<p>StatsCommandParser will check whether the date range parameters provided are valid.</p>
+</li>
+<li>
+<p><code>StatsCommand#getStatsData()</code> is executed. Spending with date range within <code>01/01/2019</code> and <code>07/01/2019</code> is filtered.
+The filtering is done through a predicate parameter which checks through the dates of the spending in the application.</p>
+</li>
+<li>
+<p>Finally, the <code>statsData</code> will be displayed on the Ui through <code>StatsWindow#loadData()</code> call.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.7.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="how-to-pass-statistics-data-parameters-from-logic-to-ui"><a class="link" href="#how-to-pass-statistics-data-parameters-from-logic-to-ui">How to pass statistics data parameters from Logic to UI</a></h5>
+<div class="sect5">
+<h6 id="alternative-1-current-choice-ui-gets-all-data-and-parameters-from-logic-which-gets-data-from-model"><a class="link" href="#alternative-1-current-choice-ui-gets-all-data-and-parameters-from-logic-which-gets-data-from-model">Alternative 1 (current choice): UI gets all data and parameters from Logic, which gets data from Model.</a></h6>
+<div class="paragraph">
+<p>Pros: Easy to implement. Aligned with architecture.</p>
+</div>
+<div class="paragraph">
+<p>Cons: A lot of method calls.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="alternative-2-pass-data-and-parameters-through-event"><a class="link" href="#alternative-2-pass-data-and-parameters-through-event">Alternative 2: Pass data and parameters through event</a></h6>
+<div class="paragraph">
+<p>Pros: Less method calls. Easier to read.</p>
+</div>
+<div class="paragraph">
+<p>Cons: Not in alignment with architecture. Need to consider application startup when there are no events posted.</p>
+</div>
+<div class="paragraph">
+<p>Alternative 1 was chosen due to the ease of implementation.
+As the current statistics feature does not require a large amount of data, the number of method calls is not too large.
+Alternative 2 requires a change in the architecture which may result in higher complexity.</p>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -2349,4 +2373,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-24 15:53:49 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-25 03:00:02 UTC</div></div></div></body></html>
