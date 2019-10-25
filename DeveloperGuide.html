@@ -36,8 +36,9 @@
 <li><a href="#reminder-feature">3.5. Reminder feature</a></li>
 <li><a href="#import-feature">3.6. Import Feature</a></li>
 <li><a href="#statistics-feature">3.7. Statistics feature</a></li>
-<li><a href="#proposed-undo-redo-feature">3.8. [Proposed] Undo/Redo feature</a></li>
-<li><a href="#proposed-data-encryption">3.9. [Proposed] Data Encryption</a></li>
+<li><a href="#budget-feature">3.8. Budget Feature</a></li>
+<li><a href="#proposed-undo-redo-feature">3.9. [Proposed] Undo/Redo feature</a></li>
+<li><a href="#proposed-data-encryption">3.10. [Proposed] Data Encryption</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a></li>
@@ -1206,9 +1207,112 @@ Alternative 2 requires a change in the architecture which may result in higher c
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-undo-redo-feature"><a class="link" href="#proposed-undo-redo-feature">3.8. [Proposed] Undo/Redo feature</a></h3>
+<h3 id="budget-feature"><a class="link" href="#budget-feature">3.8. Budget Feature</a></h3>
+<div class="paragraph">
+<p>The <code>Budget</code> component has two core features:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Allowing the user to set the monthly budget</p>
+</li>
+<li>
+<p>Calculating the remanding budget after all the spending in the same month.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The budget component allows the users to modify the current monthly budget <code>budget AMOUNT</code> command, where AMOUNT is a
+double representing the desired monthly budget.</p>
+</div>
+<div class="paragraph">
+<p>For example <code>budget 10000</code> sets the current monthly budget to 10000.</p>
+</div>
+<div class="paragraph">
+<p>The second functionality is done automatically by the program, which finds the total spending in the month and reduces
+the sum from the budget.</p>
+</div>
 <div class="sect3">
-<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.8.1. Proposed Implementation</a></h4>
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.8.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The current <code>Budget</code> component keeps track of three variables:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>the monthly budget</p>
+</li>
+<li>
+<p>the current month</p>
+</li>
+<li>
+<p>the sum of all spending in the same month.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>All of which are saved with the SpendingBook.</p>
+</div>
+<div class="paragraph">
+<p>Upon initialization, if a save file is found it will automatically set the monthly budget based on the
+save file&#8217;s options. If the current month is different from the current month
+the total spending will reset to 0, but the monthly budget will remain the same.</p>
+</div>
+<div class="paragraph">
+<p>The sum of spending will only be modified when <code>add</code> and <code>delete</code> commands are called.</p>
+</div>
+<div class="paragraph">
+<p>The sequence diagram below demonstrates how the budget command is executed:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SetBudgetSequenceDiagram.png" alt="SetBudgetSequenceDiagram">
+</div>
+<div class="title">Figure 23. Sequence Diagram when setting Budget</div>
+</div>
+<div class="paragraph">
+<p>The figure above shows the sequence of events that occur to set the monthly budget.
+The <code>LogicManager</code> receives the user input and passes it to the <code>SpendingBookParser</code> to parse the user input,
+resulting in a <code>BudgetCommand</code>.
+If the user input is valid, the command is then executed to access the Budget in Model and modify the value.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-consideration"><a class="link" href="#design-consideration">3.8.2. Design Consideration</a></h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Aspect</th>
+<th class="tableblock halign-left valign-top">Alternative 1</th>
+<th class="tableblock halign-left valign-top">Alternative 2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Method to calculate total spending</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keep track of the sum and modifies the sum when <code>add</code> and <code>delete</code> commands are added<br>
+Pros: does not waste time to calculate sum, easy to implement<br>
+Cons: none</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calculate from <code>SpendingList</code> each time<br>
+Pros: seems intuitive<br>
+Cons: not efficient, requires Budget to access Model, resulting in circular dependency</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The first option is chosen to prevent circular dependency.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="proposed-undo-redo-feature"><a class="link" href="#proposed-undo-redo-feature">3.9. [Proposed] Undo/Redo feature</a></h3>
+<div class="sect3">
+<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.9.1. Proposed Implementation</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by <code>VersionedSpendingBook</code>.
 It extends <code>SpendingBook</code> with an undo/redo history, stored internally as an <code>spendingBookStateList</code> and <code>currentStatePointer</code>.
@@ -1350,7 +1454,7 @@ If the <code>currentStatePointer</code> is at index <code>spendingBookStateList.
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.8.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.9.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
 <div class="ulist">
@@ -1420,7 +1524,7 @@ If the <code>currentStatePointer</code> is at index <code>spendingBookStateList.
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.9. [Proposed] Data Encryption</a></h3>
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.10. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
@@ -2373,4 +2477,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-25 03:00:02 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-25 03:42:04 UTC</div></div></div></body></html>
