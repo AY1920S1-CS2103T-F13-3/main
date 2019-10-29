@@ -662,7 +662,11 @@ The lifeline for <code>FindCommandParser</code> should end at the destroy marker
 </div>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">3.3.2. Design Considerations</a></h4>
+<div class="paragraph">
+<p>Listed in the table below are the design considerations for the <code>find</code> command.</p>
+</div>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
+<caption class="title">Table 1. Design considerations for <code>find</code> command</caption>
 <colgroup>
 <col style="width: 20%;">
 <col style="width: 40%;">
@@ -671,7 +675,7 @@ The lifeline for <code>FindCommandParser</code> should end at the destroy marker
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Aspect</th>
-<th class="tableblock halign-left valign-top">Alternative 1</th>
+<th class="tableblock halign-left valign-top">Alternative 1 (current choice)</th>
 <th class="tableblock halign-left valign-top">Alternative 2</th>
 </tr>
 </thead>
@@ -679,14 +683,23 @@ The lifeline for <code>FindCommandParser</code> should end at the destroy marker
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">How find is executed</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Save all predicates to a list<br>
-Pros: Easy to implement<br>
-Cons: All fields require a predicate</p></td>
+Pros:<br>
+Easy to implement<br>
+Obeys Open-Closed Principle (OCP)<br></p>
+<p class="tableblock">Cons:<br>
+All fields require a predicate</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Search the underlying list directly without using a predicate<br>
-Pros: Able to manipulate object easily<br>
-Cons: Poor abstraction</p></td>
+Pros:<br>
+Able to manipulate object easily<br>
+ <br>
+Cons:<br>
+Poor abstraction</p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>Alternative 1 was chosen as it was the easiest to implement and obeys the Open-Closed Principle (OCP) of the SOLID principles.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -806,6 +819,7 @@ The lifeline for <code>SortCommandParser</code> should end at the destroy marker
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.4.2. Design Considerations</a></h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
+<caption class="title">Table 2. Design considerations for <code>sort</code> command</caption>
 <colgroup>
 <col style="width: 20%;">
 <col style="width: 40%;">
@@ -814,7 +828,7 @@ The lifeline for <code>SortCommandParser</code> should end at the destroy marker
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Aspect</th>
-<th class="tableblock halign-left valign-top">Alternative 1</th>
+<th class="tableblock halign-left valign-top">Alternative 1 (current choice)</th>
 <th class="tableblock halign-left valign-top">Alternative 2</th>
 </tr>
 </thead>
@@ -839,6 +853,9 @@ Cons: Large code structure changes</p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>Alternative 1 was chosen as it was the easiest to implement and it does not violate Single Responsibility Principle (SRP) of the SOLID framework. Manipulating the internal elements of the list directly is dangerous and can cause unintended side effects.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1960,7 +1977,7 @@ If the <code>currentStatePointer</code> is at index <code>spendingBookStateList.
 </ol>
 </div>
 <hr>
-<h3 id="uc02-update-a-spending" class="discrete">UC02 Update a spending</h3>
+<h3 id="uc02-edit-a-spending" class="discrete">UC02 Edit a spending</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2060,7 +2077,25 @@ If the <code>currentStatePointer</code> is at index <code>spendingBookStateList.
 </ul>
 </div>
 <hr>
-<h3 id="uc04-find-a-spending" class="discrete">UC04 Find a spending</h3>
+<h3 id="uc04-list-all-spending" class="discrete">UC04 List all spending</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to list all spending.</p>
+</li>
+<li>
+<p>MoneyGoWhere shows list of spending in the default order of date in descending order, followed by cost in descending order and name in ascending order.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<hr>
+<h3 id="uc05-find-a-spending" class="discrete">UC05 Find a spending</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2070,7 +2105,7 @@ If the <code>currentStatePointer</code> is at index <code>spendingBookStateList.
 <p>User requests to find all occurrences of entered keywords, optionally within the spending name, a cost range, date range, remark and tag in a spending.</p>
 </li>
 <li>
-<p>MoneyGoWhere returns any spending found with the keywords contained within its cost range, date range, remark and tag specified.</p>
+<p>MoneyGoWhere shows spending found with the keywords contained within its cost range, date range, remark and tag specified.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2078,7 +2113,7 @@ If the <code>currentStatePointer</code> is at index <code>spendingBookStateList.
 </ol>
 </div>
 <hr>
-<h3 id="uc05-sort-displayed-spending" class="discrete">UC05 Sort displayed spending</h3>
+<h3 id="uc06-sort-displayed-spending" class="discrete">UC06 Sort displayed spending</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2088,7 +2123,7 @@ If the <code>currentStatePointer</code> is at index <code>spendingBookStateList.
 <p>User requests to sort based on optionally provided fields such as spending name, cost range, date range or remark, in ascending or descending order.</p>
 </li>
 <li>
-<p>MoneyGoWhere returns spending entries using the given order.</p>
+<p>MoneyGoWhere displays current spending entries with the given order.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2096,7 +2131,7 @@ If the <code>currentStatePointer</code> is at index <code>spendingBookStateList.
 </ol>
 </div>
 <hr>
-<h3 id="uc06-set-a-monthly-budget" class="discrete">UC06 Set a monthly budget</h3>
+<h3 id="uc07-set-a-monthly-budget" class="discrete">UC07 Set a monthly budget</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2134,7 +2169,7 @@ If the <code>currentStatePointer</code> is at index <code>spendingBookStateList.
 </ul>
 </div>
 <hr>
-<h3 id="uc07-generate-statistics" class="discrete">UC07 Generate statistics</h3>
+<h3 id="uc08-generate-statistics" class="discrete">UC08 Generate statistics</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2172,7 +2207,7 @@ If the <code>currentStatePointer</code> is at index <code>spendingBookStateList.
 </ul>
 </div>
 <hr>
-<h3 id="uc08-list-all-tags" class="discrete">UC08 List all tags</h3>
+<h3 id="uc09-list-all-tags" class="discrete">UC09 List all tags</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2190,7 +2225,7 @@ If the <code>currentStatePointer</code> is at index <code>spendingBookStateList.
 </ol>
 </div>
 <hr>
-<h3 id="uc09-add-a-reminder" class="discrete">UC09 Add a reminder</h3>
+<h3 id="uc10-add-a-reminder" class="discrete">UC10 Add a reminder</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2208,7 +2243,7 @@ If the <code>currentStatePointer</code> is at index <code>spendingBookStateList.
 </ol>
 </div>
 <hr>
-<h3 id="uc10-delete-a-reminder" class="discrete">UC10 Delete a reminder</h3>
+<h3 id="uc11-delete-a-reminder" class="discrete">UC11 Delete a reminder</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2256,7 +2291,7 @@ Use case ends.</p>
 </ul>
 </div>
 <hr>
-<h3 id="uc11-import-external-data-from-a-csv-file" class="discrete">UC11 Import external data from a CSV file</h3>
+<h3 id="uc12-import-external-data-from-a-csv-file" class="discrete">UC12 Import external data from a CSV file</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2294,7 +2329,7 @@ Use case ends.</p>
 </ul>
 </div>
 <hr>
-<h3 id="uc12-export-data-to-a-csv-file" class="discrete">UC12 Export data to a CSV file</h3>
+<h3 id="uc13-export-data-to-a-csv-file" class="discrete">UC13 Export data to a CSV file</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2332,7 +2367,7 @@ Use case ends.</p>
 </ul>
 </div>
 <hr>
-<h3 id="uc13-undo-a-command" class="discrete">UC13 Undo a command</h3>
+<h3 id="uc14-undo-a-command" class="discrete">UC14 Undo a command</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2370,7 +2405,7 @@ Use case ends.</p>
 </ul>
 </div>
 <hr>
-<h3 id="uc14-redo-a-command" class="discrete">UC14 Redo a command</h3>
+<h3 id="uc15-redo-a-command" class="discrete">UC15 Redo a command</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2408,7 +2443,7 @@ Use case ends.</p>
 </ul>
 </div>
 <hr>
-<h3 id="uc15-graphing-the-data" class="discrete">UC15 Graphing the data</h3>
+<h3 id="uc16-graphing-the-data" class="discrete">UC16 Graphing the data</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2446,7 +2481,7 @@ Use case ends.</p>
 </ul>
 </div>
 <hr>
-<h3 id="uc16-clear-all-spending" class="discrete">UC16 Clear all spending</h3>
+<h3 id="uc17-clear-all-spending" class="discrete">UC17 Clear all spending</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2637,4 +2672,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-29 11:57:14 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-29 12:10:20 UTC</div></div></div></body></html>
