@@ -749,24 +749,55 @@ Format: <code>currency [CURRENCYCODE]</code></p>
 </div>
 </div>
 </div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>currency USD</code><br>
+Sets the currency displayed for spending entries to <code>USD</code>.</p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect2">
 <h3 id="viewing-exchange-rates-code-exchangerate-code"><a class="link" href="#viewing-exchange-rates-code-exchangerate-code">4.12. Viewing exchange rates : <code>exchangerate</code></a></h3>
 <div class="paragraph">
-<p>Displays the current exchange rates available.<br>
-Format: <code>exchangerate</code></p>
+<p>Displays current exchange rates.<br>
+Format: <code>exchangerate [AMOUNT] [CURRENCYCODE]</code></p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Only supported currencies (SGD, USD, EUR, IDR, MYR, INR, MMK) are shown.
-</td>
-</tr>
-</table>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>If AMOUNT and CURRENCYCODE are specified, the indicated values are converted to SGD.</p>
+</li>
+<li>
+<p>CURRENCYCODE can be <code>USD</code>, <code>EUR</code>, <code>IDR</code>, <code>MYR</code>, <code>INR</code>, <code>MMK</code>.</p>
+</li>
+<li>
+<p>Entering <code>SGD</code> as CURRENCYCODE will display an error since the entered value is already in SGD.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>exchangerate</code><br>
+Shows all exchange rates.</p>
+</li>
+<li>
+<p><code>exchangerate 5 USD</code><br>
+Converts 5 USD to SGD based on current exchange rates.</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
@@ -1302,4 +1333,4 @@ e.g. <code>reminder delete 2</code></p></td>
 <p>The command summary above displays all commands available in MoneyGoWhere.</p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-31 13:00:23 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-31 14:11:38 UTC</div></div></div></body></html>
