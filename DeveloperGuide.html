@@ -1107,7 +1107,7 @@ There should be 5 columns specified for <code>Name</code>, <code>Cost</code>, <c
 <div class="sect4">
 <h5 id="preparation"><a class="link" href="#preparation">Preparation</a></h5>
 <div class="paragraph">
-<p>During the preparation phase, the program parses the command for Statistics and prepares to open a new Statistics Window.
+<p>During the preparation phase, the program parses the command for Statistics and verifies the arguments.
 The following sequence diagram shows how <code>stats</code> command works during the preparation phase.</p>
 </div>
 <div class="imageblock">
@@ -1137,7 +1137,7 @@ The lifeline for <code>StatsCommandParser</code> should end at the destroy marke
 <p><code>SpendingBookParser</code> will parse and identify the command as a <code>StatsCommand</code> and pass on the argument to <code>StatsCommandParser</code>.</p>
 </li>
 <li>
-<p>If no arguments were provided by the user, <code>StatsCommand#StatsCommand()</code> is called to create a StatsCommand with no parameters.
+<p>If no arguments were provided by the user, <code>StatsCommand#StatsCommand()</code> is called to create a <code>StatsCommand</code> with no parameters.
 Otherwise, <code>StatsCommandParser</code> will verify whether the arguments provided were valid.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
@@ -1159,28 +1159,14 @@ Otherwise, <code>StatsCommandParser</code> will verify whether the arguments pro
 <div class="sect4">
 <h5 id="execution"><a class="link" href="#execution">Execution</a></h5>
 <div class="paragraph">
-<p>In the execution phase, the program processes and retrieves the data to be displayed and finally displaying it.</p>
-</div>
-<div class="paragraph">
-<p>Below is the UML sequence diagram and a step-by-step explanation.</p>
+<p>In the execution phase, the program processes and retrieves the data to be displayed and finally displaying it.
+Below is the UML sequence diagram and a step-by-step explanation.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/StatsDataSequenceDiagram.png" alt="StatsDataSequenceDiagram">
+<img src="images/StatsDataSequenceDiagram.png" alt="StatsDataSequenceDiagram" width="600">
 </div>
 <div class="title">Figure 22. Sequence Diagram demonstrating the execution stage of Statistics feature</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The lifeline for <code>StatsCommandParser</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</td>
-</tr>
-</table>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -1194,7 +1180,7 @@ The lifeline for <code>StatsCommandParser</code> should end at the destroy marke
 <p><code>LogicManager#getStatsData()</code> then processes the spending and organise the data into a <code>LinkedHashMap&lt;String, Double&gt;</code> where the key value pairs represents tag and cost respectively.</p>
 </li>
 <li>
-<p>Finally, the <code>statsData</code> is returned to the <code>MainWindow</code>. The data will be displayed on the Ui through <code>StatsWindow#loadData(statsData)</code> call.</p>
+<p>Finally, the <code>statsData</code> is returned to the <code>MainWindow</code>. The data will be displayed on the Ui through <code>StatsPanel#loadData(statsData)</code> call.</p>
 </li>
 </ol>
 </div>
@@ -1223,7 +1209,7 @@ Pros: Easy to implement<br>
 Cons: Need to call multiple methods to get parameters</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Create Statistics object which contains data and all the parameters<br>
 Pros: More scalable. Less method calls to get parameters<br>
-Cons: None.</p></td>
+Cons: None</p></td>
 </tr>
 </tbody>
 </table>
@@ -1261,7 +1247,7 @@ Cons: None.</p></td>
 <div class="sect4">
 <h5 id="preparation-2"><a class="link" href="#preparation-2">Preparation</a></h5>
 <div class="paragraph">
-<p>During the preparation phase, the program parses the command for Graph and prepares to open a new Graph Window.
+<p>During the preparation phase, the program parses the command for Graph and verifies the arguments.
 The following sequence diagram shows how <code>graph</code> command works during the preparation phase.</p>
 </div>
 <div class="imageblock">
@@ -1313,28 +1299,14 @@ Otherwise, <code>GraphCommandParser</code> will verify whether the arguments pro
 <div class="sect4">
 <h5 id="execution-2"><a class="link" href="#execution-2">Execution</a></h5>
 <div class="paragraph">
-<p>In the execution phase, the program processes and retrieves the data to be displayed and finally displaying it.</p>
-</div>
-<div class="paragraph">
-<p>Below is the UML sequence diagram and a step-by-step explanation.</p>
+<p>In the execution phase, the program processes and retrieves the data to be displayed and finally displaying it.
+Below is the UML sequence diagram and a step-by-step explanation.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/GraphDataSequenceDiagram.png" alt="GraphDataSequenceDiagram">
+<img src="images/GraphDataSequenceDiagram.png" alt="GraphDataSequenceDiagram" width="600">
 </div>
 <div class="title">Figure 25. Sequence Diagram demonstrating the execution stage of Graph feature</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The lifeline for <code>GraphCommandParser</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</td>
-</tr>
-</table>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -1348,39 +1320,11 @@ The lifeline for <code>GraphCommandParser</code> should end at the destroy marke
 <p><code>LogicManager#getGraphData()</code> then processes the spending and organise the data into a <code>LinkedHashMap&lt;String, Double&gt;</code> where the key value pairs represents date and cost respectively.</p>
 </li>
 <li>
-<p>Finally, the <code>graphData</code> is returned to the <code>MainWindow</code>. The data will be displayed on the Ui through <code>GraphWindow#loadData(graphData)</code> call.</p>
+<p>Finally, the <code>graphData</code> is returned to the <code>MainWindow</code>. The data will be displayed on the Ui through <code>GraphPanel#loadData(graphData)</code> call.</p>
 </li>
 </ol>
 </div>
 </div>
-</div>
-<div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.8.2. Design Considerations</a></h4>
-<table class="tableblock frame-all grid-all" style="width: 90%;">
-<colgroup>
-<col style="width: 20%;">
-<col style="width: 40%;">
-<col style="width: 40%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Aspect</th>
-<th class="tableblock halign-left valign-top">Alternative 1 (Current choice)</th>
-<th class="tableblock halign-left valign-top">Alternative 2 (Planned for future releases)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">How to handle graph data and parameters</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Data and each parameter is handled as separate objects<br>
-Pros: Easy to implement<br>
-Cons: Need to call multiple methods to get parameters</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Create Graph object which contains data and all the parameters<br>
-Pros: More scalable. Less method calls to get parameters<br>
-Cons: None.</p></td>
-</tr>
-</tbody>
-</table>
 </div>
 </div>
 <div class="sect2">
@@ -1631,7 +1575,7 @@ If the <code>currentStatePointer</code> is at index <code>spendingBookStateList.
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.10.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.10.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
 <div class="ulist">
@@ -2746,4 +2690,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-30 18:54:54 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-31 01:48:48 UTC</div></div></div></body></html>
