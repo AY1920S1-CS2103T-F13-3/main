@@ -31,7 +31,7 @@
 <li><a href="#adding-a-reminder-code-reminder-add-code">4.15. Adding a reminder: <code>reminder add</code></a></li>
 <li><a href="#deleting-a-reminder-code-reminder-delete-code">4.16. Deleting a reminder: <code>reminder delete</code></a></li>
 <li><a href="#importing-data-code-import-code">4.17. Importing data : <code>import</code></a></li>
-<li><a href="#exporting-data-code-export-code-code-coming-in-v2-0-code">4.18. Exporting data : <code>export</code> <code>[Coming in v2.0]</code></a></li>
+<li><a href="#exporting-data-code-export-code">4.18. Exporting data : <code>export</code></a></li>
 <li><a href="#undoing-previous-command-code-undo-code-code-coming-in-v2-0-code">4.19. Undoing previous command : <code>undo</code> <code>[Coming in v2.0]</code></a></li>
 <li><a href="#redoing-the-previously-undone-command-code-redo-code-code-coming-in-v2-0-code">4.20. Redoing the previously undone command : <code>redo</code> <code>[Coming in v2.0]</code></a></li>
 <li><a href="#clear-all-data-code-clear-code">4.21. Clear all data : <code>clear</code></a></li>
@@ -992,14 +992,64 @@ Deletes the second reminder in the list based on the current results shown.</p>
 </li>
 </ul>
 </div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/ExampleValidCsv.png" alt="ExampleValidCsv">
+</div>
+<div class="title">Figure 5. A Valid <code>.csv</code> File.</div>
+</div>
+<div class="paragraph">
+<p><code>.csv</code> file must have a header row with the following values:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>name</p>
+</li>
+<li>
+<p>date</p>
+</li>
+<li>
+<p>remark</p>
+</li>
+<li>
+<p>cost</p>
+</li>
+<li>
+<p>tagged</p>
+</li>
+</ul>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Multiple tags should be separated by a semi-colon.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="paragraph">
+<p><code>juicy;nice</code></p>
+</div>
+<div class="paragraph">
+<p>Alternatively, tags could be wrapped in double quotes and separated by commas.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="paragraph">
+<p><code>"juicy,nice"</code></p>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="exporting-data-code-export-code-code-coming-in-v2-0-code"><a class="link" href="#exporting-data-code-export-code-code-coming-in-v2-0-code">4.18. Exporting data : <code>export</code> <code>[Coming in v2.0]</code></a></h3>
+<h3 id="exporting-data-code-export-code"><a class="link" href="#exporting-data-code-export-code">4.18. Exporting data : <code>export</code></a></h3>
 <div class="paragraph">
-<p>Exports data to a CSV file specified by file path.<br></p>
+<p>Exports data to a <code>moneygowhere.csv</code> file specified by a folder path.<br></p>
 </div>
 <div class="paragraph">
-<p>Format: export <code>p/FILE_PATH</code><br></p>
+<p>Format: export <code>p/FOLDER_PATH</code><br></p>
 </div>
 <div class="paragraph">
 <p>Examples:<br></p>
@@ -1007,13 +1057,10 @@ Deletes the second reminder in the list based on the current results shown.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>export p/data.csv</code></p>
+<p><code>export p/Documents</code></p>
 </li>
 <li>
-<p><code>export p/C:\data.csv</code></p>
-</li>
-<li>
-<p><code>export p/~/data.csv</code></p>
+<p><code>export p/Finance</code></p>
 </li>
 </ul>
 </div>
@@ -1255,4 +1302,4 @@ e.g. <code>reminder delete 2</code></p></td>
 <p>The command summary above displays all commands available in MoneyGoWhere.</p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-31 08:28:03 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-31 08:28:50 UTC</div></div></div></body></html>
