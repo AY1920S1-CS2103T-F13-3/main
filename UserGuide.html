@@ -122,7 +122,7 @@ Tips that can help you better navigate the application.
 <p>Double-click the file to start the app. The GUI should appear in a few seconds as shown in <code>Figure 1</code>.</p>
 <div class="imageblock">
 <div class="content">
-<img src="images/Ui.png" alt="Ui" width="790">
+<img src="images/Ui.png" alt="Ui" width="800">
 </div>
 <div class="title">Figure 1. User Interface of MoneyGoWhere</div>
 </div>
@@ -179,6 +179,9 @@ e.g. typing <strong><code>help</code></strong> will display the help information
 <li>
 <p>Parameters can be in any order e.g. if the command specifies <code>add n/NAME c/COST</code>, <code>add c/COST n/NAME</code> is also acceptable.</p>
 </li>
+<li>
+<p>If a command accepts a single parameter and multiple parameters are provided, by default, the last parameter is chosen. e.g. if there is only one <code>n/NAME</code> accepted and the input is <code>n/One n/Two</code>, <code>n/Two</code> will be selected.</p>
+</li>
 </ul>
 </div>
 </div>
@@ -189,7 +192,7 @@ e.g. typing <strong><code>help</code></strong> will display the help information
 <p>Shows a list of available commands and their usages.<br></p>
 </div>
 <div class="paragraph">
-<p>Format: <code>help</code></p>
+<p><strong>Format:</strong> <code>help</code></p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -317,11 +320,11 @@ Optionally, you can press <kbd>F1</kbd> or click <code>help</code> which can be 
 </li>
 </ul>
 </div>
-<div class="admonitionblock note">
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
 You do not need to specify which date format you would like to use as MoneyGoWhere will be able to differentiate it from the input received.
@@ -349,7 +352,7 @@ Should you accidentally provide an invalid date such as 31/02/2019, it will be r
 <p>Adds a spending to the list when the user incurs a new spending. Key information such as its name, cost, date, tags (if any) and remarks (if any) are stored.<br></p>
 </div>
 <div class="paragraph">
-<p>Format: <code>add n/NAME c/COST d/DATE [t/TAG]&#8230;&#8203; [r/REMARKS]</code></p>
+<p><strong>Format:</strong> <code>add n/NAME c/COST d/DATE [t/TAG]&#8230;&#8203; [r/REMARKS]</code></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -358,25 +361,13 @@ Should you accidentally provide an invalid date such as 31/02/2019, it will be r
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-A spending can have any number of tags (including 0). Each tag is also limited to 64 characters.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If a spending date is in the future, it can only be up to 5 years from now.
+A spending can have any number of <code>t/TAG</code> keywords (including 0). Each <code>TAG</code> is limited to 64 characters. If a spending date is in the future, it can only be up to 5 years from now.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Examples:</strong></p>
 </div>
 <div class="ulist">
 <ul>
@@ -397,6 +388,12 @@ If a spending date is in the future, it can only be up to 5 years from now.
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><strong>Expected Output:</strong></p>
+</div>
+<div class="paragraph">
+<p>A new spending is added based on the specified input.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="editing-a-spending-code-edit-code"><a class="link" href="#editing-a-spending-code-edit-code">4.4. Editing a spending : <code>edit</code></a></h3>
@@ -404,7 +401,7 @@ If a spending date is in the future, it can only be up to 5 years from now.
 <p>Edits a spending at a specified index in the list.<br></p>
 </div>
 <div class="paragraph">
-<p>Format: <code>edit i/INDEX [n/NAME] [c/COST] [d/DATE] [t/TAG]&#8230;&#8203; [r/REMARKS]</code></p>
+<p><strong>Format:</strong> <code>edit i/INDEX [n/NAME] [c/COST] [d/DATE] [t/TAG]&#8230;&#8203; [r/REMARKS]</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -436,7 +433,7 @@ If a spending date is in the future, it can only be up to 5 years from now.
 </div>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Examples:</strong></p>
 </div>
 <div class="ulist">
 <ul>
@@ -458,6 +455,12 @@ Overwrites existing tags of the tenth spending to <code>vegetable</code>.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><strong>Expected Output:</strong></p>
+</div>
+<div class="paragraph">
+<p>The specified spending is edited.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="deleting-a-spending-code-delete-code"><a class="link" href="#deleting-a-spending-code-delete-code">4.5. Deleting a spending : <code>delete</code></a></h3>
@@ -465,7 +468,7 @@ Overwrites existing tags of the tenth spending to <code>vegetable</code>.</p>
 <p>Deletes a spending at a specified index in the list.<br></p>
 </div>
 <div class="paragraph">
-<p>Format: <code>delete INDEX</code></p>
+<p><strong>Format:</strong> <code>delete INDEX</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -485,7 +488,7 @@ Overwrites existing tags of the tenth spending to <code>vegetable</code>.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Example:</p>
+<p><strong>Example:</strong></p>
 </div>
 <div class="ulist">
 <ul>
@@ -495,14 +498,18 @@ Deletes the second spending in the list based on the current list shown.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><strong>Expected Output:</strong></p>
+</div>
+<div class="paragraph">
+<p>The specified spending is deleted.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="listing-all-spending-code-list-code"><a class="link" href="#listing-all-spending-code-list-code">4.6. Listing all spending : <code>list</code></a></h3>
 <div class="paragraph">
-<p>Displays a list of all spending and their information such as name, date, cost, tag and remark.<br></p>
-</div>
-<div class="paragraph">
-<p>Format: <code>list</code></p>
+<p>Displays a list of all spending and their information such as name, date, cost, tag and remark.<br>
+<strong>Format:</strong> <code>list</code></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -511,22 +518,28 @@ Deletes the second spending in the list based on the current list shown.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-List is sorted by descending order of date, followed by descending order of cost and lastly, by ascending order of name.
+By default, list of all spending is sorted by descending order of date, followed by descending order of cost and lastly, by ascending order of name.<br>
 </td>
 </tr>
 </table>
 </div>
-<div class="admonitionblock note">
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
 This command is implicitly invoked upon application start up, and can be used to reset the view after find or sort.
 </td>
 </tr>
 </table>
+</div>
+<div class="paragraph">
+<p><strong>Expected Output:</strong></p>
+</div>
+<div class="paragraph">
+<p>All spending entries are listed.</p>
 </div>
 </div>
 <div class="sect2">
@@ -535,7 +548,7 @@ This command is implicitly invoked upon application start up, and can be used to
 <p>Sorts all spending based on a given order.<br></p>
 </div>
 <div class="paragraph">
-<p>Format: <code>sort [PREFIX/SORT_ORDER]&#8230;&#8203;</code></p>
+<p><strong>Format:</strong> <code>sort [PREFIX/SORT_ORDER]&#8230;&#8203;</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -548,7 +561,7 @@ This command is implicitly invoked upon application start up, and can be used to
 <p>Valid sort orders are: <code>ASC</code>, <code>DESC</code>.</p>
 </li>
 <li>
-<p>At least one of the optional fields must be provided.</p>
+<p>At least one of the optional fields <strong>must be provided</strong>.</p>
 </li>
 <li>
 <p>If the given sort order is <code>c/ASC n/DESC</code>, Cost will be sorted in ascending order, followed by name in descending order.</p>
@@ -558,7 +571,7 @@ This command is implicitly invoked upon application start up, and can be used to
 </div>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Examples:</strong></p>
 </div>
 <div class="ulist">
 <ul>
@@ -572,6 +585,12 @@ Sorts current spending displayed by Name in descending order.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><strong>Expected Output:</strong></p>
+</div>
+<div class="paragraph">
+<p>Spending entries are sorted based on the given order.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="finding-a-spending-code-find-code"><a class="link" href="#finding-a-spending-code-find-code">4.8. Finding a spending : <code>find</code></a></h3>
@@ -579,7 +598,7 @@ Sorts current spending displayed by Name in descending order.</p>
 <p>Searches for spending based on given keywords, cost range, date range, remarks or tags. You may refine the search results by entering more keywords.<br></p>
 </div>
 <div class="paragraph">
-<p>Format: <code>find [n/NAME_KEYWORDS] [c/COST_MIN] [c/COST_MAX] [d/DATE_START] [d/DATE_END] [r/REMARK_KEYWORDS] [t/TAG]&#8230;&#8203;</code></p>
+<p><strong>Format:</strong> <code>find [n/NAME_KEYWORDS] [c/COST_MIN] [c/COST_MAX] [d/DATE_START] [d/DATE_END] [r/REMARK_KEYWORDS] [t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -643,25 +662,13 @@ Sorts current spending displayed by Name in descending order.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-DATE_START must be earlier or the same as DATE_END.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-COST_MIN must be smaller or the same as COST_MAX.
+DATE_START must be earlier or the same as DATE_END, and COST_MIN must be smaller or the same as COST_MAX.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Examples:</strong></p>
 </div>
 <div class="ulist">
 <ul>
@@ -691,12 +698,18 @@ Returns a list of spending within <code>yesterday</code> and <code>today</code> 
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><strong>Expected Output:</strong></p>
+</div>
+<div class="paragraph">
+<p>Spending entries which match the search criteria are listed.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="setting-monthly-budget-code-budget-code"><a class="link" href="#setting-monthly-budget-code-budget-code">4.9. Setting monthly budget : <code>budget</code></a></h3>
 <div class="paragraph">
 <p>Sets a budget for the current month in Singapore dollars.<br>
-Format: <code>budget MONTHLY_BUDGET</code><br></p>
+<strong>Format:</strong> <code>budget MONTHLY_BUDGET</code><br></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -711,7 +724,7 @@ Existing budget of current month is overwritten if budget has already been set.
 </table>
 </div>
 <div class="paragraph">
-<p>Example:</p>
+<p><strong>Example:</strong></p>
 </div>
 <div class="ulist">
 <ul>
@@ -721,19 +734,31 @@ Sets a budget of <code>$500,000</code> for this month</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><strong>Expected Output:</strong></p>
+</div>
+<div class="paragraph">
+<p>The budget for the current month is changed.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="showing-current-budget-code-showbudget-code"><a class="link" href="#showing-current-budget-code-showbudget-code">4.10. Showing current budget : <code>showbudget</code></a></h3>
 <div class="paragraph">
 <p>Returns the current monthly budget.<br>
-Format: <code>showbudget</code></p>
+<strong>Format:</strong> <code>showbudget</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Expected Output:</strong></p>
+</div>
+<div class="paragraph">
+<p>The budget for the current month is shown.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="setting-the-currency-code-currency-code"><a class="link" href="#setting-the-currency-code-currency-code">4.11. Setting the currency : <code>currency</code></a></h3>
 <div class="paragraph">
 <p>Sets the currency used to display spending entries.<br>
-Format: <code>currency [CURRENCYCODE]</code></p>
+<strong>Format:</strong> <code>currency [CURRENCYCODE]</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -750,7 +775,7 @@ Format: <code>currency [CURRENCYCODE]</code></p>
 </div>
 </div>
 <div class="paragraph">
-<p>Example:</p>
+<p><strong>Example:</strong></p>
 </div>
 <div class="ulist">
 <ul>
@@ -760,12 +785,18 @@ Sets the currency displayed for spending entries to <code>USD</code>.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><strong>Expected Output:</strong></p>
+</div>
+<div class="paragraph">
+<p>The currency displayed is changed and spending entries are updated.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="viewing-exchange-rates-code-exchangerate-code"><a class="link" href="#viewing-exchange-rates-code-exchangerate-code">4.12. Viewing exchange rates : <code>exchangerate</code></a></h3>
 <div class="paragraph">
-<p>Displays current exchange rates.<br>
-Format: <code>exchangerate [AMOUNT] [CURRENCYCODE]</code></p>
+<p>Displays current stored exchange rates.<br>
+<strong>Format:</strong> <code>exchangerate [AMOUNT] [CURRENCYCODE]</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -785,7 +816,7 @@ Format: <code>exchangerate [AMOUNT] [CURRENCYCODE]</code></p>
 </div>
 </div>
 <div class="paragraph">
-<p>Example:</p>
+<p><strong>Example:</strong></p>
 </div>
 <div class="ulist">
 <ul>
@@ -799,6 +830,12 @@ Converts 5 USD to SGD based on current exchange rates.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><strong>Expected Output:</strong></p>
+</div>
+<div class="paragraph">
+<p>All available exchange rates are shown, or a conversion of an input currency is provided if it was specified.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="generating-statistics-code-stats-code"><a class="link" href="#generating-statistics-code-stats-code">4.13. Generating statistics : <code>stats</code></a></h3>
@@ -808,7 +845,7 @@ A pie chart is generated, with each sector representing the total amount of mone
 This enables users to be more informed of their spending habits as they are now aware of where they have spent most of their money on.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>stats d/DATE_START d/DATE_END</code></p>
+<p><strong>Format:</strong> <code>stats d/DATE_START d/DATE_END</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -871,7 +908,7 @@ For example, when a new spending with a tag is added, the statistics panel will 
 </table>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Examples:</strong></p>
 </div>
 <div class="ulist">
 <ul>
@@ -899,6 +936,12 @@ For example, when a new spending with a tag is added, the statistics panel will 
 </div>
 <div class="title">Figure 4. Output of <code>stats d/20/10/2019 d/25/10/2019</code></div>
 </div>
+<div class="paragraph">
+<p><strong>Expected Output:</strong></p>
+</div>
+<div class="paragraph">
+<p>Statistics is shown.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="generating-a-graph-code-graph-code"><a class="link" href="#generating-a-graph-code-graph-code">4.14. Generating a graph : <code>graph</code></a></h3>
@@ -907,7 +950,7 @@ For example, when a new spending with a tag is added, the statistics panel will 
 This enables users to analyze trends in their spending amount over a particular period of time.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>graph d/DATE_START d/DATE_END</code></p>
+<p><strong>Format:</strong> <code>graph d/DATE_START d/DATE_END</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -979,7 +1022,7 @@ For example, when a new spending is added, the graph panel will update and gener
 </table>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Examples:</strong></p>
 </div>
 <div class="ulist">
 <ul>
@@ -1007,15 +1050,21 @@ For example, when a new spending is added, the graph panel will update and gener
 </div>
 <div class="title">Figure 6. Output of <code>graph d/20/10/2019 d/25/10/2019</code></div>
 </div>
+<div class="paragraph">
+<p><strong>Expected Output:</strong></p>
+</div>
+<div class="paragraph">
+<p>A graph is shown.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="adding-a-reminder-code-reminder-add-code"><a class="link" href="#adding-a-reminder-code-reminder-add-code">4.15. Adding a reminder: <code>reminder add</code></a></h3>
 <div class="paragraph">
 <p>Adds a reminder to the reminder list
-Format: <code>reminder add d/DATE m/MESSAGE</code></p>
+<strong>Format:</strong> <code>reminder add d/DATE m/MESSAGE</code></p>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Examples:</strong></p>
 </div>
 <div class="ulist">
 <ul>
@@ -1027,12 +1076,18 @@ Format: <code>reminder add d/DATE m/MESSAGE</code></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><strong>Expected Output:</strong></p>
+</div>
+<div class="paragraph">
+<p>A new reminder is added.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="deleting-a-reminder-code-reminder-delete-code"><a class="link" href="#deleting-a-reminder-code-reminder-delete-code">4.16. Deleting a reminder: <code>reminder delete</code></a></h3>
 <div class="paragraph">
 <p>Deletes a reminder at the specified <code>INDEX</code>.
-Format: <code>reminder delete INDEX</code></p>
+<strong>Format:</strong> <code>reminder delete INDEX</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -1052,7 +1107,7 @@ Format: <code>reminder delete INDEX</code></p>
 </div>
 </div>
 <div class="paragraph">
-<p>Example:</p>
+<p><strong>Example:</strong></p>
 </div>
 <div class="ulist">
 <ul>
@@ -1062,17 +1117,23 @@ Deletes the second reminder in the list based on the current results shown.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><strong>Expected Output:</strong></p>
+</div>
+<div class="paragraph">
+<p>The specified reminder is deleted.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="importing-data-code-import-code"><a class="link" href="#importing-data-code-import-code">4.17. Importing data : <code>import</code></a></h3>
 <div class="paragraph">
-<p>Imports data from a CSV file specified by file path.<br></p>
+<p>Imports data from a CSV file specified by file path. Existing spending entries are not replaced.<br></p>
 </div>
 <div class="paragraph">
-<p>Format: <code>import p/FILE_PATH</code><br></p>
+<p><strong>Format:</strong> <code>import p/FILE_PATH</code><br></p>
 </div>
 <div class="paragraph">
-<p>Examples:<br></p>
+<p><strong>Examples:</strong><br></p>
 </div>
 <div class="ulist">
 <ul>
@@ -1121,7 +1182,7 @@ Deletes the second reminder in the list based on the current results shown.</p>
 <p>Multiple tags should be separated by a semi-colon.</p>
 </div>
 <div class="paragraph">
-<p>Example:</p>
+<p><strong>Example:</strong></p>
 </div>
 <div class="paragraph">
 <p><code>juicy;nice</code></p>
@@ -1130,12 +1191,18 @@ Deletes the second reminder in the list based on the current results shown.</p>
 <p>Alternatively, tags could be wrapped in double quotes and separated by commas.</p>
 </div>
 <div class="paragraph">
-<p>Example:</p>
+<p><strong>Example:</strong></p>
 </div>
 <div class="paragraph">
 <p><code>"juicy,nice"</code></p>
 </div>
 </div>
+</div>
+<div class="paragraph">
+<p><strong>Expected Output:</strong></p>
+</div>
+<div class="paragraph">
+<p>Data from the CSV file is imported, keeping existing spending entries.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1144,10 +1211,10 @@ Deletes the second reminder in the list based on the current results shown.</p>
 <p>Exports data to a <code>moneygowhere.csv</code> file specified by a folder path.<br></p>
 </div>
 <div class="paragraph">
-<p>Format: export <code>p/FOLDER_PATH</code><br></p>
+<p><strong>Format:</strong> export <code>p/FOLDER_PATH</code><br></p>
 </div>
 <div class="paragraph">
-<p>Examples:<br></p>
+<p><strong>Examples:</strong><br></p>
 </div>
 <div class="ulist">
 <ul>
@@ -1159,6 +1226,12 @@ Deletes the second reminder in the list based on the current results shown.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><strong>Expected Output:</strong></p>
+</div>
+<div class="paragraph">
+<p>Data from the spending list is exported to a specified folder with a file name <code>moneygowhere.csv</code>.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="undoing-previous-command-code-undo-code-code-coming-in-v2-0-code"><a class="link" href="#undoing-previous-command-code-undo-code-code-coming-in-v2-0-code">4.19. Undoing previous command : <code>undo</code> <code>[Coming in v2.0]</code></a></h3>
@@ -1166,7 +1239,7 @@ Deletes the second reminder in the list based on the current results shown.</p>
 <p>Restores the list of spending to the state before the previous undoable command was executed.<br></p>
 </div>
 <div class="paragraph">
-<p>Format: <code>undo</code><br></p>
+<p><strong>Format:</strong> <code>undo</code><br></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1183,7 +1256,7 @@ Deletes the second reminder in the list based on the current results shown.</p>
 </table>
 </div>
 <div class="paragraph">
-<p>Examples:<br></p>
+<p><strong>Examples:</strong><br></p>
 </div>
 <div class="ulist">
 <ul>
@@ -1205,6 +1278,12 @@ Deletes the second reminder in the list based on the current results shown.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><strong>Expected Output:</strong></p>
+</div>
+<div class="paragraph">
+<p>The last performed action is undone.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="redoing-the-previously-undone-command-code-redo-code-code-coming-in-v2-0-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code-code-coming-in-v2-0-code">4.20. Redoing the previously undone command : <code>redo</code> <code>[Coming in v2.0]</code></a></h3>
@@ -1212,10 +1291,10 @@ Deletes the second reminder in the list based on the current results shown.</p>
 <p>Reverses the most recent undo command.<br></p>
 </div>
 <div class="paragraph">
-<p>Format: <code>redo</code><br></p>
+<p><strong>Format:</strong> <code>redo</code><br></p>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Examples:</strong></p>
 </div>
 <div class="ulist">
 <ul>
@@ -1238,19 +1317,37 @@ Deletes the second reminder in the list based on the current results shown.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><strong>Expected Output:</strong></p>
+</div>
+<div class="paragraph">
+<p>The most recent undo command is reversed.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="clear-all-data-code-clear-code"><a class="link" href="#clear-all-data-code-clear-code">4.21. Clear all data : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries from the application.<br>
-Format: <code>clear</code></p>
+<strong>Format:</strong> <code>clear</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Expected Output:</strong></p>
+</div>
+<div class="paragraph">
+<p>All application data is cleared.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.22. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
-Format: <code>exit</code></p>
+<strong>Format:</strong> <code>exit</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Expected Output:</strong></p>
+</div>
+<div class="paragraph">
+<p>Program exits.</p>
 </div>
 </div>
 </div>
@@ -1397,4 +1494,4 @@ e.g. <code>reminder delete 2</code></p></td>
 <p>The command summary above displays all commands available in MoneyGoWhere.</p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-01 01:22:41 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-01 03:23:26 UTC</div></div></div></body></html>

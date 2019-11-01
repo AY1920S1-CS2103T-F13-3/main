@@ -271,7 +271,7 @@ Tips that can help you better navigate the application.
 <p>Double-click the file to start the app. The GUI should appear in a few seconds as shown in <code>Figure 1</code>.</p>
 <div class="imageblock">
 <div class="content">
-<img src="../images/Ui.png" alt="Ui" width="790">
+<img src="../images/Ui.png" alt="Ui" width="800">
 </div>
 <div class="title">Figure 1. User Interface of MoneyGoWhere</div>
 </div>
@@ -312,7 +312,7 @@ A pie chart is generated, with each sector representing the total amount of mone
 This enables users to be more informed of their spending habits as they are now aware of where they have spent most of their money on.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>stats d/DATE_START d/DATE_END</code></p>
+<p><strong>Format:</strong> <code>stats d/DATE_START d/DATE_END</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -375,7 +375,7 @@ For example, when a new spending with a tag is added, the statistics panel will 
 </table>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Examples:</strong></p>
 </div>
 <div class="ulist">
 <ul>
@@ -403,6 +403,12 @@ For example, when a new spending with a tag is added, the statistics panel will 
 </div>
 <div class="title">Figure 3. Output of <code>stats d/20/10/2019 d/25/10/2019</code></div>
 </div>
+<div class="paragraph">
+<p><strong>Expected Output:</strong></p>
+</div>
+<div class="paragraph">
+<p>Statistics is shown.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="generating-a-graph-code-graph-code"><a class="link" href="#generating-a-graph-code-graph-code">Generating a graph : <code>graph</code></a></h3>
@@ -411,7 +417,7 @@ For example, when a new spending with a tag is added, the statistics panel will 
 This enables users to analyze trends in their spending amount over a particular period of time.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>graph d/DATE_START d/DATE_END</code></p>
+<p><strong>Format:</strong> <code>graph d/DATE_START d/DATE_END</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -483,7 +489,7 @@ For example, when a new spending is added, the graph panel will update and gener
 </table>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Examples:</strong></p>
 </div>
 <div class="ulist">
 <ul>
@@ -510,6 +516,12 @@ For example, when a new spending is added, the graph panel will update and gener
 <img src="../images/daterangegraph.png" alt="daterangegraph" width="700">
 </div>
 <div class="title">Figure 5. Output of <code>graph d/20/10/2019 d/25/10/2019</code></div>
+</div>
+<div class="paragraph">
+<p><strong>Expected Output:</strong></p>
+</div>
+<div class="paragraph">
+<p>A graph is shown.</p>
 </div>
 </div>
 </div>
@@ -650,11 +662,11 @@ Below is the UML sequence diagram and a step-by-step explanation.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">How to handle statistics data and parameters</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Data and each parameter is handled as separate objects<br>
-Pros: Easy to implement<br>
-Cons: Need to call multiple methods to get parameters</p></td>
+<strong>Pros:</strong> Easy to implement<br>
+<strong>Cons:</strong> Need to call multiple methods to get parameters</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Create Statistics object which contains data and all the parameters<br>
-Pros: More scalable. Less method calls to get parameters<br>
-Cons: None</p></td>
+<strong>Pros:</strong> More scalable. Less method calls to get parameters<br>
+<strong>Cons:</strong> None</p></td>
 </tr>
 </tbody>
 </table>
@@ -773,4 +785,4 @@ Below is the UML sequence diagram and a step-by-step explanation.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-01 01:22:41 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-01 03:23:26 UTC</div></div></div></body></html>
