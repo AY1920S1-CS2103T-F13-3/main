@@ -307,8 +307,9 @@ e.g. typing <strong><code>help</code></strong> will display the help information
 <div class="sect2">
 <h3 id="generating-statistics-code-stats-code"><a class="link" href="#generating-statistics-code-stats-code">Generating statistics : <code>stats</code></a></h3>
 <div class="paragraph">
-<p>Returns an overview of the spending in the form of a pie chart, with each sector representing a tag as shown in Figure 3.
-Each sector is labelled with the name and total expenditure for the tag, allowing you to better analyze your spending habits.</p>
+<p>Organises the spending based on tags.
+A pie chart is generated, with each sector representing the total amount of money spent on a tag.
+This enables users to be more informed of their spending habits as they are now aware of where they have spent most of their money on.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>stats d/DATE_START d/DATE_END</code></p>
@@ -318,10 +319,16 @@ Each sector is labelled with the name and total expenditure for the tag, allowin
 <div class="ulist">
 <ul>
 <li>
-<p>Generates statistics for all spending that fall between and including the DATE_START and DATE_END specified.</p>
+<p>Generates statistics for all spending that fall between and including the DATE_START and DATE_END specified by the user.</p>
 </li>
 <li>
 <p>If no DATE_START and DATE_END parameters are specified, the statistics generated will be based on the whole list of spending.</p>
+</li>
+<li>
+<p>Only spending that have at least a tag will be considered.</p>
+</li>
+<li>
+<p>Only the top few tags which incurred a more significant amount of money  will be displayed.</p>
 </li>
 </ul>
 </div>
@@ -354,11 +361,18 @@ Date range can be input in the following ways:<br>
 </tr>
 </table>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/statistics.png" alt="statistics" width="600">
-</div>
-<div class="title">Figure 2. Output of Statistics</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The statistics panel will update every time the spending list displayed changes.
+For example, when a new spending with a tag is added, the statistics panel will update the pie chart to show the statistics for all spending, including the new spending.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -366,21 +380,35 @@ Date range can be input in the following ways:<br>
 <div class="ulist">
 <ul>
 <li>
-<p><code>stats d/01/01/2019 d/07/01/2019</code><br>
-Generates statistics for spending that fall between and including 01/01/2019 and 07/01/2019.</p>
-</li>
-<li>
-<p><code>stats</code><br>
-Generates statistics for all spending.</p>
+<p><code>stats</code>: Generates statistics for all spending.</p>
 </li>
 </ul>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/allstats.png" alt="allstats" width="700">
+</div>
+<div class="title">Figure 2. Output of <code>stats</code></div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>stats d/20/10/2019 d/25/10/2019</code>: Generates statistics for spending between and including 20/10/2019 and 25/10/2019.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/daterangestats.png" alt="daterangestats" width="700"">
+</div>
+<div class="title">Figure 3. Output of <code>stats d/20/10/2019 d/25/10/2019</code></div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="graphing-the-data-code-graph-code"><a class="link" href="#graphing-the-data-code-graph-code">Graphing the data : <code>graph</code></a></h3>
+<h3 id="generating-a-graph-code-graph-code"><a class="link" href="#generating-a-graph-code-graph-code">Generating a graph : <code>graph</code></a></h3>
 <div class="paragraph">
-<p>Shows a graph of total cost spent in a day against date in the form of a line graph as seen in Figure 4.
-This allows users to view trends in their spending over a specified period of time.</p>
+<p>Organises the spending based on date. A line graph is generated, with each point representing the total amount of money spent on a particular date.
+This enables users to analyze trends in their spending amount over a particular period of time.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>graph d/DATE_START d/DATE_END</code></p>
@@ -390,10 +418,13 @@ This allows users to view trends in their spending over a specified period of ti
 <div class="ulist">
 <ul>
 <li>
-<p>Generates a graph for all spending that fall between and including the DATE_START and DATE_END specified.</p>
+<p>Generates a graph for all spending that fall between and including the DATE_START and DATE_END specified by the user.</p>
 </li>
 <li>
 <p>If no DATE_START and DATE_END parameters are specified, the statistics generated will be based on the whole list of spending.</p>
+</li>
+<li>
+<p>Only dates that have at least a spending will be recorded in the graph.</p>
 </li>
 </ul>
 </div>
@@ -426,11 +457,30 @@ Date range can be input in the following ways:<br>
 </tr>
 </table>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/graph.png" alt="graph" width="500">
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Hovering the mouse over a point displays the date and total amount of money spent (to the nearest dollar) on that date.
+</td>
+</tr>
+</table>
 </div>
-<div class="title">Figure 3. Output of Graph</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The graph panel will update every time the spending list displayed changes.
+For example, when a new spending is added, the graph panel will update and generate a graph for all spending, including the new spending.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -438,14 +488,28 @@ Date range can be input in the following ways:<br>
 <div class="ulist">
 <ul>
 <li>
-<p><code>graph d/01/01/2019 d/07/01/2019</code><br>
-Generates a graph for spending that fall between and including 01/01/2019 and 07/01/2019.</p>
-</li>
-<li>
-<p><code>graph</code><br>
-Generates a graph for all spending.</p>
+<p><code>graph</code>: Generates a graph for all spending.</p>
 </li>
 </ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/allgraph.png" alt="allgraph" width="700">
+</div>
+<div class="title">Figure 4. Output of <code>graph</code></div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>graph d/20/10/2019 d/25/10/2019</code>: Generates a graph for spending between and including 20/10/2019 and 25/10/2019.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/daterangegraph.png" alt="daterangegraph" width="700">
+</div>
+<div class="title">Figure 5. Output of <code>graph d/20/10/2019 d/25/10/2019</code></div>
 </div>
 </div>
 </div>
@@ -480,7 +544,7 @@ Generates a graph for all spending.</p>
 <div class="content">
 <img src="../images/StatsActivityDiagram.png" alt="StatsActivityDiagram" width="600">
 </div>
-<div class="title">Figure 4. Activity Diagram showing behaviour of StatsCommandParser</div>
+<div class="title">Figure 6. Activity Diagram showing behaviour of StatsCommandParser</div>
 </div>
 <div class="paragraph">
 <p>The implementation of the Statistics feature can be split into 2 phases, preparation and execution. Given below is an explanation of how the Statistics mechanism behaves at each phase.</p>
@@ -495,7 +559,7 @@ The following sequence diagram shows how <code>stats</code> command works during
 <div class="content">
 <img src="../images/StatsSequenceDiagram.png" alt="StatsSequenceDiagram">
 </div>
-<div class="title">Figure 5. Sequence Diagram demonstrating the preparation stage of Statistics feature</div>
+<div class="title">Figure 7. Sequence Diagram demonstrating the preparation stage of Statistics feature</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -547,7 +611,7 @@ Below is the UML sequence diagram and a step-by-step explanation.</p>
 <div class="content">
 <img src="../images/StatsDataSequenceDiagram.png" alt="StatsDataSequenceDiagram" width="600">
 </div>
-<div class="title">Figure 6. Sequence Diagram demonstrating the execution stage of Statistics feature</div>
+<div class="title">Figure 8. Sequence Diagram demonstrating the execution stage of Statistics feature</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -620,7 +684,7 @@ Cons: None</p></td>
 <div class="content">
 <img src="../images/GraphActivityDiagram.png" alt="GraphActivityDiagram" width="600">
 </div>
-<div class="title">Figure 7. Activity Diagram showing behaviour of GraphCommandParser</div>
+<div class="title">Figure 9. Activity Diagram showing behaviour of GraphCommandParser</div>
 </div>
 <div class="paragraph">
 <p>The implementation of the Graph feature can be split into 2 phases, preparation and execution. Given below is an explanation of how the Graph mechanism behaves at each phase.</p>
@@ -635,7 +699,7 @@ The following sequence diagram shows how <code>graph</code> command works during
 <div class="content">
 <img src="../images/GraphSequenceDiagram.png" alt="GraphSequenceDiagram">
 </div>
-<div class="title">Figure 8. Sequence Diagram demonstrating the preparation stage of Graph feature</div>
+<div class="title">Figure 10. Sequence Diagram demonstrating the preparation stage of Graph feature</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -687,7 +751,7 @@ Below is the UML sequence diagram and a step-by-step explanation.</p>
 <div class="content">
 <img src="../images/GraphDataSequenceDiagram.png" alt="GraphDataSequenceDiagram" width="600">
 </div>
-<div class="title">Figure 9. Sequence Diagram demonstrating the execution stage of Graph feature</div>
+<div class="title">Figure 11. Sequence Diagram demonstrating the execution stage of Graph feature</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -709,4 +773,4 @@ Below is the UML sequence diagram and a step-by-step explanation.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-31 17:53:09 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-01 01:22:41 UTC</div></div></div></body></html>
