@@ -36,11 +36,12 @@
 <li><a href="#Implementation-Sort">3.5. Sort feature</a></li>
 <li><a href="#reminder-feature">3.6. Reminder feature</a></li>
 <li><a href="#import-feature">3.7. Import Feature</a></li>
-<li><a href="#statistics-feature">3.8. Statistics feature</a></li>
-<li><a href="#graph-feature">3.9. Graph feature</a></li>
-<li><a href="#budget-feature">3.10. Budget Feature</a></li>
-<li><a href="#proposed-undo-redo-feature">3.11. [Proposed] Undo/Redo feature</a></li>
-<li><a href="#proposed-data-encryption">3.12. [Proposed] Data Encryption</a></li>
+<li><a href="#export-feature">3.8. Export Feature</a></li>
+<li><a href="#statistics-feature">3.9. Statistics feature</a></li>
+<li><a href="#graph-feature">3.10. Graph feature</a></li>
+<li><a href="#budget-feature">3.11. Budget Feature</a></li>
+<li><a href="#proposed-undo-redo-feature">3.12. [Proposed] Undo/Redo feature</a></li>
+<li><a href="#proposed-data-encryption">3.13. [Proposed] Data Encryption</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a></li>
@@ -1202,8 +1203,8 @@ The above diagram also highlights how logic and model components interact with e
 <div class="sect3">
 <h4 id="implementation-6"><a class="link" href="#implementation-6">3.7.1. Implementation</a></h4>
 <div class="paragraph">
-<p>The Import feature allows our users to import data from a comma-separated values (<code>.csv</code>) files.
-It allows users who would like to add their spending in bulk.</p>
+<p>The import feature allows our users to import data from a comma-separated values (<code>.csv</code>) files.
+It allows users to add their spending in bulk.</p>
 </div>
 <div class="paragraph">
 <p>Given below is the Sequence Diagram for interactions within the <code>Logic</code> component for the
@@ -1211,7 +1212,7 @@ It allows users who would like to add their spending in bulk.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/ImportSequenceDiagram.png" alt="ImportSequenceDiagram" width="75%">
+<img src="images/ImportSequenceDiagram.png" alt="ImportSequenceDiagram" width="100%">
 </div>
 <div class="title">Figure 18. Interactions Inside the Logic Component for the <code>import</code> Command</div>
 </div>
@@ -1248,7 +1249,7 @@ There should be 5 columns specified for <code>Name</code>, <code>Cost</code>, <c
 <div class="ulist">
 <ul>
 <li>
-<p>The first row is considered a column header and is required.</p>
+<p>The first row is read in as the header and is <strong>required</strong>.</p>
 </li>
 </ul>
 </div>
@@ -1291,9 +1292,46 @@ There should be 5 columns specified for <code>Name</code>, <code>Cost</code>, <c
 </div>
 </div>
 <div class="sect2">
-<h3 id="statistics-feature"><a class="link" href="#statistics-feature">3.8. Statistics feature</a></h3>
+<h3 id="export-feature"><a class="link" href="#export-feature">3.8. Export Feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation"><a class="link" href="#current-implementation">3.8.1. Current Implementation</a></h4>
+<h4 id="implementation-7"><a class="link" href="#implementation-7">3.8.1. Implementation</a></h4>
+<div class="paragraph">
+<p>The export feature allows our  users to export their spending into a comma-separated values(<code>.csv</code>) files.
+It allows users to export their spending allowing the spending data to be portable.</p>
+</div>
+<div class="paragraph">
+<p>Given below is the Sequence Diagram for the interactions withing the <code>Logic</code> component for the <code>execute("export p/Documents")</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ExportSequenceDiagram.png" alt="ExportSequenceDiagram" width="100%">
+</div>
+<div class="title">Figure 20. Interactions Inside the Logic Component for the `export' Command</div>
+</div>
+<div class="paragraph">
+<p>The export feature has one main component, which is the <code>ExportCommand.java</code> file. This file contains the main logic behind the feature.
+The 'ExportCommand#execute()' method utilises the <code>FasterXML/jackson</code> library to read in the <code>.json</code> file where the application keeps the spending data.
+After the data has been read successfully, it is converted and written into <code>moneygowhere.csv</code> file. This file will be created at wherever the user specifies.
+After the data has been successfully exported, the application will then prints an output, showing the result of the command execution.</p>
+</div>
+<div class="paragraph">
+<p>The following activity diagram summarizes what happens when a user executes an export command:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ExportActivityDiagram.png" alt="ExportActivityDiagram" width="25%">
+</div>
+<div class="title">Figure 21. Export Feature Activity Diagram</div>
+</div>
+<div class="paragraph">
+<p>When a user calls the <code>export</code> command and inputs a valid folder path, the application will convert all the spending data into a <code>.csv</code> file and export it to <code>moneygowhere.csv</code></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="statistics-feature"><a class="link" href="#statistics-feature">3.9. Statistics feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">3.9.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>For the current <code>statistics</code> feature, there are 2 main commands that the user can execute.</p>
 </div>
@@ -1314,7 +1352,7 @@ There should be 5 columns specified for <code>Name</code>, <code>Cost</code>, <c
 <div class="content">
 <img src="images/StatsActivityDiagram.png" alt="StatsActivityDiagram" width="600">
 </div>
-<div class="title">Figure 20. Activity Diagram showing behaviour of StatsCommandParser</div>
+<div class="title">Figure 22. Activity Diagram showing behaviour of StatsCommandParser</div>
 </div>
 <div class="paragraph">
 <p>The implementation of the Statistics feature can be split into 2 phases, preparation and execution. Given below is an explanation of how the Statistics mechanism behaves at each phase.</p>
@@ -1329,7 +1367,7 @@ The following sequence diagram shows how <code>stats</code> command works during
 <div class="content">
 <img src="images/StatsSequenceDiagram.png" alt="StatsSequenceDiagram">
 </div>
-<div class="title">Figure 21. Sequence Diagram demonstrating the preparation stage of Statistics feature</div>
+<div class="title">Figure 23. Sequence Diagram demonstrating the preparation stage of Statistics feature</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1381,7 +1419,7 @@ Below is the UML sequence diagram and a step-by-step explanation.</p>
 <div class="content">
 <img src="images/StatsDataSequenceDiagram.png" alt="StatsDataSequenceDiagram" width="600">
 </div>
-<div class="title">Figure 22. Sequence Diagram demonstrating the execution stage of Statistics feature</div>
+<div class="title">Figure 24. Sequence Diagram demonstrating the execution stage of Statistics feature</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -1402,7 +1440,7 @@ Below is the UML sequence diagram and a step-by-step explanation.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.8.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.9.2. Design Considerations</a></h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 20%;">
@@ -1431,9 +1469,9 @@ Below is the UML sequence diagram and a step-by-step explanation.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="graph-feature"><a class="link" href="#graph-feature">3.9. Graph feature</a></h3>
+<h3 id="graph-feature"><a class="link" href="#graph-feature">3.10. Graph feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.9.1. Current Implementation</a></h4>
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.10.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>For the current <code>graph</code> feature, there are 2 main commands that the user can execute.</p>
 </div>
@@ -1454,7 +1492,7 @@ Below is the UML sequence diagram and a step-by-step explanation.</p>
 <div class="content">
 <img src="images/GraphActivityDiagram.png" alt="GraphActivityDiagram" width="600">
 </div>
-<div class="title">Figure 23. Activity Diagram showing behaviour of GraphCommandParser</div>
+<div class="title">Figure 25. Activity Diagram showing behaviour of GraphCommandParser</div>
 </div>
 <div class="paragraph">
 <p>The implementation of the Graph feature can be split into 2 phases, preparation and execution. Given below is an explanation of how the Graph mechanism behaves at each phase.</p>
@@ -1469,7 +1507,7 @@ The following sequence diagram shows how <code>graph</code> command works during
 <div class="content">
 <img src="images/GraphSequenceDiagram.png" alt="GraphSequenceDiagram">
 </div>
-<div class="title">Figure 24. Sequence Diagram demonstrating the preparation stage of Graph feature</div>
+<div class="title">Figure 26. Sequence Diagram demonstrating the preparation stage of Graph feature</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1521,7 +1559,7 @@ Below is the UML sequence diagram and a step-by-step explanation.</p>
 <div class="content">
 <img src="images/GraphDataSequenceDiagram.png" alt="GraphDataSequenceDiagram" width="600">
 </div>
-<div class="title">Figure 25. Sequence Diagram demonstrating the execution stage of Graph feature</div>
+<div class="title">Figure 27. Sequence Diagram demonstrating the execution stage of Graph feature</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -1543,7 +1581,7 @@ Below is the UML sequence diagram and a step-by-step explanation.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="budget-feature"><a class="link" href="#budget-feature">3.10. Budget Feature</a></h3>
+<h3 id="budget-feature"><a class="link" href="#budget-feature">3.11. Budget Feature</a></h3>
 <div class="paragraph">
 <p>The <code>Budget</code> component has two core features:</p>
 </div>
@@ -1569,7 +1607,7 @@ double representing the desired monthly budget.</p>
 the sum from the budget.</p>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.10.1. Current Implementation</a></h4>
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.11.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The current <code>Budget</code> component keeps track of three variables:</p>
 </div>
@@ -1604,7 +1642,7 @@ the total spending will reset to 0, but the monthly budget will remain the same.
 <div class="content">
 <img src="images/SetBudgetSequenceDiagram.png" alt="SetBudgetSequenceDiagram">
 </div>
-<div class="title">Figure 26. Sequence Diagram when setting Budget</div>
+<div class="title">Figure 28. Sequence Diagram when setting Budget</div>
 </div>
 <div class="paragraph">
 <p>The figure above shows the sequence of events that occur to set the monthly budget.
@@ -1614,7 +1652,7 @@ If the user input is valid, the command is then executed to access the Budget in
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-consideration"><a class="link" href="#design-consideration">3.10.2. Design Consideration</a></h4>
+<h4 id="design-consideration"><a class="link" href="#design-consideration">3.11.2. Design Consideration</a></h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 20%;">
@@ -1646,9 +1684,9 @@ Cons: not efficient, requires Budget to access Model, resulting in circular depe
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-undo-redo-feature"><a class="link" href="#proposed-undo-redo-feature">3.11. [Proposed] Undo/Redo feature</a></h3>
+<h3 id="proposed-undo-redo-feature"><a class="link" href="#proposed-undo-redo-feature">3.12. [Proposed] Undo/Redo feature</a></h3>
 <div class="sect3">
-<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.11.1. Proposed Implementation</a></h4>
+<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.12.1. Proposed Implementation</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by <code>VersionedSpendingBook</code>.
 It extends <code>SpendingBook</code> with an undo/redo history, stored internally as an <code>spendingBookStateList</code> and <code>currentStatePointer</code>.
@@ -1790,7 +1828,7 @@ If the <code>currentStatePointer</code> is at index <code>spendingBookStateList.
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.11.2. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.12.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
@@ -1844,7 +1882,7 @@ Violates Single Responsibility Principle and Separation of Concerns as <code>His
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.12. [Proposed] Data Encryption</a></h3>
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.13. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
@@ -2810,9 +2848,29 @@ Use case resumes from step 1.</p>
 <div class="sectionbody">
 <div class="dlist">
 <dl>
+<dt class="hdlist1">Budget</dt>
+<dd>
+<p>The maximum amount of money set by the user to spend.</p>
+</dd>
+<dt class="hdlist1">Cost</dt>
+<dd>
+<p>Money spent by the user.</p>
+</dd>
+<dt class="hdlist1">Deficit</dt>
+<dd>
+<p>The user has spent more than his budget set.</p>
+</dd>
 <dt class="hdlist1"><a id="mainstream-os"></a> Mainstream OS</dt>
 <dd>
 <p>Windows, Linux, Unix, OS-X.</p>
+</dd>
+<dt class="hdlist1">Safe</dt>
+<dd>
+<p>The user has spent less or equal to his budget set.</p>
+</dd>
+<dt class="hdlist1">Spending</dt>
+<dd>
+<p>An expense incurred by the user.</p>
 </dd>
 </dl>
 </div>
@@ -2927,4 +2985,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-07 17:52:42 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-07 18:47:44 UTC</div></div></div></body></html>
