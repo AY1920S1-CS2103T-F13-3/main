@@ -100,6 +100,9 @@ Tips that can help you better navigate the application.
 </div>
 </div>
 </div>
+<div class="paragraph">
+<p>Without further ado, let&#8217;s head over to <a href="#quick-start">Section 3, &#8220;Quick Start&#8221;</a> to get started!</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -156,10 +159,23 @@ e.g. typing <strong><code>help</code></strong> will display the help information
 <p>When you are ready to get started on tracking your own finances, do type <code>clear</code> in the command box and press <kbd>Enter</kbd>.
 This removes all the sample data from the application.</p>
 </li>
-<li>
-<p>You can refer to <a href="#Features">Section 4, &#8220;Features&#8221;</a> for more details about each command.</p>
-</li>
 </ol>
+</div>
+<div class="paragraph">
+<p>This is the end of the Quick Start tutorial. You can refer to <a href="#Features">Section 4, &#8220;Features&#8221;</a> for more details about each command.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Your data is saved in the <code>data/</code> folder by default. You are advised not to modify any of the system created files within the folder,
+else <strong>MoneyGoWhere</strong> may not perform as expected.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -447,7 +463,7 @@ A spending can have any number of <code>t/TAG</code> keywords (including 0). Eac
 <p>When editing tags, the existing tags of the spending will be removed i.e adding of tags is not cumulative.</p>
 </li>
 <li>
-<p>Tags can have up to 64 characters.</p>
+<p>Tags can have up to 15 characters.</p>
 </li>
 <li>
 <p>You can remove all the spending&#8217;s tags by typing <code>t/</code> without specifying any tags after it.</p>
@@ -884,7 +900,14 @@ Converts 5 USD to SGD based on current exchange rates.</p>
 <div class="paragraph">
 <p>Organises the spending based on tags.
 A pie chart is generated, with each sector representing the total amount of money spent on a tag.
-This enables users to be more informed of their spending habits as they are now aware of where they have spent most of their money on.</p>
+This enables users to be more informed of their spending habits as they are now aware of where they have spent most of their money on.
+An example is shown below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/stats.png" alt="stats" width="700">
+</div>
+<div class="title">Figure 3. Output of <code>stats</code></div>
 </div>
 <div class="paragraph">
 <p><strong>Format:</strong> <code>stats d/DATE_START d/DATE_END</code></p>
@@ -981,26 +1004,10 @@ The statistics panel will update with the currency set.
 <li>
 <p><code>stats</code>: Generates statistics for all spending.</p>
 </li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/allstats.png" alt="allstats" width="700">
-</div>
-<div class="title">Figure 3. Output of <code>stats</code></div>
-</div>
-<div class="ulist">
-<ul>
 <li>
 <p><code>stats d/20/10/2019 d/25/10/2019</code>: Generates statistics for spending between and including 20/10/2019 and 25/10/2019.</p>
 </li>
 </ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/daterangestats.png" alt="daterangestats" width="700"">
-</div>
-<div class="title">Figure 4. Output of <code>stats d/20/10/2019 d/25/10/2019</code></div>
 </div>
 <div class="paragraph">
 <p><strong>Expected Output:</strong></p>
@@ -1013,7 +1020,14 @@ The statistics panel will update with the currency set.
 <h3 id="generating-a-graph-code-graph-code"><a class="link" href="#generating-a-graph-code-graph-code">4.15. Generating a graph : <code>graph</code></a></h3>
 <div class="paragraph">
 <p>Organises the spending based on date. A line graph is generated, with each point representing the total amount of money spent on a particular date.
-This enables users to analyze trends in their spending amount over a particular period of time.</p>
+This enables users to analyze trends in their spending amount over a particular period of time.
+An example is shown below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/graph.png" alt="graph" width="700">
+</div>
+<div class="title">Figure 4. Output of <code>graph</code></div>
 </div>
 <div class="paragraph">
 <p><strong>Format:</strong> <code>graph d/DATE_START d/DATE_END</code></p>
@@ -1107,26 +1121,10 @@ The graph panel will update with the currency set.
 <li>
 <p><code>graph</code>: Generates a graph for all spending.</p>
 </li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/allgraph.png" alt="allgraph" width="700">
-</div>
-<div class="title">Figure 5. Output of <code>graph</code></div>
-</div>
-<div class="ulist">
-<ul>
 <li>
 <p><code>graph d/20/10/2019 d/25/10/2019</code>: Generates a graph for spending between and including 20/10/2019 and 25/10/2019.</p>
 </li>
 </ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/daterangegraph.png" alt="daterangegraph" width="700">
-</div>
-<div class="title">Figure 6. Output of <code>graph d/20/10/2019 d/25/10/2019</code></div>
 </div>
 <div class="paragraph">
 <p><strong>Expected Output:</strong></p>
@@ -1246,7 +1244,7 @@ Deletes the second reminder in the list based on the current results shown.</p>
 <div class="content">
 <img src="images/ExampleValidCsv.png" alt="ExampleValidCsv" width="75%">
 </div>
-<div class="title">Figure 7. A Valid <code>.csv</code> File.</div>
+<div class="title">Figure 5. A Valid <code>.csv</code> File.</div>
 </div>
 <div class="paragraph">
 <p><code>.csv</code> file must have a header row with the following values:</p>
@@ -1565,12 +1563,12 @@ e.g. <code>showbudget</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Generate statistics</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>stats d/STARTDATE d/ENDDATE</code><br>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>stats d/DATE_START d/DATE_END</code><br>
 e.g. <code>stats d/01/01/2019 d/07/01/2019</code><br></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Graph</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>graph d/STARTDATE d/ENDDATE</code><br>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>graph d/DATE_START d/DATE_END</code><br>
 e.g. <code>graph d/01/01/2019 d/07/01/2019</code><br></p></td>
 </tr>
 <tr>
@@ -1615,4 +1613,4 @@ e.g. <code>reminder delete 2</code></p></td>
 <p>The command summary above displays all commands available in MoneyGoWhere.</p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 12:52:22 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 20:09:12 UTC</div></div></div></body></html>

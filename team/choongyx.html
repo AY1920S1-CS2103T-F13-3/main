@@ -6,15 +6,15 @@
 <div class="paragraph">
 <p>MoneyGoWhere is a finance application built by my team and I as part of a Software Engineering Project.
 It was morphed from a basic command line interface Address Book.
-MoneyGoWhere is designed to help students to keep track of all their spending and their related information such as date, cost and tags.
+MoneyGoWhere is a personal finance application targeted at students at the National University of Singapore (NUS).
+It is designed to help students to keep track of all their spending and their related information such as date, cost and tags.
 Notable features include allowing users to set budget goals, view statistics, set reminders for bills and export their data to a .csv file.</p>
 </div>
 <div class="sect2">
 <h3 id="my-role"><a class="link" href="#my-role">My Role</a></h3>
 <div class="paragraph">
-<p>My  role was to implement the statistics and graph features which are essential in allowing users analyze their spending habits.
-The following sections will illustrate these features in greater detail.
-These include the implementation details and also other contributions and relevant sections I have recorded in the User Guide and Developer Guide.</p>
+<p>My  role was to implement the statistics and graph features.
+The following sections will illustrate these features in greater detail.</p>
 </div>
 <div class="paragraph">
 <p>Below are a few icons and formatting which will be used in this document.</p>
@@ -72,8 +72,8 @@ Tips that can help you better navigate the application.
 <p>What it does: It allows the user to view their spending in the form of a pie-chart which organises the user&#8217;s expenditure based on tags.</p>
 </li>
 <li>
-<p>Justification: This feature enhances the product significantly as it enables users to view their spending in the form of figures which is easier to read than text.
-It allows them to be more informed of their spending habits as they will be more aware of what they have spent their money on.</p>
+<p>Justification: This feature enhances the product significantly as it enables users to view their spending in the form of figures which is more reader-friendly.
+Furthermore, it allows users to be more informed of their spending habits as they are now aware of where they have spent most of their money on, enabling them to reflect on their spending habits.</p>
 </li>
 <li>
 <p>Highlights: This enhancement required an in-depth understanding of the software architecture as it involves multiple components of the application.</p>
@@ -86,10 +86,11 @@ It allows them to be more informed of their spending habits as they will be more
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: It allows the user to view their spending in the form of a graph based on a date range provided.</p>
+<p>What it does: It organises the user&#8217;s expenditure based on date, allowing users to view their daily expenditure based on a date range provided.</p>
 </li>
 <li>
-<p>Justification: This enables the user to easily track their spending by providing an overview of their spending within a specified date range.</p>
+<p>Justification: It enables users to view how much they spend daily and also enable them to analyze trends in their spending amount over a particular period of time.
+This helps them to better analyze their spending habits.</p>
 </li>
 <li>
 <p>Highlights: This enhancement also required an in-depth understanding of the software architecture as it involves multple components of the application.</p>
@@ -136,7 +137,7 @@ It allows them to be more informed of their spending habits as they will be more
 </li>
 <li>
 <p>Reviewed team member&#8217;s documentations. (Pull requests
-<a href="https://github.com/AY1920S1-CS2103T-F13-3/main/pull/80">#80</a>
+<a href="https://github.com/AY1920S1-CS2103T-F13-3/main/pull/80">#80</a>,
 <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/pull/85">#85</a>,
 <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/pull/98">#98</a>)</p>
 </li>
@@ -145,6 +146,9 @@ It allows them to be more informed of their spending habits as they will be more
 </li>
 <li>
 <p>Collated and updated profiles for all members of the team. (Pull request <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/pull/7/files">#7</a>)</p>
+</li>
+<li>
+<p>Updated SettingUp, Documentation, Testing and DevOps sections of Developer Guide (Pull request <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/pull/244/files">#244</a>)</p>
 </li>
 </ul>
 </div>
@@ -164,15 +168,13 @@ It allows them to be more informed of their spending habits as they will be more
 <p>Conducted manual testing, reported bugs and offered suggestions for our team
 (Examples: <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/issues/128">1</a>,
 <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/issues/122">2</a>,
-<a href="https://github.com/AY1920S1-CS2103T-F13-3/main/issues/125">3</a>,
-<a href="https://github.com/AY1920S1-CS2103T-F13-3/main/issues/124">4</a>,
-<a href="https://github.com/AY1920S1-CS2103T-F13-3/main/issues/120">5</a>,
-<a href="https://github.com/AY1920S1-CS2103T-F13-3/main/issues/115">6</a>,
-<a href="https://github.com/AY1920S1-CS2103T-F13-3/main/issues/114">7</a>,
-<a href="https://github.com/AY1920S1-CS2103T-F13-3/main/issues/119">8</a>)</p>
+<a href="https://github.com/AY1920S1-CS2103T-F13-3/main/issues/125">3</a>)</p>
 </li>
 <li>
-<p>Conducted manual testing, reported bugs and offered suggestions for other teams in the class</p>
+<p>Conducted manual testing, reported bugs and offered suggestions for other teams in the class
+(Examples: <a href="https://github.com/AY1920S1-CS2103T-T10-1/main/issues/246">1</a>,
+<a href="https://github.com/AY1920S1-CS2103T-T10-1/main/issues/242">2</a>,
+<a href="https://github.com/AY1920S1-CS2103T-T10-1/main/issues/244">3</a>)</p>
 </li>
 </ul>
 </div>
@@ -188,133 +190,22 @@ It allows them to be more informed of their spending habits as they will be more
 <h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Given below are sections I contributed to the User Guide, which include the Introduction, How To Use This Guide, Quick Start, Statistics feature and Graph feature.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>MoneyGoWhere</strong> is a personal finance application targeted to students at the National University of Singapore (NUS).
-It allows students to keep track of all their spending and their related information such as date, cost and tags.
-Users can also set budget goals, view statistics, set reminders for bills and export their data to a .csv file.
-With an easy-to-use Graphical User Interface (GUI) and employment of Command Line Interface (CLI), users can easily navigate through the application, contributing to its user-friendliness and efficiency.</p>
-</div>
-<div class="paragraph">
-<p>What are you waiting for? Start tracking your finances now!</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="how-to-use-this-guide"><a class="link" href="#how-to-use-this-guide">How To Use This Guide</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The following section details and previews a few legends and formatting that will
-be used throughout the user guide. These legends are used to represent
-special information such as tips.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Important information that should be noted.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Tips that can help you better navigate the application.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p><code>test</code>: Command to be executed</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="paragraph">
-<p>Useful information for a deeper understanding of the command.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="quick-start"><a class="link" href="#quick-start">Quick Start</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>These steps will guide you in installing MoneyGoWhere on your computer.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Ensure you have Java <code>11</code> or above installed in your Computer.</p>
-</li>
-<li>
-<p>Download the latest <code>MoneyGoWhere.jar</code> <a href="{repoURL}/releases">here</a>.</p>
-</li>
-<li>
-<p>Copy the file to the folder you want to use as the home folder for MoneyGoWhere.</p>
-</li>
-<li>
-<p>Double-click the file to start the app. The GUI should appear in a few seconds as seen in Figure 1.
-MoneyGoWhere comes preloaded with sample data to allow you to explore and familiarise with the application.</p>
-<div class="imageblock">
-<div class="content">
-<img src="../images/ui_annotate.png" alt="ui annotate" width="1000">
-</div>
-<div class="title">Figure 1. User Interface of MoneyGoWhere</div>
-</div>
-</li>
-<li>
-<p>Type the command in the command box and press <kbd>Enter</kbd> to execute it.<br>
-e.g. typing <strong><code>help</code></strong> will display the help information.</p>
-</li>
-<li>
-<p>Some example commands you can try:</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong><code>list</code></strong> : lists all spending</p>
-</li>
-<li>
-<p><strong><code>add</code></strong><code>n/apple c/2.50 d/yesterday t/fruits r/expensive apple</code> : adds a spending <code>Apple</code> to MoneyGoWhere.</p>
-</li>
-<li>
-<p><strong><code>delete</code></strong><code>3</code> : deletes the 3rd spending shown in the current list</p>
-</li>
-<li>
-<p><strong><code>exit</code></strong> : exits the app</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>When you are ready to get started on tracking your own finances, do type <code>clear</code> in the command box and press <kbd>Enter</kbd>.
-This removes all the sample data from the application.</p>
-</li>
-<li>
-<p>You can refer to <a href="#Features">[Features]</a> for more details about each command.</p>
-</li>
-</ol>
+<p>Given below are sections I contributed to the User Guide for the Statistics feature and Graph feature.
+They showcase my ability to write documentation targeting end-users.</p>
 </div>
 <div class="sect2">
 <h3 id="generating-statistics-code-stats-code"><a class="link" href="#generating-statistics-code-stats-code">Generating statistics : <code>stats</code></a></h3>
 <div class="paragraph">
 <p>Organises the spending based on tags.
 A pie chart is generated, with each sector representing the total amount of money spent on a tag.
-This enables users to be more informed of their spending habits as they are now aware of where they have spent most of their money on.</p>
+This enables users to be more informed of their spending habits as they are now aware of where they have spent most of their money on.
+An example is shown below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/stats.png" alt="stats" width="700">
+</div>
+<div class="title">Figure 1. Output of <code>stats</code></div>
 </div>
 <div class="paragraph">
 <p><strong>Format:</strong> <code>stats d/DATE_START d/DATE_END</code></p>
@@ -411,26 +302,10 @@ The statistics panel will update with the currency set.
 <li>
 <p><code>stats</code>: Generates statistics for all spending.</p>
 </li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/allstats.png" alt="allstats" width="700">
-</div>
-<div class="title">Figure 2. Output of <code>stats</code></div>
-</div>
-<div class="ulist">
-<ul>
 <li>
 <p><code>stats d/20/10/2019 d/25/10/2019</code>: Generates statistics for spending between and including 20/10/2019 and 25/10/2019.</p>
 </li>
 </ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/daterangestats.png" alt="daterangestats" width="700"">
-</div>
-<div class="title">Figure 3. Output of <code>stats d/20/10/2019 d/25/10/2019</code></div>
 </div>
 <div class="paragraph">
 <p><strong>Expected Output:</strong></p>
@@ -443,7 +318,14 @@ The statistics panel will update with the currency set.
 <h3 id="generating-a-graph-code-graph-code"><a class="link" href="#generating-a-graph-code-graph-code">Generating a graph : <code>graph</code></a></h3>
 <div class="paragraph">
 <p>Organises the spending based on date. A line graph is generated, with each point representing the total amount of money spent on a particular date.
-This enables users to analyze trends in their spending amount over a particular period of time.</p>
+This enables users to analyze trends in their spending amount over a particular period of time.
+An example is shown below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/graph.png" alt="graph" width="700">
+</div>
+<div class="title">Figure 2. Output of <code>graph</code></div>
 </div>
 <div class="paragraph">
 <p><strong>Format:</strong> <code>graph d/DATE_START d/DATE_END</code></p>
@@ -537,26 +419,10 @@ The graph panel will update with the currency set.
 <li>
 <p><code>graph</code>: Generates a graph for all spending.</p>
 </li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/allgraph.png" alt="allgraph" width="700">
-</div>
-<div class="title">Figure 4. Output of <code>graph</code></div>
-</div>
-<div class="ulist">
-<ul>
 <li>
 <p><code>graph d/20/10/2019 d/25/10/2019</code>: Generates a graph for spending between and including 20/10/2019 and 25/10/2019.</p>
 </li>
 </ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/daterangegraph.png" alt="daterangegraph" width="700">
-</div>
-<div class="title">Figure 5. Output of <code>graph d/20/10/2019 d/25/10/2019</code></div>
 </div>
 <div class="paragraph">
 <p><strong>Expected Output:</strong></p>
@@ -571,7 +437,8 @@ The graph panel will update with the currency set.
 <h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Given below are sections on the implementation of the Statistics feature and Graph feature I have worked on.</p>
+<p>Given below are sections on the implementation of the Statistics feature and Graph feature I have worked on.
+They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</p>
 </div>
 <div class="sect2">
 <h3 id="statistics-feature"><a class="link" href="#statistics-feature">Statistics feature</a></h3>
@@ -597,7 +464,20 @@ The graph panel will update with the currency set.
 <div class="content">
 <img src="../images/StatsActivityDiagram.png" alt="StatsActivityDiagram" width="600">
 </div>
-<div class="title">Figure 6. Activity Diagram showing behaviour of StatsCommandParser</div>
+<div class="title">Figure 3. Activity Diagram showing behaviour of StatsCommandParser</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>If a valid date range is provided in the <code>stats</code> command given by the user, <code>StatsCommand(DATE_START, DATE_END)</code> with the respective date parameters is created. The command will execute based on this date range.</p>
+</li>
+<li>
+<p>If no date range is provided by the user, <code>StatsCommand()</code> is created, which will execute the command based on the whole date range in the list.</p>
+</li>
+<li>
+<p>Else, if the parameters are invalid, a <code>ParseException</code> is thrown and the application waits for a new user input.</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
 <p>The implementation of the Statistics feature can be split into 2 phases, preparation and execution. Given below is an explanation of how the Statistics mechanism behaves at each phase.</p>
@@ -612,7 +492,7 @@ The following sequence diagram shows how <code>stats</code> command works during
 <div class="content">
 <img src="../images/StatsSequenceDiagram.png" alt="StatsSequenceDiagram">
 </div>
-<div class="title">Figure 7. Sequence Diagram demonstrating the preparation stage of Statistics feature</div>
+<div class="title">Figure 4. Sequence Diagram demonstrating the preparation stage of Statistics feature</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -629,7 +509,7 @@ The lifeline for <code>StatsCommandParser</code> should end at the destroy marke
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User first enters the command <code>stats d/01/01/2019 d/07/01/2019</code>.</p>
+<p>User first enters a <code>stats</code> command.</p>
 </li>
 <li>
 <p><code>SpendingBookParser</code> will parse and identify the command as a <code>StatsCommand</code> and pass on the argument to <code>StatsCommandParser</code>.</p>
@@ -649,7 +529,10 @@ Otherwise, <code>StatsCommandParser</code> will verify whether the arguments pro
 </div>
 </li>
 <li>
-<p><code>StatsCommand</code> is returned to <code>LogicManager</code> which then calls <code>StatsCommand#execute()</code>, which updates the <code>statsPredicate</code> in <code>Model</code>.</p>
+<p><code>StatsCommand</code> is returned to <code>LogicManager</code> which then calls <code>StatsCommand#execute()</code>.</p>
+</li>
+<li>
+<p><code>Model#updateFilteredSpendingList(predicate)</code> is subsequently called to update the list.</p>
 </li>
 </ol>
 </div>
@@ -664,7 +547,7 @@ Below is the UML sequence diagram and a step-by-step explanation.</p>
 <div class="content">
 <img src="../images/StatsDataSequenceDiagram.png" alt="StatsDataSequenceDiagram" width="600">
 </div>
-<div class="title">Figure 8. Sequence Diagram demonstrating the execution stage of Statistics feature</div>
+<div class="title">Figure 5. Sequence Diagram demonstrating the execution stage of Statistics feature</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -696,18 +579,18 @@ Below is the UML sequence diagram and a step-by-step explanation.</p>
 <tr>
 <th class="tableblock halign-left valign-top">Aspect</th>
 <th class="tableblock halign-left valign-top">Alternative 1 (Current choice)</th>
-<th class="tableblock halign-left valign-top">Alternative 2 (Planned for future releases)</th>
+<th class="tableblock halign-left valign-top">Alternative 2</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">How to handle statistics data and parameters</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Data and each parameter is handled as separate objects<br>
-<strong>Pros:</strong> Easy to implement<br>
-<strong>Cons:</strong> Need to call multiple methods to get parameters</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Create Statistics object which contains data and all the parameters<br>
-<strong>Pros:</strong> More scalable. Less method calls to get parameters<br>
-<strong>Cons:</strong> None</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Visual Representation of Statistics</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Represent data in the form of a pie chart.<br>
+<strong>Pros:</strong> Limits the number of tags to the tags that are the most significant. Will not encounter any errors in the event there is a large number of tags.<br>
+<strong>Cons:</strong> Unable to display the data of other tags that are less significant.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Represent data in the form of a table.<br>
+<strong>Pros:</strong> Able to view the data of more tags.<br>
+<strong>Cons:</strong> Less reader-friendly option due to the large amount of data. Data is not summarized easily for the user to analyze his spending habits.</p></td>
 </tr>
 </tbody>
 </table>
@@ -737,7 +620,20 @@ Below is the UML sequence diagram and a step-by-step explanation.</p>
 <div class="content">
 <img src="../images/GraphActivityDiagram.png" alt="GraphActivityDiagram" width="600">
 </div>
-<div class="title">Figure 9. Activity Diagram showing behaviour of GraphCommandParser</div>
+<div class="title">Figure 6. Activity Diagram showing behaviour of GraphCommandParser</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>If a valid date range is provided in the <code>graph</code> command given by the user, <code>GraphCommand(DATE_START, DATE_END)</code> with the respective date parameters is created. The command will execute based on this date range.</p>
+</li>
+<li>
+<p>If no date range is provided by the user, <code>GraphCommand()</code> is created, which will execute the command based on the whole date range in the list.</p>
+</li>
+<li>
+<p>Else, if the parameters are invalid, a <code>ParseException</code> is thrown and the application waits for a new user input.</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
 <p>The implementation of the Graph feature can be split into 2 phases, preparation and execution. Given below is an explanation of how the Graph mechanism behaves at each phase.</p>
@@ -752,7 +648,7 @@ The following sequence diagram shows how <code>graph</code> command works during
 <div class="content">
 <img src="../images/GraphSequenceDiagram.png" alt="GraphSequenceDiagram">
 </div>
-<div class="title">Figure 10. Sequence Diagram demonstrating the preparation stage of Graph feature</div>
+<div class="title">Figure 7. Sequence Diagram demonstrating the preparation stage of Graph feature</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -769,7 +665,7 @@ The lifeline for <code>GraphCommandParser</code> should end at the destroy marke
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User first enters the command <code>graph d/01/01/2019 d/07/01/2019</code>.</p>
+<p>User first enters a <code>graph</code> command.</p>
 </li>
 <li>
 <p><code>SpendingBookParser</code> will parse and identify the command as a <code>GraphCommand</code> and pass on the argument to <code>GraphCommandParser</code>.</p>
@@ -789,7 +685,10 @@ Otherwise, <code>GraphCommandParser</code> will verify whether the arguments pro
 </div>
 </li>
 <li>
-<p><code>GraphCommand</code> is returned to <code>LogicManager</code> which then calls <code>GraphCommand#execute()</code>, which updates the <code>statsPredicate</code> in <code>Model</code>.</p>
+<p><code>GraphCommand</code> is returned to <code>LogicManager</code> which then calls <code>GraphCommand#execute()</code>.</p>
+</li>
+<li>
+<p><code>Model#updateFilteredSpendingList(predicate)</code> is subsequently called to update the list.</p>
 </li>
 </ol>
 </div>
@@ -804,7 +703,7 @@ Below is the UML sequence diagram and a step-by-step explanation.</p>
 <div class="content">
 <img src="../images/GraphDataSequenceDiagram.png" alt="GraphDataSequenceDiagram" width="600">
 </div>
-<div class="title">Figure 11. Sequence Diagram demonstrating the execution stage of Graph feature</div>
+<div class="title">Figure 8. Sequence Diagram demonstrating the execution stage of Graph feature</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -824,6 +723,36 @@ Below is the UML sequence diagram and a step-by-step explanation.</p>
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Aspect</th>
+<th class="tableblock halign-left valign-top">Alternative 1 (Current choice)</th>
+<th class="tableblock halign-left valign-top">Alternative 2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to merge Graph and Statistics features into one command</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Distinct commands for Graph and Statistics features.<br>
+<strong>Pros:</strong> Distinct commands with similar parameters make it easy for the user to remember and use.
+One feature could be easily modified without affecting the other feature.<br>
+<strong>Cons:</strong> Code duplication due to similarity of implementation.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Merge Graph and Statistics features into one command.<br>
+<strong>Pros:</strong> Reduces code duplication due to  similarity of implementation.<br>
+<strong>Cons:</strong> Another parameter needed for user to indicate the mode he prefers to view his statistics.
+Difficult to modify one feature without needing to modify the other as well.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 12:52:22 UTC</div></div></div></body></html>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 20:09:12 UTC</div></div></div></body></html>
