@@ -244,100 +244,59 @@ Optionally, you can press <kbd>F1</kbd> or click <code>help</code> which can be 
 <div class="sect2">
 <h3 id="flexible-date-formats"><a class="link" href="#flexible-date-formats">4.2. Flexible date formats</a></h3>
 <div class="paragraph">
-<p>Whenever a particular command requires a <code>DATE</code> field, you can choose either of the following formats.</p>
+<p>Whenever a particular command requires a <code>DATE</code> field, you can choose either of the following formats in the table below.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Formal Dates</strong></p>
-<div class="ulist">
-<ul>
-<li>
-<p>1978-01-28</p>
-</li>
-<li>
-<p>1984/04/02</p>
-</li>
-<li>
-<p>1/02/1980 <em>(1st February 1980)</em></p>
-</li>
-<li>
-<p>26/2/2019</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Relaxed Dates</strong></p>
-<div class="ulist">
-<ul>
-<li>
-<p>The 31st of April in the year 2008</p>
-</li>
-<li>
-<p>21 Nov 1997</p>
-</li>
-<li>
-<p>jan 1st</p>
-</li>
-<li>
-<p>february twenty-eight</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Relative Dates</strong></p>
-<div class="ulist">
-<ul>
-<li>
-<p>next thursday / last wednesday</p>
-</li>
-<li>
-<p>today / tomorrow / yesterday</p>
-</li>
-<li>
-<p>next week / next month / next year</p>
-</li>
-<li>
-<p>3 days from now</p>
-</li>
-<li>
-<p>three weeks ago</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Date Alternatives</strong></p>
-<div class="ulist">
-<ul>
-<li>
-<p>next wed to thurs</p>
-</li>
-<li>
-<p>oct 3rd to 4th</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Prefixes</strong></p>
-<div class="ulist">
-<ul>
-<li>
-<p>day after / the day before</p>
-</li>
-<li>
-<p>the monday after / the monday before</p>
-</li>
-<li>
-<p>2 fridays before / 4 tuesdays after</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 1. Date format table</caption>
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Date Type</th>
+<th class="tableblock halign-left valign-top">Formats</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Formal Date</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1978-01-28<br>
+1984/04/02<br>
+1/02/1980 <em>(1st February 1980)</em><br>
+26/2/2019<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Relaxed Date</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The 31st of April in the year 2008<br>
+21 Nov 1997<br>
+Jan 21,'97<br>
+jan 1st<br>
+february twenty-eight</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Relative Dates</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">next thursday/ last wednesday<br>
+today/ tomorrow/ yesterday<br>
+next week/ next month / next year<br>
+3 days from now<br>
+three weeks ago</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Date Alternatives</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">next wed or thurs<br>
+oct 3rd or 4th</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Prefixes</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">day after/ the day before<br>
+the monday after/ the monday before<br>
+2 fridays before/ 4 tuesdays after</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Listed above are the date formats that can be used.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -601,19 +560,19 @@ This command is implicitly invoked upon application start up, and can be used to
 <div class="ulist">
 <ul>
 <li>
+<p>At least one of the optional fields <strong>must be provided</strong>.</p>
+</li>
+<li>
 <p>Valid prefixes are: Cost (<code>c</code>), Date (<code>d</code>), Name (<code>n</code>), Remarks (<code>r</code>).</p>
 </li>
 <li>
 <p>Valid sort orders are: <code>ASC</code>, <code>DESC</code>.</p>
 </li>
 <li>
-<p>At least one of the optional fields <strong>must be provided</strong>.</p>
-</li>
-<li>
 <p>If the given sort order is <code>c/ASC n/DESC</code>, Cost will be sorted in ascending order, followed by name in descending order.</p>
 </li>
 <li>
-<p>Sorting names or remarks by default will sort uppercase letters first, followed by lowercase letters.</p>
+<p>Sorting names or remarks in Ascending order will sort uppercase letters first, followed by lowercase letters.</p>
 </li>
 </ul>
 </div>
@@ -638,7 +597,16 @@ Sorts current spending displayed by Name in descending order.</p>
 <p><strong>Expected Output:</strong></p>
 </div>
 <div class="paragraph">
-<p>Spending entries are sorted based on the given order.</p>
+<p>An example is shown below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SortPreviewUG.png" alt="SortPreviewUG" width="350">
+</div>
+<div class="title">Figure 3. Output of <code>sort n/ASC d/DESC</code></div>
+</div>
+<div class="paragraph">
+<p>Spending entries are sorted based on the example above.</p>
 </div>
 </div>
 <div class="sect2">
@@ -654,54 +622,16 @@ Sorts current spending displayed by Name in descending order.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>At least one search field must be present.</p>
+<p>At least one search field must be present and the search is case-insensitive. For example, <code>apple</code> and <code>Apple</code> will output the same search results.</p>
 </li>
 <li>
-<p>The search is case-insensitive. For example, <code>apple</code> and <code>Apple</code> will output the same search results.</p>
-</li>
-<li>
-<p>The order of the keywords do not matter for name and remarks. For example, <code>ticket concert</code> will match <code>concert ticket</code>.</p>
+<p>The order of the keywords do not matter for name and remarks. For example, <code>ticket concert</code> will match <code>concert ticket</code> and only full words will be matched. For example, <code>app</code> will not match <code>apple</code>.</p>
 </li>
 <li>
 <p>Spending matching at least one keyword will be returned. For example, <code>Phone</code> will return <code>New Phone</code>, <code>Phone Bill</code>.</p>
 </li>
 <li>
-<p>When searching for multiple tags, any tag listed will be matched along with the previous criteria. For example, if there the search keyword was <code>d/yesterday d/today t/food t/entertainment</code>, spending entries within <code>yesterday</code> and <code>today</code> that have either tags <code>food</code> or <code>entertainment</code> will be matched.</p>
-</li>
-<li>
-<p>Only full words will be matched. For example, <code>app</code> will not match <code>apple</code>.</p>
-</li>
-<li>
-<p>Date range can only be input in the following ways:</p>
-<div class="ulist">
-<ul>
-<li>
-<p><code>d/DATE_START d/DATE_END</code></p>
-</li>
-<li>
-<p><code>d/DATE_START to DATE_END</code></p>
-</li>
-<li>
-<p><code>d/DATE_START - DATE_END</code></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Cost range can only be input in the following ways:</p>
-<div class="ulist">
-<ul>
-<li>
-<p><code>c/COST_MIN c/COST_MAX</code></p>
-</li>
-<li>
-<p><code>c/COST_MIN-COST_MAX</code></p>
-</li>
-<li>
-<p><code>c/COST_MIN - COST_MAX</code></p>
-</li>
-</ul>
-</div>
+<p>When searching for multiple tags, any tag listed will be matched along with the previous criteria. For example, if the search keyword was <code>d/yesterday d/today t/food t/entertainment</code>, spending entries within <code>yesterday</code> and <code>today</code> that have either tags <code>food</code> or <code>entertainment</code> will be matched.</p>
 </li>
 </ul>
 </div>
@@ -719,30 +649,44 @@ DATE_START must be earlier or the same as DATE_END, and COST_MIN must be smaller
 </tr>
 </table>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Date range can be input in the following ways:<br>
+<code>d/DATE_START d/DATE_END</code><br>
+<code>d/DATE_START to DATE_END</code><br>
+<code>d/DATE_START - DATE_END</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Cost range can be input in the following ways:<br>
+<code>c/COST_MIN c/COST_MAX</code><br>
+<code>c/COST_MIN-COST_MAX</code><br>
+<code>c/COST_MIN - COST_MAX</code>
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p><strong>Examples:</strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>find n/apple c/1.50-2.00 d/01/09/2019 d/30/09/2019</code><br>
-Returns a list of spending with <code>apple</code> keyword within the cost range <code>1.50</code> to <code>2.00</code> and date range within <code>01/09/2019</code> to <code>30/09/2019</code>.</p>
-</li>
-<li>
 <p><code>find n/Java book c/100.20-150.00 d/01/09/2019 - 30/09/2019</code><br>
 Returns a list of spending with matching the keywords <code>Java</code> or <code>book</code> within the cost range <code>100.20</code> to <code>150.00</code> and date range within <code>01/09/2019</code> to <code>30/09/2019</code>.</p>
-</li>
-<li>
-<p><code>find n/apple c/1-2 d/01/09/2019 to 30/09/2019</code><br>
-Returns a list of spending with <code>apple</code> keyword within the cost range <code>1.00</code> to <code>2.00</code> and date range within <code>01/09/2019</code> to <code>30/09/2019</code>.</p>
-</li>
-<li>
-<p><code>find r/breakfast meal</code><br>
-Returns a list of spending with matching the keywords <code>breakfast</code> or <code>meal</code> in remarks.</p>
-</li>
-<li>
-<p><code>find t/food t/leisure</code><br>
-Returns a list of spending with <code>food</code> or <code>leisure</code> tags.</p>
 </li>
 <li>
 <p><code>find d/yesterday d/today t/food t/leisure</code><br>
@@ -866,12 +810,33 @@ Sets the currency displayed for spending entries to <code>USD</code>.</p>
 <li>
 <p>Entering <code>SGD</code> as CURRENCYCODE will display an error since the entered value is already in SGD.</p>
 </li>
-<li>
-<p>Due to network limitations, exchange rates are fixed and locally stored. Note that exchange rates may vary across different websites.</p>
-</li>
 </ul>
 </div>
 </div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Due to network limitations, exchange rates are fixed and locally stored. Exchange rates may also vary across different websites.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+v1.4 does not have networking support for exchange rates. This will be available from v2.0 onwards.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p><strong>Example:</strong></p>
@@ -907,7 +872,7 @@ An example is shown below.</p>
 <div class="content">
 <img src="images/stats.png" alt="stats" width="700">
 </div>
-<div class="title">Figure 3. Output of <code>stats</code></div>
+<div class="title">Figure 4. Output of <code>stats</code></div>
 </div>
 <div class="paragraph">
 <p><strong>Format:</strong> <code>stats d/DATE_START d/DATE_END</code></p>
@@ -1027,7 +992,7 @@ An example is shown below.</p>
 <div class="content">
 <img src="images/graph.png" alt="graph" width="700">
 </div>
-<div class="title">Figure 4. Output of <code>graph</code></div>
+<div class="title">Figure 5. Output of <code>graph</code></div>
 </div>
 <div class="paragraph">
 <p><strong>Format:</strong> <code>graph d/DATE_START d/DATE_END</code></p>
@@ -1244,7 +1209,7 @@ Deletes the second reminder in the list based on the current results shown.</p>
 <div class="content">
 <img src="images/ExampleValidCsv.png" alt="ExampleValidCsv" width="75%">
 </div>
-<div class="title">Figure 5. A Valid <code>.csv</code> File.</div>
+<div class="title">Figure 6. A Valid <code>.csv</code> File.</div>
 </div>
 <div class="paragraph">
 <p><code>.csv</code> file must have a header row with the following values:</p>
@@ -1491,7 +1456,7 @@ This command clears all stored reminders and spending from the application, and 
 <p>Listed below is a summary of all available commands.</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 1. Command Summary table</caption>
+<caption class="title">Table 2. Command Summary table</caption>
 <colgroup>
 <col style="width: 40%;">
 <col style="width: 60%;">
@@ -1613,4 +1578,4 @@ e.g. <code>reminder delete 2</code></p></td>
 <p>The command summary above displays all commands available in MoneyGoWhere.</p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 20:12:10 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 21:01:03 UTC</div></div></div></body></html>

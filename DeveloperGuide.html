@@ -767,18 +767,12 @@ The only difference is which commands get returned.
 <div class="sect2">
 <h3 id="Implementation-Find"><a class="link" href="#Implementation-Find">5.4. Find feature</a></h3>
 <div class="paragraph">
-<p>The find feature allows the user to search for a spending based on specified field. If search results are too broad, fields may be combined to increase specificity.</p>
-</div>
-<div class="paragraph">
-<p>For example, <code>find n/Apple c/2.50-3.00</code> will find an <code>Apple</code> of cost range $<code>2.50</code> to $<code>3.00</code>.</p>
+<p>The find feature allows the user to search for a spending based on specified fields. More fields may added to increase specificity. For example, <code>find n/Apple c/2.50-3.00</code> will find an <code>Apple</code> of cost range $<code>2.50</code> to $<code>3.00</code>.</p>
 </div>
 <div class="sect3">
 <h4 id="implementation-3"><a class="link" href="#implementation-3">5.4.1. Implementation</a></h4>
 <div class="paragraph">
-<p>Find is supported by having a <code>Predicate</code> implemented for every field in Spending. Predicates are added based on valid input entered by the user.</p>
-</div>
-<div class="paragraph">
-<p>The <code>FindCommandParser</code> class stores these predicates, which are combined using Java 8 streams with an <code>AND</code> operation to form a more specific search query.</p>
+<p>Find is supported by having a <code>Predicate</code> implemented for every field in Spending. Predicates are added based on valid input entered by the user. The <code>FindCommandParser</code> class stores these predicates, which are combined using Java 8 streams with an <code>AND</code> operation to form a more specific search query.</p>
 </div>
 <div class="paragraph">
 <p>The sequence diagram below demonstrates how the <code>find</code> command is executed:</p>
@@ -893,23 +887,19 @@ Able to manipulate objects directly<br>
  <br>
 <strong>Cons:</strong><br>
 Poor abstraction<br>
-Change in comparison requires prior knowledge of the structure of the entire code <br>
-Difficult to implement</p></td>
+Requires prior knowledge of the structure of the entire code</p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>Alternative 1 was chosen as it was the easiest to implement and obeys the Open-Closed Principle (OCP) of the SOLID principles. Although Alternative 2 enables checking of the related objects directly, it has poor abstraction and changes in the function require prior knowledge of the structure of the entire code. It is also difficult to implement</p>
+<p>Alternative 1 was chosen as it was the easiest to implement and obeys the Open-Closed Principle (OCP) of the SOLID principles. Although Alternative 2 enables checking of the related objects directly, it has poor abstraction and changes in the function require prior knowledge of the structure of the entire code, making it difficult to implement.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="Implementation-Sort"><a class="link" href="#Implementation-Sort">5.5. Sort feature</a></h3>
 <div class="paragraph">
-<p>The sort feature allows users to sort all currently displayed Spending entries automatically. The default sorting sequence is by Date, followed by Cost. Both are in descending order.</p>
-</div>
-<div class="paragraph">
-<p>The user may choose to modify how the displayed entries are sorted using the <code>sort</code> command.</p>
+<p>The sort feature allows users to sort all currently displayed Spending entries automatically using the <code>sort</code> command. The default sorting sequence is by: Date (Descending), Cost (Descending), Name (Ascending) and Remark (Ascending).</p>
 </div>
 <div class="paragraph">
 <p>For example, <code>sort n/ASC d/DESC</code> applies sorting by name in ascending order, followed by Date in descending order. This applies to any future commands entered.</p>
@@ -934,7 +924,7 @@ Difficult to implement</p></td>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/SortPackageDiagram.png" alt="Sort Package Diagram">
+<img src="images/SortPackageDiagram.png" alt="Sort Package Diagram" width="20%">
 </div>
 <div class="title">Figure 13. High-level view of package interaction</div>
 </div>
@@ -1055,13 +1045,7 @@ The lifeline for <code>SortCommandParser</code> should end at the destroy marker
 </tbody>
 </table>
 <div class="paragraph">
-<p>Alternative 1 was chosen as it was the easiest to implement and it does not violate Single Responsibility Principle (SRP) of the SOLID framework. The only downside of this approach is that changing any field classes might require a change in the Comparator.</p>
-</div>
-<div class="paragraph">
-<p>In contrast, for Alternative 2, manipulating the internal elements of the list directly is dangerous and can cause unintended side effects.</p>
-</div>
-<div class="paragraph">
-<p>There was also a huge difference for the method design for sort, and Alternative 1 was the easier approach to avoid side effects in Alternative 2.</p>
+<p>Alternative 1 was chosen as it was the easiest to implement and it does not violate Single Responsibility Principle (SRP) of the SOLID framework. The only downside of this approach is that changing any field classes might require a change in the Comparator. In contrast, for Alternative 2, manipulating the internal elements of the list directly is dangerous and can cause unintended side effects. There was also a huge difference for the method design for sort, and Alternative 1 was the easier approach to avoid side effects in Alternative 2.</p>
 </div>
 </div>
 </div>
@@ -3436,4 +3420,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 20:12:10 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 21:01:03 UTC</div></div></div></body></html>
