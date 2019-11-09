@@ -1028,7 +1028,7 @@ The lifeline for <code>SortCommandParser</code> should end at the destroy marker
 <td class="tableblock halign-left valign-top"><p class="tableblock">How sort is executed</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Set a new comparator<br>
 <strong>Pros:</strong> Easy to implement<br>
-<strong>Cons:</strong> <code>Comparator</code> is coupled to many field classes</p></td>
+<strong>Cons:</strong> <code>SpendingComparator</code> may be updated when new fields are added</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Sort the underlying list without a comparator<br>
 <strong>Pros:</strong> Able to manipulate objects directly<br>
 <strong>Cons:</strong> Violates fundamental Object Oriented Principles</p></td>
@@ -1045,7 +1045,7 @@ The lifeline for <code>SortCommandParser</code> should end at the destroy marker
 </tbody>
 </table>
 <div class="paragraph">
-<p>Alternative 1 was chosen as it was the easiest to implement and it does not violate Single Responsibility Principle (SRP) of the SOLID framework. The only downside of this approach is that changing any field classes might require a change in the Comparator. In contrast, for Alternative 2, manipulating the internal elements of the list directly is dangerous and can cause unintended side effects. There was also a huge difference for the method design for sort, and Alternative 1 was the easier approach to avoid side effects in Alternative 2.</p>
+<p>Alternative 1 was chosen as it was the easiest to implement and it does not violate Single Responsibility Principle (SRP) of the SOLID framework. The only downside of this approach is that changing any field classes may require modifying <code>SpendingComparator</code>. In contrast, for Alternative 2, manipulating the internal elements of the list directly is dangerous and can cause unintended side effects. There was also a huge difference for the method design for sort, and Alternative 1 was the easier approach to avoid side effects in Alternative 2.</p>
 </div>
 </div>
 </div>
@@ -3420,4 +3420,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 21:01:03 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 21:12:44 UTC</div></div></div></body></html>
