@@ -651,14 +651,14 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Spending Book
 <div class="sect2">
 <h3 id="Implementation-UpDown"><a class="link" href="#Implementation-UpDown">5.3. Up/Down key</a></h3>
 <div class="paragraph">
-<p>Similar to a typical Command Line Interface(CLI), the up and down key allows the users to through their previous commands.</p>
+<p>Similar to a typical Command Line Interface(CLI), the up and down key allows the users to cycle through their previous commands.</p>
 </div>
 <div class="sect3">
 <h4 id="implementation-2"><a class="link" href="#implementation-2">5.3.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The up and down key mechanism is facilitated by the <code>logic</code> component of <code>MoneyGoWhere</code>.
-When ever a user inputted command is entered, it is stored internally as an <code>ArrayList</code> in the <code>commandHistory</code> component of <code>Storage</code>.
-<code>CommandHistory</code> uses an internal index to keep track of its current position in the list.</p>
+When ever a user inputted command is entered, it is stored internally in a list in <code>commandHistory</code> component of <code>Storage</code>.
+<code>CommandHistory</code> has an internal index to keep track of its current position in the list.</p>
 </div>
 <div class="paragraph">
 <p>Additionally, it implements the following operations:</p>
@@ -679,125 +679,16 @@ When ever a user inputs a command, the command is stored at the end of the list 
 the index is set to the size of the list, to indicate that there are no commands beyond after this point.</p>
 </div>
 <div class="paragraph">
-<p>When the up key is pressed, the index will decrement by 1 and show the user input command stored at that index.
-When the index is currently 0, the first user command inputted, pressing the up key will cause the index to move to -1.
-this returns the empty string, since there are no commands before this point. Any further up key press will have the same
+<p>Calling <code>getNextCommand()</code> will cause the index to decrement by 1 and show the user input command stored at that index.
+When the index is currently 0, or the first user command inputted, pressing the up key will cause the index to result in -1.
+This returns the empty string, since there are no commands before this point. Any further up key press will have the same
 outcome, but the index will stay at -1.</p>
 </div>
 <div class="paragraph">
-<p>When the down key is pressed, the index will increment by 1 and the user inputted command at that index will be returned.
+<p>Calling <code>getPrevCommand()</code> will cause the index to increment by 1 and the user inputted command at that index will be returned.
 If the index is currently the last possible value, the last user inputted command, pressing the down key will cause the
-index to increment by 1, which is beyond the index of the list, the empty string will be returned. Any further down key press
+index to increment by 1, which is outside the list, the empty string will be returned. Any further down key press
 will have the same outcome but the index will stay the list size or last possible index + 1.</p>
-</div>
-<div class="paragraph">
-<p>Given below is an example usage scenario and how the up/down mechanism behaves at each step:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>The user launches the application for the first time. The <code>commandHistory</code> will be initialized with an empty storage ,
-and the <code>commandHistoryIndex</code> will have value -1.</p>
-</li>
-</ol>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/UpDownState0.png" alt="UpDownState0">
-</div>
-</div>
-<div class="paragraph">
-<p>Initially the storage is empty and the index is set to -1, as shown in the picture above.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>The user executes <code>delete 5</code> command to delete the 5th Spending in the spending book.
-The <code>delete 5</code> command is added to the back of  <code>commandHistory</code>.</p>
-</li>
-</ol>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/UpDownState1.png" alt="UpDownState1">
-</div>
-</div>
-<div class="paragraph">
-<p>The user input is stored as a string in the commandHistoryList,
-and the index is set to the size of the list.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The index is the same as the size of the list,
-but the index does not point to any particular command, since it is out of bounds
-</td>
-</tr>
-</table>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>The user executes <code>add n/David &#8230;&#8203;</code> to add a new Spending.
-The <code>add n/David &#8230;&#8203;</code> command is added to the back of  <code>commandHistory</code>.</p>
-</li>
-</ol>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/UpDownState2.png" alt="UpDownState2">
-</div>
-</div>
-<div class="paragraph">
-<p>The user input is stored as a string in the commandHistoryList,
-and the index is set to the size of the list, in this case 2.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Any command, whether it is valid or not will be stored in <code>CommandHistory</code>
-</td>
-</tr>
-</table>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>The user presses the up key.</p>
-</li>
-</ol>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/UpDownState3.png" alt="UpDownState3">
-</div>
-</div>
-<div class="paragraph">
-<p>The index is decremented by 1, and the user input command at that point is returned</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>The user presses the down key.</p>
-</li>
-</ol>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/UpDownState4.png" alt="UpDownState4">
-</div>
-</div>
-<div class="paragraph">
-<p>The index is incremented by 1, resulting it to be out of bounds in the list,
-the empty string is returned.</p>
 </div>
 <div class="paragraph">
 <p>The following sequence diagram shows how the up/down key mechanism works:</p>
@@ -806,51 +697,70 @@ the empty string is returned.</p>
 <div class="content">
 <img src="images/UpDownSequenceDiagram.png" alt="UpDownSequenceDiagram">
 </div>
+<div class="title">Figure 9. Sequence diagram for <code>getNextCommand()</code></div>
 </div>
-<div class="paragraph">
-<p><code>getPrevCommand()</code> works the same way as the the sequence diagram above for <code>getNextCommand()</code>.
-The only difference is which commands get returned.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">5.3.2. Design Considerations</a></h4>
-<div class="sect4">
-<h5 id="aspect-how-up-undo-executes"><a class="link" href="#aspect-how-up-undo-executes">Aspect: How up &amp; undo executes</a></h5>
-<table class="tableblock frame-all grid-all" style="width: 90%;">
-<colgroup>
-<col style="width: 20%;">
-<col style="width: 40%;">
-<col style="width: 40%;">
-</colgroup>
-<thead>
+<div class="admonitionblock note">
+<table>
 <tr>
-<th class="tableblock halign-left valign-top">Aspect</th>
-<th class="tableblock halign-left valign-top">Alternative 1 (current choice)</th>
-<th class="tableblock halign-left valign-top">Alternative 2</th>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>getPrevCommand()</code> works the same way as the the sequence diagram above for <code>getNextCommand()</code>.
+The only difference is which commands get returned.
+</td>
 </tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Where the commands stored.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">commands are stored in storage.<br>
-<strong>Pros:</strong><br>
-Intuitive.<br>
-Follows current Architecture.
-<br>
-<strong>Cons:</strong><br>
-more lines of code.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Commands are stored in logic.<br>
-<strong>Pros:</strong><br>
-less oop.
-<br>
-<strong>Cons:</strong><br>
-Does not follow single responsibility principle</p></td>
-</tr>
-</tbody>
 </table>
-<div class="paragraph">
-<p>Option 1 was chosen due to it staying with the current Architecture.</p>
 </div>
+<div class="paragraph">
+<p>The following steps explain the sequence diagram:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The user presses the down key.</p>
+</li>
+<li>
+<p><code>LogicManager</code> calls  <code>StorageManager#getNextCommand()</code>.</p>
+</li>
+<li>
+<p><code>StorageManager#getNextCommand()</code> calls <code>CommandHistory#getNextCommand()</code></p>
+</li>
+<li>
+<p><code>CommandHistory</code> returns the next user inputted command.</p>
+</li>
+<li>
+<p>The returned command is then showed to the user in the <code>CommandBox</code>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>To summarize what happens when the user presses the down key:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/GetNextCommandActivityDiagram.png" alt="GetNextCommandActivityDiagram">
+</div>
+<div class="title">Figure 10. Activity diagram for <code>getNextCommand()</code></div>
+</div>
+<div class="paragraph">
+<p>The following steps explain the activity diagram:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The user presses the down key.</p>
+</li>
+<li>
+<p><code>CommandHistory</code> will increment its index.</p>
+</li>
+<li>
+<p>If the index is not out of bounds, the user inputted command at the index will be returned</p>
+</li>
+<li>
+<p>Else, the index is set to the size of the list, and an empty string is returned.</p>
+</li>
+</ol>
 </div>
 </div>
 </div>
@@ -877,7 +787,7 @@ Does not follow single responsibility principle</p></td>
 <div class="content">
 <img src="images/FindSequenceDiagram.png" alt="Find Sequence Diagram" width="75%">
 </div>
-<div class="title">Figure 9. Sequence diagram for an example <code>find</code> command</div>
+<div class="title">Figure 11. Sequence diagram for an example <code>find</code> command</div>
 </div>
 <div class="paragraph">
 <p>The following steps explain the sequence diagram:</p>
@@ -920,7 +830,7 @@ The lifeline for <code>FindCommandParser</code> should end at the destroy marker
 <div class="content">
 <img src="images/FindActivityDiagram.png" alt="Find Activity Diagram" width="75%">
 </div>
-<div class="title">Figure 10. Activity diagram for an example <code>find</code> command</div>
+<div class="title">Figure 12. Activity diagram for an example <code>find</code> command</div>
 </div>
 <div class="paragraph">
 <p>The following steps explain the activity diagram:</p>
@@ -950,7 +860,7 @@ The lifeline for <code>FindCommandParser</code> should end at the destroy marker
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">5.4.2. Design Considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">5.4.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p>Listed in the table below are the design considerations for the <code>find</code> command.</p>
 </div>
@@ -1026,7 +936,7 @@ Difficult to implement</p></td>
 <div class="content">
 <img src="images/SortPackageDiagram.png" alt="Sort Package Diagram">
 </div>
-<div class="title">Figure 11. High-level view of package interaction</div>
+<div class="title">Figure 13. High-level view of package interaction</div>
 </div>
 <div class="paragraph">
 <p>The sequence diagram below demonstrates how the <code>sort</code> command is executed:</p>
@@ -1035,7 +945,7 @@ Difficult to implement</p></td>
 <div class="content">
 <img src="images/SortSequenceDiagram.png" alt="Sort Sequence Diagram" width="75%">
 </div>
-<div class="title">Figure 12. Sequence diagram for an example <code>sort</code> command</div>
+<div class="title">Figure 14. Sequence diagram for an example <code>sort</code> command</div>
 </div>
 <div class="paragraph">
 <p>The following steps explain the sequence diagram:</p>
@@ -1078,7 +988,7 @@ The lifeline for <code>SortCommandParser</code> should end at the destroy marker
 <div class="content">
 <img src="images/SortActivityDiagram.png" alt="Sort Activity Diagram" width="75%">
 </div>
-<div class="title">Figure 13. Activity diagram for an example <code>sort</code> command</div>
+<div class="title">Figure 15. Activity diagram for an example <code>sort</code> command</div>
 </div>
 <div class="paragraph">
 <p>The following steps explain the activity diagram:</p>
@@ -1108,7 +1018,7 @@ The lifeline for <code>SortCommandParser</code> should end at the destroy marker
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">5.5.2. Design Considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">5.5.2. Design Considerations</a></h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <caption class="title">Table 2. Design considerations for <code>sort</code> command</caption>
 <colgroup>
@@ -1200,7 +1110,7 @@ e.g. <code>reminder delete 1</code> - delete the first reminder in the reminder 
 <div class="content">
 <img src="images/AddReminderActivityDiagram.png" alt="AddReminderActivityDiagram" width="75%">
 </div>
-<div class="title">Figure 14. Activity diagram for adding a reminder</div>
+<div class="title">Figure 16. Activity diagram for adding a reminder</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1221,7 +1131,7 @@ In the above diagram, it can be seen that respective error messages will be show
 <div class="content">
 <img src="images/AddReminderSequenceDiagram.png" alt="AddReminderSequenceDiagram" width="75%">
 </div>
-<div class="title">Figure 15. Sequence diagram while user attempts to add a new reminder</div>
+<div class="title">Figure 17. Sequence diagram while user attempts to add a new reminder</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1242,7 +1152,7 @@ The above sequence diagram demonstrates how a new reminder is constructed from v
 <div class="content">
 <img src="images/DeleteReminderActivityDiagram.png" alt="DeleteReminderActivityDiagram" width="75%">
 </div>
-<div class="title">Figure 16. Activity diagram for removing a reminder</div>
+<div class="title">Figure 18. Activity diagram for removing a reminder</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1263,7 +1173,7 @@ The negative index from user input will leads to invalid command format error.
 <div class="content">
 <img src="images/DeleteReminderSequenceDiagram.png" alt="DeleteReminderSequenceDiagram" width="75%">
 </div>
-<div class="title">Figure 17. Sequence diagram while user attempt to remove a reminder</div>
+<div class="title">Figure 19. Sequence diagram while user attempt to remove a reminder</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1295,7 +1205,7 @@ It allows users to add their spending in bulk.</p>
 <div class="content">
 <img src="images/ImportSequenceDiagram.png" alt="ImportSequenceDiagram" width="100%">
 </div>
-<div class="title">Figure 18. Interactions Inside the Logic Component for the <code>import</code> Command</div>
+<div class="title">Figure 20. Interactions Inside the Logic Component for the <code>import</code> Command</div>
 </div>
 <div class="paragraph">
 <p>The Import Feature has one main component, which is the <code>ImportCommand.java</code> file. This file contains the main logic behind the feature.
@@ -1312,7 +1222,7 @@ Following that, the application will then prints an output, showing the result o
 <div class="content">
 <img src="images/ImportActivityDiagram.png" alt="ImportActivityDiagram" width="25%">
 </div>
-<div class="title">Figure 19. Import Feature Activity Diagram</div>
+<div class="title">Figure 21. Import Feature Activity Diagram</div>
 </div>
 <div class="paragraph">
 <p>When a user calls the <code>import</code> command and inputs a valid <code>.csv</code> file, the application will read and parses all the data inside the file and save them to the <code>SpendingBookList</code> and <code>moneygowhere.json</code>.</p>
@@ -1387,7 +1297,7 @@ It allows users to export their spending allowing the spending data to be portab
 <div class="content">
 <img src="images/ExportSequenceDiagram.png" alt="ExportSequenceDiagram" width="100%">
 </div>
-<div class="title">Figure 20. Interactions Inside the Logic Component for the `export' Command</div>
+<div class="title">Figure 22. Interactions Inside the Logic Component for the `export' Command</div>
 </div>
 <div class="paragraph">
 <p>The export feature has one main component, which is the <code>ExportCommand.java</code> file. This file contains the main logic behind the feature.
@@ -1402,7 +1312,7 @@ After the data has been successfully exported, the application will then prints 
 <div class="content">
 <img src="images/ExportActivityDiagram.png" alt="ExportActivityDiagram" width="25%">
 </div>
-<div class="title">Figure 21. Export Feature Activity Diagram</div>
+<div class="title">Figure 23. Export Feature Activity Diagram</div>
 </div>
 <div class="paragraph">
 <p>When a user calls the <code>export</code> command and inputs a valid folder path, the application will convert all the spending data into a <code>.csv</code> file and export it to <code>moneygowhere.csv</code></p>
@@ -1433,7 +1343,7 @@ After the data has been successfully exported, the application will then prints 
 <div class="content">
 <img src="images/StatsActivityDiagram.png" alt="StatsActivityDiagram" width="600">
 </div>
-<div class="title">Figure 22. Activity Diagram showing behaviour of StatsCommandParser</div>
+<div class="title">Figure 24. Activity Diagram showing behaviour of StatsCommandParser</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -1461,7 +1371,7 @@ The following sequence diagram shows how <code>stats</code> command works during
 <div class="content">
 <img src="images/StatsSequenceDiagram.png" alt="StatsSequenceDiagram">
 </div>
-<div class="title">Figure 23. Sequence Diagram demonstrating the preparation stage of Statistics feature</div>
+<div class="title">Figure 25. Sequence Diagram demonstrating the preparation stage of Statistics feature</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1516,7 +1426,7 @@ Below is the UML sequence diagram and a step-by-step explanation.</p>
 <div class="content">
 <img src="images/StatsDataSequenceDiagram.png" alt="StatsDataSequenceDiagram" width="600">
 </div>
-<div class="title">Figure 24. Sequence Diagram demonstrating the execution stage of Statistics feature</div>
+<div class="title">Figure 26. Sequence Diagram demonstrating the execution stage of Statistics feature</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -1537,7 +1447,7 @@ Below is the UML sequence diagram and a step-by-step explanation.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">5.9.2. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">5.9.2. Design Considerations</a></h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 20%;">
@@ -1589,7 +1499,7 @@ Below is the UML sequence diagram and a step-by-step explanation.</p>
 <div class="content">
 <img src="images/GraphActivityDiagram.png" alt="GraphActivityDiagram" width="600">
 </div>
-<div class="title">Figure 25. Activity Diagram showing behaviour of GraphCommandParser</div>
+<div class="title">Figure 27. Activity Diagram showing behaviour of GraphCommandParser</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -1617,7 +1527,7 @@ The following sequence diagram shows how <code>graph</code> command works during
 <div class="content">
 <img src="images/GraphSequenceDiagram.png" alt="GraphSequenceDiagram">
 </div>
-<div class="title">Figure 26. Sequence Diagram demonstrating the preparation stage of Graph feature</div>
+<div class="title">Figure 28. Sequence Diagram demonstrating the preparation stage of Graph feature</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1672,7 +1582,7 @@ Below is the UML sequence diagram and a step-by-step explanation.</p>
 <div class="content">
 <img src="images/GraphDataSequenceDiagram.png" alt="GraphDataSequenceDiagram" width="600">
 </div>
-<div class="title">Figure 27. Sequence Diagram demonstrating the execution stage of Graph feature</div>
+<div class="title">Figure 29. Sequence Diagram demonstrating the execution stage of Graph feature</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -1693,7 +1603,7 @@ Below is the UML sequence diagram and a step-by-step explanation.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">5.10.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">5.10.2. Design Considerations</a></h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 20%;">
@@ -1740,7 +1650,7 @@ Difficult to modify one feature without needing to modify the other as well.</p>
 </div>
 <div class="paragraph">
 <p>The budget component allows the users to modify the current monthly budget <code>budget AMOUNT</code> command, where AMOUNT is a
-double representing the desired monthly budget.</p>
+double representing the desired monthly budget. The amount cannot exceed 1,000,000,000 Singapore dollars.</p>
 </div>
 <div class="paragraph">
 <p>For example <code>budget 10000</code> sets the current monthly budget to 10000.</p>
@@ -1757,41 +1667,98 @@ the sum from the budget.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>the monthly budget</p>
+<p>The monthly budget amount.</p>
 </li>
 <li>
-<p>the current month</p>
+<p>The month the budget is set.</p>
 </li>
 <li>
-<p>the sum of all spending in the same month.</p>
+<p>The sum of all spending in the month.</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>All of which are saved with the SpendingBook.</p>
+<p>The budget amount and the month the budget is set are saved in the save file, whereas the sum is not.
+Upon initialization, if a save file is found it will automatically set the monthly budget based on the save file&#8217;s options.
+Once the save file is loaded, the program will check today&#8217;s month.
+If the month has changed, the budget&#8217;s set month will change to the current month, and the budget amount will carry over.
+Once the month has been set, it will go through all spending available and sum up all the spending that are in the set month.
+It will then keep track of this sum.</p>
 </div>
 <div class="paragraph">
-<p>Upon initialization, if a save file is found it will automatically set the monthly budget based on the
-save file&#8217;s options. If the current month is different from the current month
-the total spending will reset to 0, but the monthly budget will remain the same.</p>
-</div>
-<div class="paragraph">
-<p>The sum of spending will only be modified when <code>add</code> and <code>delete</code> commands are called.</p>
-</div>
-<div class="paragraph">
-<p>The sequence diagram below demonstrates how the budget command is executed:</p>
+<p>Once done initializing, users can set a new monthly budget by executing the <code>budget</code> command.
+The sequence diagram below demonstrates how the budget command is executed:</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/SetBudgetSequenceDiagram.png" alt="SetBudgetSequenceDiagram">
 </div>
-<div class="title">Figure 28. Sequence Diagram when setting Budget</div>
+<div class="title">Figure 30. Sequence Diagram when setting Budget</div>
 </div>
 <div class="paragraph">
-<p>The figure above shows the sequence of events that occur to set the monthly budget.
-The <code>LogicManager</code> receives the user input and passes it to the <code>SpendingBookParser</code> to parse the user input,
-resulting in a <code>BudgetCommand</code>.
-If the user input is valid, the command is then executed to access the Budget in Model and modify the value.</p>
+<p>The figure above shows the sequence of events that occur to set the monthly budget:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User first enters "budget 100000".</p>
+</li>
+<li>
+<p>The <code>LogicManager</code> receives the user input and passes it to the <code>SpendingBookParser</code>, which passes it to <code>BudgeCommandParser</code>
+to parse the user input.</p>
+</li>
+<li>
+<p>If the user input is valid, a <code>BudgetCommand</code> is then created.</p>
+</li>
+<li>
+<p>The <code>BudgetCommand</code> is then executed.</p>
+</li>
+<li>
+<p>The Budget in Model then set to the new amount.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Budget also keeps track of the sum of all spending in order to show the user how much budget the user has left.
+Initially, it has totaled up all spending in the save file, and then the value is modified with when <code>add</code>, <code>delete</code> and <code>edit</code> commands are called.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram will demonstrate how Budget modifies its value when the <code>add</code> command is used:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/BudgetAddSpendingSequenceDiagram.png" alt="BudgetAddSpendingSequenceDiagram">
+</div>
+<div class="title">Figure 31. Sequence Diagram for <code>Budget</code> when <code>add</code> command is called</div>
+</div>
+<div class="paragraph">
+<p>The diagram above shows what happens when an <code>addCommand</code> is being executed. It focuses only on the components that affect <code>Budget</code>.</p>
+</div>
+<div class="paragraph">
+<p>When adding a new <code>Spending</code> the following steps happen:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The new <code>Spending</code> is passed to Model to be added.</p>
+</li>
+<li>
+<p>The new <code>Spending</code> is then passed to <code>SpendingBook</code> to be added.</p>
+</li>
+<li>
+<p>SpendingBook passes the <code>Spending</code> to <code>Budget</code>.</p>
+</li>
+<li>
+<p><code>Budget</code> checks whether the <code>Spending</code> is in the same month as it is set or not.</p>
+</li>
+<li>
+<p>If they are in the same month, the sum of <code>Budget</code> is updated accordingly.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The same applies to <code>delete</code> commands, instead of adding to the sum, it is subtracting from the sum.
+As well as <code>edit</code> command, which utilizes both <code>add</code> and <code>delete</code>.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1805,24 +1772,25 @@ If the user input is valid, the command is then executed to access the Budget in
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Aspect</th>
-<th class="tableblock halign-left valign-top">Alternative 1 (current choice)</th>
+<th class="tableblock halign-left valign-top">Alternative 1</th>
 <th class="tableblock halign-left valign-top">Alternative 2</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Method to calculate total spending</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Keep track of the sum and modifies the sum when <code>add</code> and <code>delete</code> commands are added<br>
-Pros: does not waste time to calculate sum, easy to implement<br>
-Cons: none</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Method to calculate sum of spending</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keep track of the sum and modifies the sum when <code>add</code>, <code>delete</code> and <code>edit</code> commands are called<br>
+Pros: Does not waste time to calculate sum, easy to implement.<br>
+Cons:</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Calculate from <code>SpendingList</code> each time<br>
-Pros: seems intuitive<br>
-Cons: not efficient, requires Budget to access Model, resulting in circular dependency</p></td>
+Pros: Seems intuitive.<br>
+Cons: Is not efficient, we need to go through the entire each time/</p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>The first option is chosen to prevent circular dependency.</p>
+<p>A combination of the two was chosen. During the initialization phase, we read through
+all spending available, but we handle <code>add</code>, <code>delete</code> and <code>edit</code> commands using option 1.</p>
 </div>
 </div>
 </div>
@@ -1971,7 +1939,7 @@ If the <code>currentStatePointer</code> is at index <code>spendingBookStateList.
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">5.12.2. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">5.12.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
@@ -2091,7 +2059,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 29. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 32. Saving documentation as PDF files in Chrome</div>
 </div>
 </div>
 <div class="sect2">
@@ -2324,7 +2292,7 @@ e.g. <code>seedu.moneygowhere.logic.LogicManagerTest</code></p>
 <div class="content">
 <img src="images/testfx-idea-accessibility-permissions.png" alt="testfx idea accessibility permissions" width="600">
 </div>
-<div class="title">Figure 30. <code>Accessibility</code> permission is granted to <code>IntelliJ IDEA</code></div>
+<div class="title">Figure 33. <code>Accessibility</code> permission is granted to <code>IntelliJ IDEA</code></div>
 </div>
 </div>
 </div>
@@ -3468,4 +3436,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 20:09:12 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 20:11:40 UTC</div></div></div></body></html>
