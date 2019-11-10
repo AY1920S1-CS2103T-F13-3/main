@@ -437,6 +437,18 @@ A spending can have any number of <code>t/TAG</code> keywords (including 0). Eac
 </div>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In v1.4, this command does not support adding or removing a particular tag from a specific spending. Removing and adding of tags will be available from v2.0 onwards.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p><strong>Examples:</strong></p>
 </div>
@@ -1101,7 +1113,7 @@ The graph panel will update with the currency set.
 <div class="sect2">
 <h3 id="adding-a-reminder-code-reminder-add-code"><a class="link" href="#adding-a-reminder-code-reminder-add-code">4.16. Adding a reminder: <code>reminder add</code></a></h3>
 <div class="paragraph">
-<p>Adds a reminder to the reminder list. Key information such as deadline and message are recorded.</p>
+<p>Adds a reminder to the reminder list when the user enters a new reminder. Key information such as deadline and message are recorded.</p>
 </div>
 <div class="paragraph">
 <p><strong>Format:</strong> <code>reminder add d/DATE m/MESSAGE</code></p>
@@ -1113,7 +1125,7 @@ The graph panel will update with the currency set.
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The date of a deadline must be within 1 year from the current date. MoneyGoWhere will check if the given reminder message and deadline are valid. If it encounters invalid information such as an empty message, the application will display an error.
+The date of the deadline in a reminder must be in the future before the end of next year. In other words, MoneyGoWhere will accept dates starting from today until the end of next year as deadlines.
 </td>
 </tr>
 </table>
@@ -1675,4 +1687,4 @@ e.g. <code>reminder delete 2</code></p></td>
 <p>The command summary above displays all commands available in MoneyGoWhere.</p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 10:28:16 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 10:28:53 UTC</div></div></div></body></html>
