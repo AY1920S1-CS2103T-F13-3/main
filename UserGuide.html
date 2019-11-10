@@ -21,12 +21,12 @@
 <li><a href="#editing-a-spending-code-edit-code">4.5. Editing a spending : <code>edit</code></a></li>
 <li><a href="#deleting-a-spending-code-delete-code">4.6. Deleting a spending : <code>delete</code></a></li>
 <li><a href="#listing-all-spending-code-list-code">4.7. Listing all spending : <code>list</code></a></li>
-<li><a href="#sorting-spending-entries-code-sort-code">4.8. Sorting spending entries : <code>sort</code></a></li>
-<li><a href="#finding-a-spending-code-find-code">4.9. Finding a spending : <code>find</code></a></li>
-<li><a href="#setting-monthly-budget-code-budget-code">4.10. Setting monthly budget : <code>budget</code></a></li>
-<li><a href="#showing-current-budget-code-showbudget-code">4.11. Showing current budget : <code>showbudget</code></a></li>
-<li><a href="#setting-the-currency-code-currency-code">4.12. Setting the currency : <code>currency</code></a></li>
-<li><a href="#viewing-exchange-rates-code-exchangerate-code">4.13. Viewing exchange rates : <code>exchangerate</code></a></li>
+<li><a href="#finding-a-spending-code-find-code">4.8. Finding a spending : <code>find</code></a></li>
+<li><a href="#sorting-spending-entries-code-sort-code">4.9. Sorting spending entries : <code>sort</code></a></li>
+<li><a href="#setting-the-currency-code-currency-code">4.10. Setting the currency : <code>currency</code></a></li>
+<li><a href="#viewing-exchange-rates-code-exchangerate-code">4.11. Viewing exchange rates : <code>exchangerate</code></a></li>
+<li><a href="#setting-monthly-budget-code-budget-code">4.12. Setting monthly budget : <code>budget</code></a></li>
+<li><a href="#showing-current-budget-code-showbudget-code">4.13. Showing current budget : <code>showbudget</code></a></li>
 <li><a href="#generating-statistics-code-stats-code">4.14. Generating statistics : <code>stats</code></a></li>
 <li><a href="#generating-a-graph-code-graph-code">4.15. Generating a graph : <code>graph</code></a></li>
 <li><a href="#adding-a-reminder-code-reminder-add-code">4.16. Adding a reminder: <code>reminder add</code></a></li>
@@ -523,7 +523,7 @@ Deletes the second spending in the list based on the current list shown.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-By default, list of all spending is sorted by descending order of date, followed by descending order of cost and lastly, by ascending order of name.<br>
+By default, list of all spending is sorted by descending order of date, descending order of cost, ascending order of name and finally ascending order of remark.<br>
 </td>
 </tr>
 </table>
@@ -548,69 +548,7 @@ This command is implicitly invoked upon application start up, and can be used to
 </div>
 </div>
 <div class="sect2">
-<h3 id="sorting-spending-entries-code-sort-code"><a class="link" href="#sorting-spending-entries-code-sort-code">4.8. Sorting spending entries : <code>sort</code></a></h3>
-<div class="paragraph">
-<p>Sorts all spending based on a given order.<br></p>
-</div>
-<div class="paragraph">
-<p><strong>Format:</strong> <code>sort [PREFIX/SORT_ORDER]&#8230;&#8203;</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>At least one of the optional fields <strong>must be provided</strong>.</p>
-</li>
-<li>
-<p>Valid prefixes are: Cost (<code>c</code>), Date (<code>d</code>), Name (<code>n</code>), Remarks (<code>r</code>).</p>
-</li>
-<li>
-<p>Valid sort orders are: <code>ASC</code>, <code>DESC</code>.</p>
-</li>
-<li>
-<p>If the given sort order is <code>c/ASC n/DESC</code>, Cost will be sorted in ascending order, followed by name in descending order.</p>
-</li>
-<li>
-<p>Sorting names or remarks in Ascending order will sort uppercase letters first, followed by lowercase letters.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p><strong>Examples:</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>sort d/ASC c/DESC</code><br>
-Sorts current spending displayed by Date in ascending order. If they are the same, sort by Cost in descending order.</p>
-</li>
-<li>
-<p><code>sort n/DESC</code><br>
-Sorts current spending displayed by Name in descending order.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><strong>Expected Output:</strong></p>
-</div>
-<div class="paragraph">
-<p>An example is shown below.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/SortPreviewUG.png" alt="SortPreviewUG" width="350">
-</div>
-<div class="title">Figure 3. Output of <code>sort n/ASC d/DESC</code></div>
-</div>
-<div class="paragraph">
-<p>Spending entries are sorted based on the example above.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="finding-a-spending-code-find-code"><a class="link" href="#finding-a-spending-code-find-code">4.9. Finding a spending : <code>find</code></a></h3>
+<h3 id="finding-a-spending-code-find-code"><a class="link" href="#finding-a-spending-code-find-code">4.8. Finding a spending : <code>find</code></a></h3>
 <div class="paragraph">
 <p>Searches for spending based on given keywords, cost range, date range, remarks or tags. You may refine the search results by entering more keywords.<br></p>
 </div>
@@ -702,34 +640,48 @@ Returns a list of spending within <code>yesterday</code> and <code>today</code> 
 </div>
 </div>
 <div class="sect2">
-<h3 id="setting-monthly-budget-code-budget-code"><a class="link" href="#setting-monthly-budget-code-budget-code">4.10. Setting monthly budget : <code>budget</code></a></h3>
+<h3 id="sorting-spending-entries-code-sort-code"><a class="link" href="#sorting-spending-entries-code-sort-code">4.9. Sorting spending entries : <code>sort</code></a></h3>
 <div class="paragraph">
-<p>Sets a budget for the current month in the currency set .<br>
-The monthly budget cannot exceed 1,000,000,000 Singapore Dollars.<br></p>
+<p>Sorts all spending based on a given order to view information more clearly.<br></p>
 </div>
 <div class="paragraph">
-<p><strong>Format:</strong> <code>budget MONTHLY_BUDGET</code><br></p>
+<p><strong>Format:</strong> <code>sort [PREFIX/SORT_ORDER]&#8230;&#8203;</code></p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Existing budget of current month is overwritten if budget has already been set.
-</td>
-</tr>
-</table>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>At least one of the optional fields <strong>must be provided</strong>.</p>
+</li>
+<li>
+<p>Valid prefixes are: Cost (<code>c</code>), Date (<code>d</code>), Name (<code>n</code>), Remarks (<code>r</code>).</p>
+</li>
+<li>
+<p>Valid sort orders are: <code>ASC</code>, <code>DESC</code>.</p>
+</li>
+<li>
+<p>If the given sort order is <code>c/ASC n/DESC</code>, Cost will be sorted in ascending order, followed by name in descending order.</p>
+</li>
+<li>
+<p>Sorting names or remarks in Ascending order will sort uppercase letters first, followed by lowercase letters.</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="paragraph">
-<p><strong>Example:</strong></p>
+<p><strong>Examples:</strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>budget 500000</code><br>
-Sets a budget of $<code>500000</code> for this month</p>
+<p><code>sort d/ASC c/DESC</code><br>
+Sorts current spending displayed by Date in ascending order. If they are the same, sort by Cost in descending order.</p>
+</li>
+<li>
+<p><code>sort n/DESC</code><br>
+Sorts current spending displayed by Name in descending order.</p>
 </li>
 </ul>
 </div>
@@ -737,24 +689,20 @@ Sets a budget of $<code>500000</code> for this month</p>
 <p><strong>Expected Output:</strong></p>
 </div>
 <div class="paragraph">
-<p>The budget for the current month is changed to the set amount.</p>
+<p>An example is shown below.</p>
+</div>
+<div id="SortOutput" class="imageblock" style="text-align: center">
+<div class="content">
+<img src="images/SortPreviewUG.png" alt="SortPreviewUG" width="350">
+</div>
+<div class="title">Figure 3. Output of <code>sort n/ASC d/DESC</code></div>
+</div>
+<div class="paragraph">
+<p>Spending entries are sorted based on the example <a href="#SortOutput">Figure 3, &#8220;Output of <code>sort n/ASC d/DESC</code>&#8221;</a>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="showing-current-budget-code-showbudget-code"><a class="link" href="#showing-current-budget-code-showbudget-code">4.11. Showing current budget : <code>showbudget</code></a></h3>
-<div class="paragraph">
-<p>Returns the current monthly budget, total spending and remaining budget in Singapore Dollars.<br>
-<strong>Format:</strong> <code>showbudget</code></p>
-</div>
-<div class="paragraph">
-<p><strong>Expected Output:</strong></p>
-</div>
-<div class="paragraph">
-<p>The budget for the current month along with the total spending in the month as well as remaining budget is shown.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="setting-the-currency-code-currency-code"><a class="link" href="#setting-the-currency-code-currency-code">4.12. Setting the currency : <code>currency</code></a></h3>
+<h3 id="setting-the-currency-code-currency-code"><a class="link" href="#setting-the-currency-code-currency-code">4.10. Setting the currency : <code>currency</code></a></h3>
 <div class="paragraph">
 <p>Sets the currency used to display spending entries.<br>
 <strong>Format:</strong> <code>currency [CURRENCYCODE]</code></p>
@@ -792,9 +740,9 @@ Sets the currency displayed for spending entries to <code>USD</code>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="viewing-exchange-rates-code-exchangerate-code"><a class="link" href="#viewing-exchange-rates-code-exchangerate-code">4.13. Viewing exchange rates : <code>exchangerate</code></a></h3>
+<h3 id="viewing-exchange-rates-code-exchangerate-code"><a class="link" href="#viewing-exchange-rates-code-exchangerate-code">4.11. Viewing exchange rates : <code>exchangerate</code></a></h3>
 <div class="paragraph">
-<p>Displays current stored exchange rates.<br>
+<p>Displays currently stored exchange rates.<br>
 <strong>Format:</strong> <code>exchangerate [AMOUNT] [CURRENCYCODE]</code></p>
 </div>
 <div class="sidebarblock">
@@ -858,6 +806,58 @@ Converts 5 USD to SGD based on current exchange rates.</p>
 </div>
 <div class="paragraph">
 <p>All available exchange rates are shown, or a conversion of an input currency is provided if it was specified.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="setting-monthly-budget-code-budget-code"><a class="link" href="#setting-monthly-budget-code-budget-code">4.12. Setting monthly budget : <code>budget</code></a></h3>
+<div class="paragraph">
+<p>Sets a budget for the current month in the currency set .<br>
+The monthly budget cannot exceed 1,000,000,000 Singapore Dollars.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Format:</strong> <code>budget MONTHLY_BUDGET</code><br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Existing budget of current month is overwritten if budget has already been set.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Example:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>budget 500000</code><br>
+Sets a budget of $<code>500000</code> for this month</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Expected Output:</strong></p>
+</div>
+<div class="paragraph">
+<p>The budget for the current month is changed to the set amount.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="showing-current-budget-code-showbudget-code"><a class="link" href="#showing-current-budget-code-showbudget-code">4.13. Showing current budget : <code>showbudget</code></a></h3>
+<div class="paragraph">
+<p>Returns the current monthly budget, total spending and remaining budget in Singapore Dollars.<br>
+<strong>Format:</strong> <code>showbudget</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Expected Output:</strong></p>
+</div>
+<div class="paragraph">
+<p>The budget for the current month along with the total spending in the month as well as remaining budget is shown.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1594,11 +1594,6 @@ e.g. <code>delete 123</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>list</code><br></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Sort</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sort [PREFIX/SORT_ORDER]&#8230;&#8203;</code><br>
-e.g. <code>sort d/DESC c/ASC</code><br></p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Find</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>find [n/NAME] [c/COST_RANGE] [d/DATE_RANGE] [r/REMARK] [t/TAG]</code><br>
 e.g. <code>find n/apple orange c/1.00-200.00 d/19/09/2019 - 20/09/2019 r/healthy food t/fruit food</code></p></td>
@@ -1680,4 +1675,4 @@ e.g. <code>reminder delete 2</code></p></td>
 <p>The command summary above displays all commands available in MoneyGoWhere.</p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 07:38:18 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 07:47:01 UTC</div></div></div></body></html>

@@ -6,30 +6,32 @@
 <div class="paragraph">
 <p>MoneyGoWhere is a personal finance application targeted at students at the National University of Singapore (NUS), designed by my team and I for our Software Engineering project. It was morphed from a basic command line Address Book. Some notable features include: setting budget goals, viewing statistics, customised searching and sorting, setting reminders for bills, viewing exchange rates, changing the application currency and importing and exporting data from and to a csv file.</p>
 </div>
+<div class="sect2">
+<h3 id="my-role"><a class="link" href="#my-role">My Role</a></h3>
 <div class="paragraph">
-<p>My role was to complete find and sort features, and minor features such as natural language date parsing, exchange rate and currency. The sections that follow in this document will elaborate these features in detail. I have also made notable contributions to the User Guide and Developer Guide.</p>
+<p>My role was to complete find and sort features, and minor features such as natural language date parsing, exchange rate and changing the application currency. The sections that follow in this document will elaborate these features in detail. I have also made notable contributions to the User Guide and Developer Guide.</p>
 </div>
 <div class="paragraph">
-<p>Listed below are some notations that are used throughout the document.</p>
+<p>Listed in the table below are some notations that are used throughout the document.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table id="Legend" class="tableblock frame-all grid-all spread">
 <caption class="title">Table 1. Legend table</caption>
 <colgroup>
 <col style="width: 15%;">
 <col style="width: 85%;">
 </colgroup>
-<tbody>
+<thead>
 <tr>
-<td class="tableblock halign-center valign-top"><div><div class="paragraph">
-<p><strong>Icon</strong></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Description</strong></p></td>
+<th class="tableblock halign-center valign-top"><strong>Icon</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Description</strong></th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-center valign-top"><div><div class="paragraph">
 <p><code>command</code></p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Command that can be executed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Command that can be executed, or a component, class or object in the architecture of the application</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top"><div><div class="paragraph">
@@ -39,7 +41,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top"><div><div class="paragraph">
-<p><span class="icon icon-note"><i class="fa fa-info-circle fa-2x"></i></span></p>
+<p><span class="icon icon-note blue"><i class="fa fa-info-circle fa-2x"></i></span></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Important information that should be noted</p></td>
 </tr>
@@ -54,7 +56,8 @@
 </tbody>
 </table>
 <div class="paragraph">
-<p>These icons and their following descriptions enable greater clarity in understanding the document.</p>
+<p>As shown in <a href="#Legend">Table 1, &#8220;Legend table&#8221;</a>, these icons associated to their following descriptions, such as commands, tips, important information and useful information, enable greater clarity in understanding the document. Note that useful information will have text enclosed in its box.</p>
+</div>
 </div>
 </div>
 </div>
@@ -99,39 +102,7 @@
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement #1</strong>: Implemented <strong>natural language date parsing</strong> feature</p>
-<div class="ulist">
-<ul>
-<li>
-<p>What it does: It allows users to enter date formats that are closer to how they are naturally expressed in daily language.</p>
-</li>
-<li>
-<p>Justification: It gives users the freedom of choice to enter a variety of dates they want to enter without being restricted to a standard date format.</p>
-</li>
-<li>
-<p>Highlights: This enhancement is fundamental to features such as <code>stats</code>, <code>budget</code> and <code>reminder</code>. Implementing this was an extremely arduous task and middleware had to be written to ensure compatibility with the library.</p>
-</li>
-<li>
-<p>Credits: <strong>natty</strong> library was used to aid in natural language parsing. However, many modifications were applied in order to allow support for <em>DD/MM/YYYY</em> dates, as it was not implemented by the author.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Minor enhancement #2</strong>: Implemented the <strong>exchange rate</strong> and <strong>currency</strong> feature.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>What it does: It allows users to view foreign currency exchange rates, and change their viewing currency.</p>
-</li>
-<li>
-<p>Justification: Users can use this feature when they do online shopping and convert currencies as they wish, or use the application overseas.</p>
-</li>
-<li>
-<p>Highlights: This enhancement required interaction with the storage and careful handling of existing software architecture.</p>
-</li>
-</ul>
-</div>
+<p><strong>Other enhancements</strong>: Implemented <strong>natural language date parsing</strong>, <strong>exchange rate</strong> and <strong>currency</strong> features.</p>
 </li>
 <li>
 <p><strong>Code contributed</strong>: [<a href="https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#search=nanosync">Collated code</a>]</p>
@@ -212,7 +183,7 @@
 <h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Listed below are sections I contributed to the User Guide, which includes Find and Sort section. It showcases my ability to write documentation targeting end-users. For brevity, <strong>flexible date formats</strong> has been omitted and can be found <a href="https://ay1920s1-cs2103t-f13-3.github.io/main/UserGuide.html#flexible-date-formats">here</a>.</p>
+<p>Listed below are sections I contributed to the User Guide, which includes the find and sort features and the flexible date formats section. It showcases my ability to write documentation targeting end-users. <em>For brevity, detailed information for <strong>flexible date formats</strong> can be found in the <a href="https://ay1920s1-cs2103t-f13-3.github.io/main/UserGuide.html#flexible-date-formats">User Guide</a>.</em></p>
 </div>
 <div class="sect2">
 <h3 id="finding-a-spending-code-find-code"><a class="link" href="#finding-a-spending-code-find-code">Finding a spending : <code>find</code></a></h3>
@@ -309,7 +280,7 @@ Returns a list of spending within <code>yesterday</code> and <code>today</code> 
 <div class="sect2">
 <h3 id="sorting-spending-entries-code-sort-code"><a class="link" href="#sorting-spending-entries-code-sort-code">Sorting spending entries : <code>sort</code></a></h3>
 <div class="paragraph">
-<p>Sorts all spending based on a given order.<br></p>
+<p>Sorts all spending based on a given order to view information more clearly.<br></p>
 </div>
 <div class="paragraph">
 <p><strong>Format:</strong> <code>sort [PREFIX/SORT_ORDER]&#8230;&#8203;</code></p>
@@ -358,14 +329,14 @@ Sorts current spending displayed by Name in descending order.</p>
 <div class="paragraph">
 <p>An example is shown below.</p>
 </div>
-<div class="imageblock">
+<div id="SortOutput" class="imageblock" style="text-align: center">
 <div class="content">
 <img src="../images/SortPreviewUG.png" alt="SortPreviewUG" width="350">
 </div>
 <div class="title">Figure 1. Output of <code>sort n/ASC d/DESC</code></div>
 </div>
 <div class="paragraph">
-<p>Spending entries are sorted based on the example above.</p>
+<p>Spending entries are sorted based on the example <a href="#SortOutput">Figure 1, &#8220;Output of <code>sort n/ASC d/DESC</code>&#8221;</a>.</p>
 </div>
 </div>
 </div>
@@ -389,14 +360,14 @@ Sorts current spending displayed by Name in descending order.</p>
 <div class="paragraph">
 <p>The sequence diagram below demonstrates how the <code>find</code> command is executed:</p>
 </div>
-<div class="imageblock">
+<div id="FindSequenceDiagram" class="imageblock" style="text-align: center">
 <div class="content">
-<img src="../images/FindSequenceDiagram.png" alt="Find Sequence Diagram" width="75%">
+<img src="../images/FindSequenceDiagram.png" alt="FindSequenceDiagram" width="75%">
 </div>
 <div class="title">Figure 2. Sequence diagram for an example <code>find</code> command</div>
 </div>
 <div class="paragraph">
-<p>The following steps explain the sequence diagram:</p>
+<p>The following steps explain <a href="#FindSequenceDiagram">Figure 2, &#8220;Sequence diagram for an example <code>find</code> command&#8221;</a>:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -432,14 +403,14 @@ The lifeline for <code>FindCommandParser</code> should end at the destroy marker
 <div class="paragraph">
 <p>To summarise what happens when the user uses the <code>find</code> command, the following activity diagram is shown below:</p>
 </div>
-<div class="imageblock">
+<div id="FindActivityDiagram" class="imageblock" style="text-align: center">
 <div class="content">
-<img src="../images/FindActivityDiagram.png" alt="Find Activity Diagram" width="75%">
+<img src="../images/FindActivityDiagram.png" alt="FindActivityDiagram" width="75%">
 </div>
 <div class="title">Figure 3. Activity diagram for an example <code>find</code> command</div>
 </div>
 <div class="paragraph">
-<p>The following steps explain the activity diagram:</p>
+<p>The following steps explain <a href="#FindActivityDiagram">Figure 3, &#8220;Activity diagram for an example <code>find</code> command&#8221;</a>:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -534,18 +505,21 @@ Requires prior knowledge of the structure of the entire code</p></td>
 <div class="paragraph">
 <p>At a high level view, <code>SpendingComparator</code> and <code>SortField</code> interacts in the manner shown below.</p>
 </div>
-<div class="imageblock">
+<div id="SortPackageDiagram" class="imageblock" style="text-align: center">
 <div class="content">
-<img src="../images/SortPackageDiagram.png" alt="Sort Package Diagram" width="20%">
+<img src="../images/SortPackageDiagram.png" alt="SortPackageDiagram" width="20%">
 </div>
 <div class="title">Figure 4. High-level view of package interaction</div>
 </div>
 <div class="paragraph">
+<p>As shown in <a href="#SortPackageDiagram">Figure 4, &#8220;High-level view of package interaction&#8221;</a>, <code>SortCommand</code> has an association to <code>SortField</code> and a dependency to <code>SpendingComparator</code>.</p>
+</div>
+<div class="paragraph">
 <p>The sequence diagram below demonstrates how the <code>sort</code> command is executed:</p>
 </div>
-<div class="imageblock">
+<div id="SortSequenceDiagram" class="imageblock" style="text-align: center">
 <div class="content">
-<img src="../images/SortSequenceDiagram.png" alt="Sort Sequence Diagram" width="75%">
+<img src="../images/SortSequenceDiagram.png" alt="SortSequenceDiagram" width="75%">
 </div>
 <div class="title">Figure 5. Sequence diagram for an example <code>sort</code> command</div>
 </div>
@@ -586,14 +560,14 @@ The lifeline for <code>SortCommandParser</code> should end at the destroy marker
 <div class="paragraph">
 <p>The following activity diagram summarises what happens when the user uses the <code>sort</code> command:</p>
 </div>
-<div class="imageblock">
+<div id="SortActivityDiagram" class="imageblock" style="text-align: center">
 <div class="content">
-<img src="../images/SortActivityDiagram.png" alt="Sort Activity Diagram" width="75%">
+<img src="../images/SortActivityDiagram.png" alt="SortActivityDiagram" width="75%">
 </div>
 <div class="title">Figure 6. Activity diagram for an example <code>sort</code> command</div>
 </div>
 <div class="paragraph">
-<p>The following steps explain the activity diagram:</p>
+<p>The following steps explain <a href="#SortActivityDiagram">Figure 6, &#8220;Activity diagram for an example <code>sort</code> command&#8221;</a>:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -621,7 +595,7 @@ The lifeline for <code>SortCommandParser</code> should end at the destroy marker
 </div>
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
-<table class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="SortDesignConsiderations" class="tableblock frame-all grid-all" style="width: 90%;">
 <caption class="title">Table 3. Design considerations for <code>sort</code> command</caption>
 <colgroup>
 <col style="width: 20%;">
@@ -657,9 +631,12 @@ The lifeline for <code>SortCommandParser</code> should end at the destroy marker
 </tbody>
 </table>
 <div class="paragraph">
-<p>Alternative 1 was chosen as it was the easiest to implement and it does not violate Single Responsibility Principle (SRP) of the SOLID framework. The only downside of this approach is that changing any field classes may require modifying <code>SpendingComparator</code>. In contrast, for Alternative 2, manipulating the internal elements of the list directly is dangerous and can cause unintended side effects. There was also a huge difference for the method design for sort, and Alternative 1 was the easier approach to avoid side effects in Alternative 2.</p>
+<p>Based on <a href="#SortDesignConsiderations">Table 3, &#8220;Design considerations for <code>sort</code> command&#8221;</a>, Alternative 1 was chosen as it was the easiest to implement and it does not violate Single Responsibility Principle (SRP) of the SOLID framework. The only downside of this approach is that changing any field classes may require modifying <code>SpendingComparator</code>.</p>
+</div>
+<div class="paragraph">
+<p>In contrast, for Alternative 2, manipulating the internal elements of the list directly is dangerous and can cause unintended side effects. There was also a huge difference for the method design for sort, and Alternative 1 was the easier approach to avoid side effects in Alternative 2.</p>
 </div>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 07:38:18 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 07:47:01 UTC</div></div></div></body></html>
