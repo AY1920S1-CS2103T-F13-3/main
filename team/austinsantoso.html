@@ -52,10 +52,10 @@ It is written in Java, and has about 15 kLoC.</p>
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: Implemented <code>showbudget</code> command to show the user their budget as well as sum of spending in the month set.</p>
+<p><strong>Minor enhancement</strong>: Implemented <code>showbudget</code> command to show users their budget as well as sum of spending in the month set.</p>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: Implemented the ability for the user to navigate to previous commands using up/down keys.</p>
+<p><strong>Minor enhancement</strong>: Implemented the ability for users to navigate to previous commands using up/down keys.</p>
 </li>
 <li>
 <p><strong>Code contributed</strong>: [<a href="https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#search=austinsantoso&amp;sort=groupTitle&amp;sortWithin=title&amp;since=2019-09-06&amp;timeframe=commit&amp;mergegroup=false&amp;groupSelect=groupByRepos&amp;breakdown=false">Collated code</a>]</p>
@@ -69,7 +69,7 @@ It is written in Java, and has about 15 kLoC.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>posted user stories as issues</p>
+<p>Posted user stories as issues</p>
 </li>
 </ul>
 </div>
@@ -305,7 +305,7 @@ to parse the user input.</p>
 </div>
 <div class="paragraph">
 <p>Budget also keeps track of the sum of all spending in order to show the user how much budget the user has left.
-Initially, it has totaled up all spending in the save file, and then the value is modified with when <code>add</code>, <code>delete</code> and <code>edit</code> commands are called.</p>
+Initially, it has totaled up all spending in the save file, and then the value is modified when the <code>add</code>, <code>delete</code> and <code>edit</code> commands are called.</p>
 </div>
 <div class="paragraph">
 <p>The following sequence diagram will demonstrate how Budget modifies its value when the <code>add</code> command is used:</p>
@@ -365,11 +365,11 @@ As well as <code>edit</code> command, which utilizes both <code>add</code> and <
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Method to calculate sum of spending</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Keep track of the sum and modifies the sum when <code>add</code>, <code>delete</code> and <code>edit</code> commands are called<br>
-Pros: Does not waste time to calculate sum, easy to implement.<br>
-Cons:</p></td>
+Pros: Does not waste time to calculate sum. easy to implement.<br>
+Cons: We need to keep track of the sum when saving.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Calculate from <code>SpendingList</code> each time<br>
 Pros: Seems intuitive.<br>
-Cons: Is not efficient, we need to go through the entire each time/</p></td>
+Cons: It is not efficient, we need to go through the entire each time to calculate sum.</p></td>
 </tr>
 </tbody>
 </table>
@@ -388,7 +388,7 @@ all spending available, but we handle <code>add</code>, <code>delete</code> and 
 <h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
 <div class="paragraph">
 <p>The up and down key mechanism is facilitated by the <code>logic</code> component of <code>MoneyGoWhere</code>.
-When ever a user inputted command is entered, it is stored internally in a list in <code>commandHistory</code> component of <code>Storage</code>.
+Whenever a user inputted command is entered, it is stored internally in a list in <code>commandHistory</code> component of <code>Storage</code>.
 <code>CommandHistory</code> has an internal index to keep track of its current position in the list.</p>
 </div>
 <div class="paragraph">
@@ -397,26 +397,26 @@ When ever a user inputted command is entered, it is stored internally in a list 
 <div class="ulist">
 <ul>
 <li>
-<p><code>Logic#getNextCommand()</code>&#8201;&#8212;&#8201;Retrieves the more recent user input command with respect to the current index.</p>
+<p><code>Logic#getNextCommand()</code>&#8201;&#8212;&#8201;Retrieves the next user input command with respect to the current index.</p>
 </li>
 <li>
-<p><code>Logic#getPrevCommand()</code>&#8201;&#8212;&#8201;Retrieves the earliest user input command with respect to the current index.</p>
+<p><code>Logic#getPrevCommand()</code>&#8201;&#8212;&#8201;Retrieves the previous user input command with respect to the current index.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
 <p>The index is initially set to -1, to indicate that that no user input has been inputted.
-When ever a user inputs a command, the command is stored at the end of the list and
+Whenever a user inputs a command, the command is stored at the end of the list and
 the index is set to the size of the list, to indicate that there are no commands beyond after this point.</p>
 </div>
 <div class="paragraph">
-<p>Calling <code>getNextCommand()</code> will cause the index to decrement by 1 and show the user input command stored at that index.
+<p>Calling <code>getPrevCommand()</code> will cause the index to decrement by 1 and show the user input command stored at that index.
 When the index is currently 0, or the first user command inputted, pressing the up key will cause the index to result in -1.
 This returns the empty string, since there are no commands before this point. Any further up key press will have the same
 outcome, but the index will stay at -1.</p>
 </div>
 <div class="paragraph">
-<p>Calling <code>getPrevCommand()</code> will cause the index to increment by 1 and the user inputted command at that index will be returned.
+<p>Calling <code>getNextCommand()</code> will cause the index to increment by 1 and the user inputted command at that index will be returned.
 If the index is currently the last possible value, the last user inputted command, pressing the down key will cause the
 index to increment by 1, which is outside the list, the empty string will be returned. Any further down key press
 will have the same outcome but the index will stay the list size or last possible index + 1.</p>
@@ -466,7 +466,7 @@ The only difference is which commands get returned.
 </ol>
 </div>
 <div class="paragraph">
-<p>To summarize what happens when the user presses the down key:</p>
+<p>To summarize what determines the output when the user presses the down key:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -493,7 +493,11 @@ The only difference is which commands get returned.
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p>The sequence diagram and activity diagram for <code>getPrevCommand()</code> are similar to the sequence and activity diagram of <code>getNextCommand()</code> as shown above.
+The only difference is whether it returns the next command or the previous command.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 13:37:19 UTC</div></div></div></body></html>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 15:48:18 UTC</div></div></div></body></html>
