@@ -88,6 +88,8 @@
 <li><a href="#viewing-exchange-rate-or-conversion-rate">F.7. Viewing exchange rate or conversion rate</a></li>
 <li><a href="#importing-spending-data">F.8. Importing Spending Data</a></li>
 <li><a href="#exporting-spending-data">F.9. Exporting Spending Data</a></li>
+<li><a href="#showing-statistics">F.10. Showing Statistics</a></li>
+<li><a href="#showing-graph">F.11. Showing Graph</a></li>
 </ul>
 </li>
 </ul>
@@ -3656,5 +3658,59 @@ Expected: All spending data will be exported into <code>C:\Users\user\Documents\
 </ol>
 </div>
 </div>
+<div class="sect2">
+<h3 id="showing-statistics"><a class="link" href="#showing-statistics">F.10. Showing Statistics</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Showing statistics based on spending listed in MoneyGoWhere</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: There should be existing spending with tags in MoneyGoWhere.</p>
+</li>
+<li>
+<p>Test case: <code>stats</code><br>
+   Expected: Tab switches to Statistics tab if not already showing. MoneyGoWhere will display statistics for all spending.
+If there are no spending to be displayed, MoneyGoWhere will display a message showing that there is no data to show.</p>
+</li>
+<li>
+<p>Test case: <code>stats d/last week d/today</code><br>
+   Expected: Tab switches to Statistics tab if not already showing. MoneyGoWhere will display statistics for spending that fall between last week and today.
+If there are no spending in the date range to be displayed, MoneyGoWhere will display a message showing that there is no data to show.</p>
+</li>
+</ol>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 11:19:01 UTC</div></div></div></body></html>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="showing-graph"><a class="link" href="#showing-graph">F.11. Showing Graph</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Showing graph based on spending listed in MoneyGoWhere</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: There should be existing spending with varying dates in MoneyGoWhere.</p>
+</li>
+<li>
+<p>Test case: <code>graph</code><br>
+   Expected: Tab switches to Graph tab if not already showing. MoneyGoWhere will display graph for all spending.
+If there are no spending to be displayed, an empty graph is shown.</p>
+</li>
+<li>
+<p>Test case: <code>graph d/last week d/today</code><br>
+   Expected: Tab switches to Graph tab if not already showing. MoneyGoWhere will display graph for spending that fall between last week and today.
+If there are no spending in the date range to be displayed, an empty graph is shown.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 13:37:19 UTC</div></div></div></body></html>
