@@ -26,7 +26,6 @@
 <li><a href="#Design-Logic">4.3. Logic component</a></li>
 <li><a href="#Design-Model">4.4. Model component</a></li>
 <li><a href="#Design-Storage">4.5. Storage component</a></li>
-<li><a href="#Design-Commons">4.6. Common classes</a></li>
 </ul>
 </li>
 <li><a href="#implementation">5. Implementation</a>
@@ -83,6 +82,8 @@
 <li><a href="#launch-and-shutdown">F.1. Launch and Shutdown</a></li>
 <li><a href="#deleting-a-spending">F.2. Deleting a Spending</a></li>
 <li><a href="#saving-data">F.3. Saving data</a></li>
+<li><a href="#importing-spending-data">F.4. Importing Spending Data</a></li>
+<li><a href="#exporting-spending-data">F.5. Exporting Spending Data</a></li>
 </ul>
 </li>
 </ul>
@@ -439,7 +440,7 @@ The following class plays an important role at the architecture level:</p>
 <p><strong>API</strong> : <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/tree/master/src/main/java/seedu/moneygowhere/ui/Ui.java"><code>Ui.java</code></a></p>
 </div>
 <div class="paragraph">
-<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>SpendingListPanel</code>, <code>StatusBarFooter</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
+<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>SpendingListPanel</code>, <code>StatusBarFooter</code>, <code>ReminderListPanel</code>, etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
 </div>
 <div class="paragraph">
 <p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/tree/master/src/main/java/seedu/moneygowhere/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/tree/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
@@ -451,6 +452,9 @@ The following class plays an important role at the architecture level:</p>
 <ul>
 <li>
 <p>Executes user commands using the <code>Logic</code> component.</p>
+</li>
+<li>
+<p>Responds to the user&#8217;s keyboard and mouse input.</p>
 </li>
 <li>
 <p>Listens for changes to <code>Model</code> data so that the UI can be updated with the modified data.</p>
@@ -537,10 +541,16 @@ The lifeline for <code>DeleteCommandParser</code> should end at the destroy mark
 <p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences.</p>
 </li>
 <li>
-<p>stores the Spending Book data.</p>
+<p>stores the Spending data.</p>
 </li>
 <li>
-<p>exposes an unmodifiable <code>ObservableList&lt;Spending&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
+<p>stores the Reminder data.</p>
+</li>
+<li>
+<p>stores the Budget data.</p>
+</li>
+<li>
+<p>exposes an unmodifiable <code>ObservableList&lt;Spending&gt;</code> and <code>ObservableList&lt;Reminder&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
 </li>
 <li>
 <p>does not depend on any of the other three components.</p>
@@ -585,13 +595,11 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Spending Book
 <p>can save <code>UserPref</code> objects in json format and read it back.</p>
 </li>
 <li>
-<p>can save the Spending Book data in json format and read it back.</p>
+<p>can save the Spending Book data in json format and read it back.
+=== Common classes</p>
 </li>
 </ul>
 </div>
-</div>
-<div class="sect2">
-<h3 id="Design-Commons"><a class="link" href="#Design-Commons">4.6. Common classes</a></h3>
 <div class="paragraph">
 <p>Classes used by multiple components are in the <code>seedu.moneygowhere.commons</code> package.</p>
 </div>
@@ -1175,10 +1183,28 @@ The above diagram also highlights how logic and model components interact with e
 </div>
 <div class="sect2">
 <h3 id="import-feature"><a class="link" href="#import-feature">5.7. Import Feature</a></h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The current implementation only imports spending data.</p>
+</div>
+<div class="paragraph">
+<p><strong>Coming in version 2.0</strong>,<br>
+Reminder and budget data will also be imported.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="sect3">
 <h4 id="implementation-6"><a class="link" href="#implementation-6">5.7.1. Implementation</a></h4>
 <div class="paragraph">
-<p>The import feature allows our users to import data from a comma-separated values (<code>.csv</code>) files.
+<p>The import feature allows our users to import data from a comma-separated values (Csv) files.
 It allows users to add their spending in bulk.</p>
 </div>
 <div class="paragraph">
@@ -1193,7 +1219,7 @@ It allows users to add their spending in bulk.</p>
 </div>
 <div class="paragraph">
 <p>The Import Feature has one main component, which is the <code>ImportCommand.java</code> file. This file contains the main logic behind the feature.
-The <code>ImportCommand#readSpendingFromCsv()</code> method utilises the <code>FasterXML/jackson</code> library to read in <code>.csv</code> files and convert it into maps of objects.
+The <code>ImportCommand#readSpendingFromCsv()</code> method utilises the <code>FasterXML/jackson</code> library to read in Csv files and convert it into maps of objects.
 The maps will then be processed and parsed into <code>Spending</code> objects which will be added into a <code>Spending</code> list.
 Those maps that do not pass the parse conditions will then be thrown as an exception and its message will be saved inside an error list.
 After all the maps are processed, the application will then go through the valid spending list and save them by calling the <code>Model#addSpending()</code> method.
@@ -1209,13 +1235,13 @@ Following that, the application will then prints an output, showing the result o
 <div class="title">Figure 21. Import Feature Activity Diagram</div>
 </div>
 <div class="paragraph">
-<p>When a user calls the <code>import</code> command and inputs a valid <code>.csv</code> file, the application will read and parses all the data inside the file and save them to the <code>SpendingBookList</code> and <code>moneygowhere.json</code>.</p>
+<p>When a user calls the <code>import</code> command and inputs a valid Csv file, the application will read and parses all the data inside the file and save them to the <code>SpendingBookList</code> and <code>moneygowhere.json</code>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="csv-file-format-and-constraints"><a class="link" href="#csv-file-format-and-constraints">5.7.2. CSV File Format and Constraints</a></h4>
+<h4 id="a-id-csv-constraints-a-csv-file-format-and-constraints"><a class="link" href="#a-id-csv-constraints-a-csv-file-format-and-constraints">5.7.2. <a id="csv-constraints"></a>Csv File Format and Constraints</a></h4>
 <div class="paragraph">
-<p>In order for data to be imported into MoneyGoWhere, it must be in a properly formatted CSV file.
+<p>In order for data to be imported into MoneyGoWhere, it must be in a properly formatted Csv file.
 There should be 5 columns specified for <code>Name</code>, <code>Cost</code>, <code>Date</code>, <code>Tag</code> and <code>Remark</code></p>
 </div>
 <div class="paragraph">
@@ -1265,13 +1291,75 @@ There should be 5 columns specified for <code>Name</code>, <code>Cost</code>, <c
 </ul>
 </div>
 </div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">5.7.3. Design Considerations</a></h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Aspect</th>
+<th class="tableblock halign-left valign-top">Alternative 1 (current choice)</th>
+<th class="tableblock halign-left valign-top">Alternative 2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How import executes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Imports the entire Csv file, converts all the rows into a list of <code>spending</code> objects and add the list into the spending list.<br></p>
+<p class="tableblock"><strong>Pros:</strong><br>
+Better performance<br>
+<br>
+<strong>Cons:</strong><br>
+Requires additional functions to successfully implement the feature.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Imports the Csv file, converts all the rows into a list of <code>spending</code> objects and add each <code>spending</code> object one by one. <br></p>
+<p class="tableblock"><strong>Pros:</strong><br>
+Easy to implement.<br>
+Re-use existing functions<br>
+<br>
+<strong>Cons:</strong><br>
+May have performance issues in terms of memory usage.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Alternative 1 was chosen as it gives a much better performance as opposed to alternative 2.
+At first alternative 2 was chosen as it was easier to implement.
+However, performance issues was detected when importing more than 50 spending and
+when importing more than 1000 spending, the whole application stops responding.</p>
+</div>
+<div class="paragraph">
+<p>Hence, alternative 1 was implemented and now the application could handle large amount of spending without a noticeable sluggishness in performance.</p>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="export-feature"><a class="link" href="#export-feature">5.8. Export Feature</a></h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The current implementation only exports spending data.</p>
+</div>
+<div class="paragraph">
+<p><strong>Coming in version 2.0</strong>,<br>
+Reminder and budget data will also be exported.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="sect3">
 <h4 id="implementation-7"><a class="link" href="#implementation-7">5.8.1. Implementation</a></h4>
 <div class="paragraph">
-<p>The export feature allows our  users to export their spending into a comma-separated values(<code>.csv</code>) files.
+<p>The export feature allows our  users to export their spending into a comma-separated values(Csv) files.
 It allows users to export their spending allowing the spending data to be portable.</p>
 </div>
 <div class="paragraph">
@@ -1299,7 +1387,7 @@ After the data has been successfully exported, the application will then prints 
 <div class="title">Figure 23. Export Feature Activity Diagram</div>
 </div>
 <div class="paragraph">
-<p>When a user calls the <code>export</code> command and inputs a valid folder path, the application will convert all the spending data into a <code>.csv</code> file and export it to <code>moneygowhere.csv</code></p>
+<p>When a user calls the <code>export</code> command and inputs a valid folder path, the application will convert all the spending data into a Csv file and export it to <code>moneygowhere.csv</code></p>
 </div>
 </div>
 </div>
@@ -1431,7 +1519,7 @@ Below is the UML sequence diagram and a step-by-step explanation.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">5.9.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">5.9.2. Design Considerations</a></h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 20%;">
@@ -1587,7 +1675,7 @@ Below is the UML sequence diagram and a step-by-step explanation.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">5.10.2. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">5.10.2. Design Considerations</a></h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 20%;">
@@ -1923,7 +2011,7 @@ If the <code>currentStatePointer</code> is at index <code>spendingBookStateList.
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">5.12.2. Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">5.12.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
@@ -2378,7 +2466,7 @@ e.g. <code>seedu.moneygowhere.logic.LogicManagerTest</code></p>
 <p>is reasonably comfortable using CLI apps</p>
 </li>
 <li>
-<p>wishes to import or export their data to a .csv file</p>
+<p>wishes to import or export their data to a Csv file</p>
 </li>
 </ul>
 </div>
@@ -2907,17 +2995,17 @@ Use case ends.</p>
 </ul>
 </div>
 <hr>
-<h3 id="uc12-import-external-data-from-a-csv-file" class="discrete">UC12 Import external data from a CSV file</h3>
+<h3 id="uc12-import-external-data-from-a-csv-file" class="discrete">UC12 Import external data from a Csv file</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to import data from CSV file by specifying the file path.</p>
+<p>User requests to import data from Csv file by specifying the file path.</p>
 </li>
 <li>
-<p>MoneyGoWhere imports the data from the CSV file located at specified file path.</p>
+<p>MoneyGoWhere imports the data from the Csv file located at specified file path.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2945,17 +3033,17 @@ Use case ends.</p>
 </ul>
 </div>
 <hr>
-<h3 id="uc13-export-data-to-a-csv-file" class="discrete">UC13 Export data to a CSV file</h3>
+<h3 id="uc13-export-data-to-a-csv-file" class="discrete">UC13 Export data to a Csv file</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to export data from CSV file by specifying the file path.</p>
+<p>User requests to export data to a Csv file by specifying the folder path.</p>
 </li>
 <li>
-<p>MoneyGoWhere exports the data into the CSV file located at specified file path.</p>
+<p>MoneyGoWhere exports the data into <code>moneygowhere.csv</code> file located at specified folder path.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -3291,6 +3379,10 @@ Use case resumes from step 1.</p>
 <dd>
 <p>Money spent by the user.</p>
 </dd>
+<dt class="hdlist1">Csv</dt>
+<dd>
+<p>Comma-separated values.</p>
+</dd>
 <dt class="hdlist1">Deficit</dt>
 <dd>
 <p>The user has spent more than his budget set.</p>
@@ -3342,29 +3434,12 @@ These instructions only provide a starting point for testers to work on; testers
 </li>
 <li>
 <p>Double-click the jar file<br>
-Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Saving window preferences</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Resize the window to an optimum size. Move the window to a different location. Close the window.</p>
-</li>
-<li>
-<p>Re-launch the app by double-clicking the jar file.<br>
-Expected: The most recent window size and location is retained.</p>
+Expected: Shows the GUI with a set of sample spending. The window size will be maximised according to your window size.</p>
 </li>
 </ol>
 </div>
 </li>
 </ol>
-</div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
 </div>
 </div>
 <div class="sect2">
@@ -3380,11 +3455,11 @@ Expected: The most recent window size and location is retained.</p>
 </li>
 <li>
 <p>Test case: <code>delete 1</code><br>
-Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.</p>
+Expected: First spending is deleted from the list. Details of the deleted spending shown in the results display.</p>
 </li>
 <li>
 <p>Test case: <code>delete 0</code><br>
-Expected: No Spending is deleted. Error details shown in the status message. Status bar remains the same.</p>
+Expected: No spending is deleted. Error details shown in the results display.</p>
 </li>
 <li>
 <p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size) <em>{give more}</em><br>
@@ -3394,9 +3469,6 @@ Expected: Similar to previous.</p>
 </div>
 </li>
 </ol>
-</div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
 </div>
 </div>
 <div class="sect2">
@@ -3419,5 +3491,63 @@ Expected: Similar to previous.</p>
 <p><em>{ more test cases &#8230;&#8203; }</em></p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="importing-spending-data"><a class="link" href="#importing-spending-data">F.4. Importing Spending Data</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Importing valid spending while all spending are listed</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Prepare a valid Csv file following the <a href="#csv-constraints">csv constraints</a>.</p>
+</li>
+<li>
+<p>Test case: <code>import p/./moneygowhere.csv</code><br>
+Expected: All valid spending will be added to the spending list.</p>
+</li>
+</ol>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 07:37:41 UTC</div></div></div></body></html>
+</li>
+<li>
+<p>Importing partially valid spending data while all spending are listed</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Prepare a Csv file with some valid spending and some invalid spending
+such as a spending with empty <code>name</code>, <code>cost</code> or <code>date</code> parameter.</p>
+</li>
+<li>
+<p>Test case: <code>import p/./moneygowhere.csv</code><br>
+Expected: Only valid spending will be added to the spending list, whereas error details specifying which spending is invalid will be shown in the results display.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exporting-spending-data"><a class="link" href="#exporting-spending-data">F.5. Exporting Spending Data</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Exporting all spending into <code>moneygowhere.csv</code> file</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>export p/.</code><br>
+Expected: All spending data will be exported into a <code>moneygowhere.csv</code> file at whichever folder the jar file is.</p>
+</li>
+<li>
+<p>Test case: <code>export p/C:\Users\user\Documents\MoneyGoWhere</code><br>
+Expected: All spending data will be exported into <code>C:\Users\user\Documents\MoneyGoWhere\moneygowhere.csv</code>.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 07:38:18 UTC</div></div></div></body></html>

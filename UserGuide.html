@@ -50,7 +50,7 @@
 <div class="paragraph">
 <p><strong>MoneyGoWhere</strong> is a personal finance application targeted to students at the National University of Singapore (NUS).
 It allows students to keep track of all their spending and their related information such as date, cost and tags.
-Users can also set budget goals, view statistics, set reminders for bills and export their data to a .csv file.
+Users can also set budget goals, view statistics, set reminders for bills and export their data to a Csv file.
 With an easy-to-use Graphical User Interface (GUI) and employment of Command Line Interface (CLI), users can easily navigate through the application, contributing to its user-friendliness and efficiency.</p>
 </div>
 <div class="paragraph">
@@ -1184,9 +1184,6 @@ Deletes the second reminder in the list based on the current results shown.</p>
 <div class="sect2">
 <h3 id="importing-data-code-import-code"><a class="link" href="#importing-data-code-import-code">4.18. Importing data : <code>import</code></a></h3>
 <div class="paragraph">
-<p>Imports data from a CSV file specified by file path. Existing spending entries are not replaced.<br></p>
-</div>
-<div class="paragraph">
 <p><strong>Format:</strong> <code>import p/FILE_PATH</code><br></p>
 </div>
 <div class="paragraph">
@@ -1198,21 +1195,107 @@ Deletes the second reminder in the list based on the current results shown.</p>
 <p><code>import p/data.csv</code></p>
 </li>
 <li>
-<p><code>import p/C:\Users\User\Documents\importfile.csv</code></p>
+<p><code>import p/C:\Users\User\Documents\spending.csv</code></p>
 </li>
 <li>
-<p><code>import p/~/data.csv</code></p>
+<p><code>import p/./data.csv</code></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>The purpose of this command is to let you import external spending data from a Csv file.</p>
+</div>
+<div class="paragraph">
+<p>When you want to import your existing spending data which is recorded in a Csv file,
+you could type a simple command, in the format of <code>import p/FILE_PATH</code>, and press <code>enter</code>.
+Your new spending entries will be added to the existing spending entries without replacing them.</p>
+</div>
+<div class="paragraph">
+<p>The Graph, Statistics and Budget will also be updated accordingly once the import is successful.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Only spending data will be imported. This excludes Reminder and Budget data.</p>
+</div>
+<div class="paragraph">
+<p>However, importing of Reminder and Budget data is <strong>coming in our version 2.0</strong>!</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="a-id-retrieving-filepath-a-retrieving-file-path"><a class="link" href="#a-id-retrieving-filepath-a-retrieving-file-path">4.18.1. <a id="retrieving-filepath"></a>Retrieving File Path</a></h4>
+<div class="paragraph">
+<p>You could retrieve your file path by following these steps, depending on which Operating System you are on:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/exampleFilePathWindows.png" alt="exampleFilePathWindows" width="75%">
+</div>
+<div class="title">Figure 6. Retrieving File Path in Windows</div>
+</div>
+<div class="paragraph">
+<p>For Windows:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open your File Explorer.</p>
+</li>
+<li>
+<p>Navigate to the folder where you save your Csv file.</p>
+</li>
+<li>
+<p>Click on the address bar of your File Explorer window.</p>
+</li>
+<li>
+<p>You should be able to see something similar to the figure above.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/exampleFilePathMac.png" alt="exampleFilePathMac" width="50%">
+</div>
+<div class="title">Figure 7. Retrieving File Path in Mac</div>
+</div>
+<div class="paragraph">
+<p>For Mac:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open your Finder window.</p>
+</li>
+<li>
+<p>Navigate to the folder where you sove your Csv file.</p>
+</li>
+<li>
+<p>Right-click on your Csv file and select <code>Get Info</code>.</p>
+</li>
+<li>
+<p>You should be able to see a window open up showing something similar to the figure above.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="csv-file-constraints"><a class="link" href="#csv-file-constraints">4.18.2. Csv File Constraints</a></h4>
 <div class="imageblock text-center">
 <div class="content">
 <img src="images/ExampleValidCsv.png" alt="ExampleValidCsv" width="75%">
 </div>
-<div class="title">Figure 6. A Valid <code>.csv</code> File.</div>
+<div class="title">Figure 8. A Valid Csv File.</div>
 </div>
 <div class="paragraph">
-<p><code>.csv</code> file must have a header row with the following values:</p>
+<p>Before importing your Csv file, you have to <strong>make sure</strong> that your Csv file have a header row with the following values:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1232,6 +1315,9 @@ Deletes the second reminder in the list based on the current results shown.</p>
 <p>tagged</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>You should end up with a Csv file similar to the figure above.</p>
 </div>
 <div class="exampleblock">
 <div class="content">
@@ -1259,14 +1345,12 @@ Deletes the second reminder in the list based on the current results shown.</p>
 <p><strong>Expected Output:</strong></p>
 </div>
 <div class="paragraph">
-<p>Data from the CSV file is imported, keeping existing spending entries.</p>
+<p>Data from the Csv file is imported, keeping existing spending entries.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="exporting-data-code-export-code"><a class="link" href="#exporting-data-code-export-code">4.19. Exporting data : <code>export</code></a></h3>
-<div class="paragraph">
-<p>Exports data to a <code>moneygowhere.csv</code> file specified by a folder path.<br></p>
-</div>
 <div class="paragraph">
 <p><strong>Format:</strong> export <code>p/FOLDER_PATH</code><br></p>
 </div>
@@ -1281,13 +1365,31 @@ Deletes the second reminder in the list based on the current results shown.</p>
 <li>
 <p><code>export p/Finance</code></p>
 </li>
+<li>
+<p><code>export p/C:\Users\user\Documents\MoneyGoWhere</code></p>
+</li>
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Expected Output:</strong></p>
+<p>The purpose of this command is to let you export your spending data to a
+<code>moneygowhere.csv</code> file at a folder that you like. You could refer to <a href="#retrieving-filepath">Retrieving File Path</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Only spending data will be exported into <code>moneygowhere.csv</code> file. This excludes Reminder and Budget data</p>
 </div>
 <div class="paragraph">
-<p>Data from the spending list is exported to a specified folder with a file name <code>moneygowhere.csv</code>.</p>
+<p>However, exporting of Reminder and Budget data is <strong>coming in our version 2.0</strong>!</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -1578,4 +1680,4 @@ e.g. <code>reminder delete 2</code></p></td>
 <p>The command summary above displays all commands available in MoneyGoWhere.</p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 07:37:41 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 07:38:18 UTC</div></div></div></body></html>

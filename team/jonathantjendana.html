@@ -3,58 +3,168 @@
 <link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">MoneyGoWhere</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/AY1920S1-CS2103T-F13-3/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Jonathan Tjendana - Project Portfolio</h1></div><div id="content"><div class="sect1">
 <h2 id="project-moneygowhere"><a class="link" href="#project-moneygowhere">PROJECT: MoneyGoWhere</a></h2>
 <div class="sectionbody">
-<hr>
+
 </div>
 </div>
 <div class="sect1">
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>MoneyGoWhere is a desktop personal finance application targeted at students of the National University of Singapore (NUS).
-It allows students to keep track of all their spending and their related information such as date, cost and tags.
-Users can also set budget goals, view statistics, set reminders for bills and export their data to a .csv file.</p>
+<p>MoneyGoWhere is a personal finance application targeted at students at the National University of Singapore (NUS), designed by my team and I for our Software Engineering project.</p>
 </div>
 <div class="paragraph">
-<p>The user interacts with it using a CLI, and it has a GUI created with JavaFx.
-The CLI is equipped with a Natural Language Processing (NLP) library, natty, to read in date input.
-It is written in Java, and has about 15 kLoC.</p>
+<p>Designed primarily with a Command Line Interface (CLI), it allows students to keep track of all their spending with related information such as date, cost and tags. Users can also set budget goals, view statistics, view exchange rates, set their existing  set reminders for bills, import and export their data from and to a .csv file.</p>
+</div>
+<div class="sect2">
+<h3 id="my-role"><a class="link" href="#my-role">My Role</a></h3>
+<div class="paragraph">
+<p>I was tasked to complete import and export feature, as well as to enhance the Graphical User Interface (GUI) to be more user-friendly.
+I have also made notable contributions to the User Guide and Developer Guide.</p>
+</div>
+<div class="paragraph">
+<p>Listed below are some notations that are used throughout the document.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 1. Legend table</caption>
+<colgroup>
+<col style="width: 15%;">
+<col style="width: 85%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><div><div class="paragraph">
+<p>Icon</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><div><div class="paragraph">
+<p><code>command</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Command that can be executed</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><div><div class="paragraph">
+<p><span class="icon icon-tip"><i class="fa fa-lightbulb-o fa-2x"></i></span></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tips that might be helpful in navigating the application</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><div><div class="paragraph">
+<p><span class="icon icon-note"><i class="fa fa-info-circle fa-2x"></i></span></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Important information that should be noted</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>If there are any additional related information, it will be described in a block below:</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Useful information for a deeper understanding of the command.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>These icons and their following descriptions enable greater clarity in understanding the document.</p>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>This section shows a summary of my contributions to the team project.</p>
+</div>
+<div class="sect2">
+<h3 id="major-enhancement-added-the-ability-to-import-export-spending-data"><a class="link" href="#major-enhancement-added-the-ability-to-import-export-spending-data">Major enhancement: Added the ability to import &amp; export spending data</a></h3>
+<div class="paragraph">
+<p>I have implemented both the import and export feature to make the spending data more portable for the user.</p>
+</div>
+<div class="sect3">
+<h4 id="what-it-does"><a class="link" href="#what-it-does">What it does</a></h4>
+<div class="paragraph">
+<p>It allows the user to save his spending data in an external file and modifies the data before importing it back into the application.</p>
+</div>
+<div class="paragraph">
+<p>It also allows the user to change between computers without a fear of losing his spending data.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
+<div class="paragraph">
+<p>This feature improves the product significantly as the user may have existing data before starting to use the application
+and to export the spending data if he would like to change between multiple computers.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="highlights"><a class="link" href="#highlights">Highlights</a></h4>
+<div class="paragraph">
+<p>This enhancement functions well with existing commands as it adds more spending into the list, all the other features such as budget, graph and statistics are updated as well.
+It required an in-depth analysis of design alternatives.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="credits"><a class="link" href="#credits">Credits</a></h4>
+<div class="paragraph">
+<p><a href="https://github.com/FasterXML/jackson">Jackson</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="minor-enhancement-redesign-the-user-interface-to-be-more-user-friendly"><a class="link" href="#minor-enhancement-redesign-the-user-interface-to-be-more-user-friendly">Minor enhancement: Redesign the user interface to be more user-friendly</a></h3>
+<div class="paragraph">
+<p>I have also redesigned the entire user interface to be more user-friendly.</p>
+</div>
+<div class="sect3">
+<h4 id="what-it-does-2"><a class="link" href="#what-it-does-2">What it does</a></h4>
+<div class="paragraph">
+<p>This enhancement allows the application to have a better-looking, more user-friendly colour theme
+as well as allows the application window size to be resizeable.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="justification-2"><a class="link" href="#justification-2">Justification</a></h4>
+<div class="paragraph">
+<p>As the application is targeting to solve a financial problem, I figure it would be better to have a light theme coupled with a green colour scheme as opposed to the dark theme given by the base project, AddressBook-Level3.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="highlights-2"><a class="link" href="#highlights-2">Highlights</a></h4>
+<div class="paragraph">
+<p>When the application window is resized, all components in the application is resized as well according to the window size. This allows the application to still be usable even after the window size is resized.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="code-contributed"><a class="link" href="#code-contributed">Code contributed:</a></h4>
+<div class="paragraph">
+<p><a href="https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#search=jonathantjendana&amp;sort=groupTitle&amp;sortWithin=title&amp;since=2019-09-06&amp;timeframe=commit&amp;mergegroup=false&amp;groupSelect=groupByRepos&amp;breakdown=false&amp;tabOpen=true&amp;tabType=authorship&amp;tabAuthor=jonathantjendana&amp;tabRepo=AY1920S1-CS2103T-F13-3%2Fmain%5Bmaster%5D">Collated code</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="other-contributions"><a class="link" href="#other-contributions">Other contributions</a></h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement</strong>: added <strong>the ability to import/export data</strong></p>
+<p>Project management</p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to import and export data to and from a .csv file.</p>
+<p>Guided teammates for tips and tricks in regards to using JavaFx and FXML</p>
 </li>
 <li>
-<p>Justification: This feature improves the product significantly because a user can have existing data before starting to use the application and to export the data if he would like to process the data using other applications such as Microsoft Excel.</p>
-</li>
-<li>
-<p>Highlights: This enhancement affects other commands as it modifies the spending list. It required an in-depth analysis of design alternatives.</p>
-</li>
-<li>
-<p>Credits: Jackson library.</p>
+<p>Helps teammates review their pull requests</p>
 </li>
 </ul>
 </div>
 </li>
-<li>
-<p><strong>Minor enhancement</strong>: Redesign the user interface to fit the application</p>
-</li>
-<li>
-<p><strong>Code contributed</strong>: <a href="https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#search=jonathantjendana&amp;sort=groupTitle&amp;sortWithin=title&amp;since=2019-09-06&amp;timeframe=commit&amp;mergegroup=false&amp;groupSelect=groupByRepos&amp;breakdown=false&amp;tabOpen=true&amp;tabType=authorship&amp;tabAuthor=jonathantjendana&amp;tabRepo=AY1920S1-CS2103T-F13-3%2Fmain%5Bmaster%5D">Collated code</a></p>
-</li>
-<li>
-<p><strong>Other contributions</strong>:</p>
-<div class="ulist">
-<ul>
 <li>
 <p>Enhancements to existing features:</p>
 <div class="ulist">
@@ -63,7 +173,7 @@ It is written in Java, and has about 15 kLoC.</p>
 <p>Updated the GUI (Pull requests <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/pull/134">#134</a>, <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/pull/136">#136</a>, <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/pull/137">#137</a>)</p>
 </li>
 <li>
-<p>Changed email field into remark field <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/pull/69">#68</a></p>
+<p>Refactored existing class <code>email</code> to <code>remark</code> to fit the needs of our application. (Pull request <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/pull/69">#68</a>)</p>
 </li>
 </ul>
 </div>
@@ -93,9 +203,6 @@ It is written in Java, and has about 15 kLoC.</p>
 </li>
 </ul>
 </div>
-</li>
-</ul>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -107,15 +214,12 @@ It is written in Java, and has about 15 kLoC.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Listed below are sections I contributed to the User Guide. This includes the Features section, particularly the Import and Export section.</p></td>
 </tr>
 </tbody>
 </table>
 <div class="sect2">
 <h3 id="importing-data-code-import-code"><a class="link" href="#importing-data-code-import-code">Importing data : <code>import</code></a></h3>
-<div class="paragraph">
-<p>Imports data from a CSV file specified by file path. Existing spending entries are not replaced.<br></p>
-</div>
 <div class="paragraph">
 <p><strong>Format:</strong> <code>import p/FILE_PATH</code><br></p>
 </div>
@@ -128,21 +232,107 @@ It is written in Java, and has about 15 kLoC.</p>
 <p><code>import p/data.csv</code></p>
 </li>
 <li>
-<p><code>import p/C:\Users\User\Documents\importfile.csv</code></p>
+<p><code>import p/C:\Users\User\Documents\spending.csv</code></p>
 </li>
 <li>
-<p><code>import p/~/data.csv</code></p>
+<p><code>import p/./data.csv</code></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>The purpose of this command is to let you import external spending data from a Csv file.</p>
+</div>
+<div class="paragraph">
+<p>When you want to import your existing spending data which is recorded in a Csv file,
+you could type a simple command, in the format of <code>import p/FILE_PATH</code>, and press <code>enter</code>.
+Your new spending entries will be added to the existing spending entries without replacing them.</p>
+</div>
+<div class="paragraph">
+<p>The Graph, Statistics and Budget will also be updated accordingly once the import is successful.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Only spending data will be imported. This excludes Reminder and Budget data.</p>
+</div>
+<div class="paragraph">
+<p>However, importing of Reminder and Budget data is <strong>coming in our version 2.0</strong>!</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="a-id-retrieving-filepath-a-retrieving-file-path"><a class="link" href="#a-id-retrieving-filepath-a-retrieving-file-path"><a id="retrieving-filepath"></a>Retrieving File Path</a></h4>
+<div class="paragraph">
+<p>You could retrieve your file path by following these steps, depending on which Operating System you are on:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/exampleFilePathWindows.png" alt="exampleFilePathWindows" width="75%">
+</div>
+<div class="title">Figure 1. Retrieving File Path in Windows</div>
+</div>
+<div class="paragraph">
+<p>For Windows:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open your File Explorer.</p>
+</li>
+<li>
+<p>Navigate to the folder where you save your Csv file.</p>
+</li>
+<li>
+<p>Click on the address bar of your File Explorer window.</p>
+</li>
+<li>
+<p>You should be able to see something similar to the figure above.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/exampleFilePathMac.png" alt="exampleFilePathMac" width="50%">
+</div>
+<div class="title">Figure 2. Retrieving File Path in Mac</div>
+</div>
+<div class="paragraph">
+<p>For Mac:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open your Finder window.</p>
+</li>
+<li>
+<p>Navigate to the folder where you sove your Csv file.</p>
+</li>
+<li>
+<p>Right-click on your Csv file and select <code>Get Info</code>.</p>
+</li>
+<li>
+<p>You should be able to see a window open up showing something similar to the figure above.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="csv-file-constraints"><a class="link" href="#csv-file-constraints">Csv File Constraints</a></h4>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/ExampleValidCsv.png" alt="ExampleValidCsv" width="75%">
 </div>
-<div class="title">Figure 1. A Valid <code>.csv</code> File.</div>
+<div class="title">Figure 3. A Valid Csv File.</div>
 </div>
 <div class="paragraph">
-<p><code>.csv</code> file must have a header row with the following values:</p>
+<p>Before importing your Csv file, you have to <strong>make sure</strong> that your Csv file have a header row with the following values:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -162,6 +352,9 @@ It is written in Java, and has about 15 kLoC.</p>
 <p>tagged</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>You should end up with a Csv file similar to the figure above.</p>
 </div>
 <div class="exampleblock">
 <div class="content">
@@ -189,14 +382,12 @@ It is written in Java, and has about 15 kLoC.</p>
 <p><strong>Expected Output:</strong></p>
 </div>
 <div class="paragraph">
-<p>Data from the CSV file is imported, keeping existing spending entries.</p>
+<p>Data from the Csv file is imported, keeping existing spending entries.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="exporting-data-code-export-code"><a class="link" href="#exporting-data-code-export-code">Exporting data : <code>export</code></a></h3>
-<div class="paragraph">
-<p>Exports data to a <code>moneygowhere.csv</code> file specified by a folder path.<br></p>
-</div>
 <div class="paragraph">
 <p><strong>Format:</strong> export <code>p/FOLDER_PATH</code><br></p>
 </div>
@@ -211,13 +402,31 @@ It is written in Java, and has about 15 kLoC.</p>
 <li>
 <p><code>export p/Finance</code></p>
 </li>
+<li>
+<p><code>export p/C:\Users\user\Documents\MoneyGoWhere</code></p>
+</li>
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Expected Output:</strong></p>
+<p>The purpose of this command is to let you export your spending data to a
+<code>moneygowhere.csv</code> file at a folder that you like. You could refer to <a href="#retrieving-filepath">Retrieving File Path</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Only spending data will be exported into <code>moneygowhere.csv</code> file. This excludes Reminder and Budget data</p>
 </div>
 <div class="paragraph">
-<p>Data from the spending list is exported to a specified folder with a file name <code>moneygowhere.csv</code>.</p>
+<p>However, exporting of Reminder and Budget data is <strong>coming in our version 2.0</strong>!</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -231,16 +440,150 @@ It is written in Java, and has about 15 kLoC.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Listed below are sections I contributed to the Developer Guide. This includes the features section for Import and Export, and the components for UI, model and storage section.</p></td>
 </tr>
 </tbody>
 </table>
 <div class="sect2">
+<h3 id="Design-Ui"><a class="link" href="#Design-Ui">UI component</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UiClassDiagram.png" alt="UiClassDiagram">
+</div>
+<div class="title">Figure 4. Structure of the UI Component</div>
+</div>
+<div class="paragraph">
+<p><strong>API</strong> : <a href="{repoURL}/src/main/java/seedu/moneygowhere/ui/Ui.java"><code>Ui.java</code></a></p>
+</div>
+<div class="paragraph">
+<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>SpendingListPanel</code>, <code>StatusBarFooter</code>, <code>ReminderListPanel</code>, etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
+</div>
+<div class="paragraph">
+<p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="{repoURL}/src/main/java/seedu/moneygowhere/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="{repoURL}/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
+</div>
+<div class="paragraph">
+<p>The <code>UI</code> component,</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Executes user commands using the <code>Logic</code> component.</p>
+</li>
+<li>
+<p>Responds to the user&#8217;s keyboard and mouse input.</p>
+</li>
+<li>
+<p>Listens for changes to <code>Model</code> data so that the UI can be updated with the modified data.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Design-Model"><a class="link" href="#Design-Model">Model component</a></h3>
+<div class="paragraph">
+<p>The following class diagram shows the structure of the Model component.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ModelClassDiagram.png" alt="ModelClassDiagram">
+</div>
+<div class="title">Figure 5. Structure of the Model Component</div>
+</div>
+<div class="paragraph">
+<p><strong>API</strong> : <a href="{repoURL}/src/main/java/seedu/moneygowhere/model/Model.java"><code>Model.java</code></a></p>
+</div>
+<div class="paragraph">
+<p>The <code>Model</code>,</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences.</p>
+</li>
+<li>
+<p>stores the Spending data.</p>
+</li>
+<li>
+<p>stores the Reminder data.</p>
+</li>
+<li>
+<p>stores the Budget data.</p>
+</li>
+<li>
+<p>exposes an unmodifiable <code>ObservableList&lt;Spending&gt;</code> and <code>ObservableList&lt;Reminder&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
+</li>
+<li>
+<p>does not depend on any of the other three components.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+As a more OOP model, we can store a <code>Tag</code> list in <code>Spending Book</code>, which <code>Spending</code> can reference. This would allow <code>Spending Book</code> to only require one <code>Tag</code> object per unique <code>Tag</code>, instead of each <code>Spending</code> needing their own <code>Tag</code> object. An example of how such a model may look like is given below.<br>
+<br>
+<span class="image"><img src="../images/BetterModelClassDiagram.png" alt="BetterModelClassDiagram"></span>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Design-Storage"><a class="link" href="#Design-Storage">Storage component</a></h3>
+<div class="paragraph">
+<p>The following class diagram below displays the structure of the Storage Component.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/StorageClassDiagram.png" alt="StorageClassDiagram">
+</div>
+<div class="title">Figure 6. Structure of the Storage Component</div>
+</div>
+<div class="paragraph">
+<p><strong>API</strong> : <a href="{repoURL}/src/main/java/seedu/moneygowhere/storage/Storage.java"><code>Storage.java</code></a></p>
+</div>
+<div class="paragraph">
+<p>The <code>Storage</code> component,</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>can save <code>UserPref</code> objects in json format and read it back.</p>
+</li>
+<li>
+<p>can save the Spending Book data in json format and read it back.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
 <h3 id="import-feature"><a class="link" href="#import-feature">Import Feature</a></h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The current implementation only imports spending data.</p>
+</div>
+<div class="paragraph">
+<p><strong>Coming in version 2.0</strong>,<br>
+Reminder and budget data will also be imported.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="sect3">
 <h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
 <div class="paragraph">
-<p>The import feature allows our users to import data from a comma-separated values (<code>.csv</code>) files.
+<p>The import feature allows our users to import data from a comma-separated values (Csv) files.
 It allows users to add their spending in bulk.</p>
 </div>
 <div class="paragraph">
@@ -251,11 +594,11 @@ It allows users to add their spending in bulk.</p>
 <div class="content">
 <img src="../images/ImportSequenceDiagram.png" alt="ImportSequenceDiagram" width="100%">
 </div>
-<div class="title">Figure 2. Interactions Inside the Logic Component for the <code>import</code> Command</div>
+<div class="title">Figure 7. Interactions Inside the Logic Component for the <code>import</code> Command</div>
 </div>
 <div class="paragraph">
 <p>The Import Feature has one main component, which is the <code>ImportCommand.java</code> file. This file contains the main logic behind the feature.
-The <code>ImportCommand#readSpendingFromCsv()</code> method utilises the <code>FasterXML/jackson</code> library to read in <code>.csv</code> files and convert it into maps of objects.
+The <code>ImportCommand#readSpendingFromCsv()</code> method utilises the <code>FasterXML/jackson</code> library to read in Csv files and convert it into maps of objects.
 The maps will then be processed and parsed into <code>Spending</code> objects which will be added into a <code>Spending</code> list.
 Those maps that do not pass the parse conditions will then be thrown as an exception and its message will be saved inside an error list.
 After all the maps are processed, the application will then go through the valid spending list and save them by calling the <code>Model#addSpending()</code> method.
@@ -268,16 +611,16 @@ Following that, the application will then prints an output, showing the result o
 <div class="content">
 <img src="../images/ImportActivityDiagram.png" alt="ImportActivityDiagram" width="25%">
 </div>
-<div class="title">Figure 3. Import Feature Activity Diagram</div>
+<div class="title">Figure 8. Import Feature Activity Diagram</div>
 </div>
 <div class="paragraph">
-<p>When a user calls the <code>import</code> command and inputs a valid <code>.csv</code> file, the application will read and parses all the data inside the file and save them to the <code>SpendingBookList</code> and <code>moneygowhere.json</code>.</p>
+<p>When a user calls the <code>import</code> command and inputs a valid Csv file, the application will read and parses all the data inside the file and save them to the <code>SpendingBookList</code> and <code>moneygowhere.json</code>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="csv-file-format-and-constraints"><a class="link" href="#csv-file-format-and-constraints">CSV File Format and Constraints</a></h4>
+<h4 id="a-id-csv-constraints-a-csv-file-format-and-constraints"><a class="link" href="#a-id-csv-constraints-a-csv-file-format-and-constraints"><a id="csv-constraints"></a>Csv File Format and Constraints</a></h4>
 <div class="paragraph">
-<p>In order for data to be imported into MoneyGoWhere, it must be in a properly formatted CSV file.
+<p>In order for data to be imported into MoneyGoWhere, it must be in a properly formatted Csv file.
 There should be 5 columns specified for <code>Name</code>, <code>Cost</code>, <code>Date</code>, <code>Tag</code> and <code>Remark</code></p>
 </div>
 <div class="paragraph">
@@ -327,13 +670,75 @@ There should be 5 columns specified for <code>Name</code>, <code>Cost</code>, <c
 </ul>
 </div>
 </div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Aspect</th>
+<th class="tableblock halign-left valign-top">Alternative 1 (current choice)</th>
+<th class="tableblock halign-left valign-top">Alternative 2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How import executes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Imports the entire Csv file, converts all the rows into a list of <code>spending</code> objects and add the list into the spending list.<br></p>
+<p class="tableblock"><strong>Pros:</strong><br>
+Better performance<br>
+<br>
+<strong>Cons:</strong><br>
+Requires additional functions to successfully implement the feature.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Imports the Csv file, converts all the rows into a list of <code>spending</code> objects and add each <code>spending</code> object one by one. <br></p>
+<p class="tableblock"><strong>Pros:</strong><br>
+Easy to implement.<br>
+Re-use existing functions<br>
+<br>
+<strong>Cons:</strong><br>
+May have performance issues in terms of memory usage.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Alternative 1 was chosen as it gives a much better performance as opposed to alternative 2.
+At first alternative 2 was chosen as it was easier to implement.
+However, performance issues was detected when importing more than 50 spending and
+when importing more than 1000 spending, the whole application stops responding.</p>
+</div>
+<div class="paragraph">
+<p>Hence, alternative 1 was implemented and now the application could handle large amount of spending without a noticeable sluggishness in performance.</p>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="export-feature"><a class="link" href="#export-feature">Export Feature</a></h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The current implementation only exports spending data.</p>
+</div>
+<div class="paragraph">
+<p><strong>Coming in version 2.0</strong>,<br>
+Reminder and budget data will also be exported.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="sect3">
 <h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
 <div class="paragraph">
-<p>The export feature allows our  users to export their spending into a comma-separated values(<code>.csv</code>) files.
+<p>The export feature allows our  users to export their spending into a comma-separated values(Csv) files.
 It allows users to export their spending allowing the spending data to be portable.</p>
 </div>
 <div class="paragraph">
@@ -343,7 +748,7 @@ It allows users to export their spending allowing the spending data to be portab
 <div class="content">
 <img src="../images/ExportSequenceDiagram.png" alt="ExportSequenceDiagram" width="100%">
 </div>
-<div class="title">Figure 4. Interactions Inside the Logic Component for the `export' Command</div>
+<div class="title">Figure 9. Interactions Inside the Logic Component for the `export' Command</div>
 </div>
 <div class="paragraph">
 <p>The export feature has one main component, which is the <code>ExportCommand.java</code> file. This file contains the main logic behind the feature.
@@ -358,12 +763,12 @@ After the data has been successfully exported, the application will then prints 
 <div class="content">
 <img src="../images/ExportActivityDiagram.png" alt="ExportActivityDiagram" width="25%">
 </div>
-<div class="title">Figure 5. Export Feature Activity Diagram</div>
+<div class="title">Figure 10. Export Feature Activity Diagram</div>
 </div>
 <div class="paragraph">
-<p>When a user calls the <code>export</code> command and inputs a valid folder path, the application will convert all the spending data into a <code>.csv</code> file and export it to <code>moneygowhere.csv</code></p>
+<p>When a user calls the <code>export</code> command and inputs a valid folder path, the application will convert all the spending data into a Csv file and export it to <code>moneygowhere.csv</code></p>
 </div>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 07:37:41 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 07:38:18 UTC</div></div></div></body></html>
