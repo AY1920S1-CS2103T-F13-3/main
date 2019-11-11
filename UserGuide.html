@@ -824,10 +824,54 @@ Converts 5 USD to SGD based on current exchange rates.</p>
 <h3 id="setting-monthly-budget-code-budget-code"><a class="link" href="#setting-monthly-budget-code-budget-code">4.12. Setting monthly budget : <code>budget</code></a></h3>
 <div class="paragraph">
 <p>Sets a budget for the current month in the currency set .<br>
-The monthly budget cannot exceed 1,000,000,000 Singapore Dollars.<br></p>
+<strong>Format:</strong> <code>budget MONTHLY_BUDGET</code><br></p>
 </div>
-<div class="paragraph">
-<p><strong>Format:</strong> <code>budget MONTHLY_BUDGET</code><br></p>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The monthly budget must be a valid number.</p>
+</li>
+<li>
+<p>The monthly budget amount cannot exceed 1,000,000,000 Singapore Dollars.</p>
+</li>
+<li>
+<p>The monthly budget amount can only have at most 2 digits after the decimal point, regardless if it is trailing zeroes.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Examples of valid budget amount:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>20</p>
+</li>
+<li>
+<p>100.01</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Examples of invalid budget amount:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>100.00000</p>
+</li>
+<li>
+<p>0.0001</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -836,7 +880,7 @@ The monthly budget cannot exceed 1,000,000,000 Singapore Dollars.<br></p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Existing budget of current month is overwritten if budget has already been set.
+Using the <code>budget</code> command  will overwrite the currently set budget.
 </td>
 </tr>
 </table>
@@ -1687,4 +1731,4 @@ e.g. <code>reminder delete 2</code></p></td>
 <p>The command summary above displays all commands available in MoneyGoWhere.</p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 04:13:55 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 07:28:26 UTC</div></div></div></body></html>
