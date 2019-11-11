@@ -23,7 +23,7 @@ It is written in Java, and has about 15 kLoC.</p>
 <h2 id="my-role"><a class="link" href="#my-role">My Role</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>I was tasked to implement the <code>Budget</code> feature of the program, as well as implemented the ability for users to press the up and down key to traverse their command history. I have also made notable contributions to the User Guide and Developer Guide.</p>
+<p>I was a developer and was tasked to implement the <code>Budget</code> feature of the program, as well as implemented the ability for users to press the up and down key to traverse their command history. I have also made notable contributions to the User Guide and Developer Guide.</p>
 </div>
 </div>
 </div>
@@ -55,7 +55,7 @@ It is written in Java, and has about 15 kLoC.</p>
 <p><strong>Minor enhancement</strong>: Implemented <code>showbudget</code> command to show users their budget as well as sum of spending in the month set.</p>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: Implemented the ability for users to navigate to previous commands using up/down keys.</p>
+<p><strong>Minor enhancement</strong>: Implemented the ability for users to navigate through previous commands using up/down keys.</p>
 </li>
 <li>
 <p><strong>Code contributed</strong>: [<a href="https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#search=austinsantoso&amp;sort=groupTitle&amp;sortWithin=title&amp;since=2019-09-06&amp;timeframe=commit&amp;mergegroup=false&amp;groupSelect=groupByRepos&amp;breakdown=false">Collated code</a>]</p>
@@ -70,6 +70,9 @@ It is written in Java, and has about 15 kLoC.</p>
 <ul>
 <li>
 <p>Posted user stories as issues</p>
+</li>
+<li>
+<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/pull/87">#87</a></p>
 </li>
 </ul>
 </div>
@@ -102,10 +105,10 @@ It is written in Java, and has about 15 kLoC.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/pull/87">#87</a></p>
+<p>Performed manual testing, reported bugs and suggestions for teammates.</p>
 </li>
 <li>
-<p>Reported bugs and suggestions for other teams in the class</p>
+<p>Performed manual testing, reported bugs and suggestions for other teams in the class</p>
 </li>
 </ul>
 </div>
@@ -133,7 +136,7 @@ It is written in Java, and has about 15 kLoC.</p>
 <div class="sect2">
 <h3 id="setting-monthly-budget-code-budget-code"><a class="link" href="#setting-monthly-budget-code-budget-code">Setting monthly budget : <code>budget</code></a></h3>
 <div class="paragraph">
-<p>Sets a budget for the current month in the currency set .<br>
+<p>Sets a budget for the current month in the currency set.<br>
 <strong>Format:</strong> <code>budget MONTHLY_BUDGET</code><br></p>
 </div>
 <div class="sidebarblock">
@@ -201,8 +204,8 @@ Using the <code>budget</code> command  will overwrite the currently set budget.
 <div class="ulist">
 <ul>
 <li>
-<p><code>budget 500000</code><br>
-Sets a budget of $<code>500000</code> for this month</p>
+<p><code>budget 5000</code><br>
+Sets a budget of $<code>5000</code> for this month</p>
 </li>
 </ul>
 </div>
@@ -216,7 +219,7 @@ Sets a budget of $<code>500000</code> for this month</p>
 <div class="sect2">
 <h3 id="showing-current-budget-code-showbudget-code"><a class="link" href="#showing-current-budget-code-showbudget-code">Showing current budget : <code>showbudget</code></a></h3>
 <div class="paragraph">
-<p>Returns the current monthly budget, total spending and remaining budget in Singapore Dollars.<br>
+<p>Shows the current monthly budget, total spending and remaining budget in Singapore Dollars.<br>
 <strong>Format:</strong> <code>showbudget</code></p>
 </div>
 <div class="paragraph">
@@ -227,7 +230,7 @@ Sets a budget of $<code>500000</code> for this month</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="going-through-your-command-history"><a class="link" href="#going-through-your-command-history">Going through your command history:</a></h3>
+<h3 id="going-through-your-command-history"><a class="link" href="#going-through-your-command-history">Going through your command history</a></h3>
 <div class="paragraph">
 <p>Similar to a typical command line interface (CLI), the user may press the up and down key
 to go through the previous user input history, and display it in the command box. Pressing the up key would go back to the earlier user input command.
@@ -263,7 +266,7 @@ no text will be displayed.
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="budget-feature"><a class="link" href="#budget-feature">Budget Feature</a></h3>
+<h3 id="budget-feature"><a class="link" href="#budget-feature">Budget feature</a></h3>
 <div class="paragraph">
 <p>The <code>Budget</code> component has two core features:</p>
 </div>
@@ -365,7 +368,7 @@ to parse the user input.</p>
 Initially, it has totaled up all spending in the save file, and then the value is modified when the <code>add</code>, <code>delete</code> and <code>edit</code> commands are called.</p>
 </div>
 <div class="paragraph">
-<p>The following sequence diagram will demonstrate how Budget modifies its value when the <code>add</code> command is used:</p>
+<p>The following sequence diagram demonstrates how Budget modifies its value when the <code>add</code> command is used:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -437,15 +440,15 @@ all spending available, but we handle <code>add</code>, <code>delete</code> and 
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-UpDown"><a class="link" href="#Implementation-UpDown">Up/Down key</a></h3>
+<h3 id="Implementation-commandHistory"><a class="link" href="#Implementation-commandHistory">Command History Feature</a></h3>
 <div class="paragraph">
-<p>Similar to a typical Command Line Interface(CLI), the up and down key allows the users to cycle through their previous commands.</p>
+<p>Similar to a typical CLI, the up and down key allows the users to cycle through their previous commands.</p>
 </div>
 <div class="sect3">
 <h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
 <div class="paragraph">
-<p>The up and down key mechanism is facilitated by the <code>logic</code> component of <code>MoneyGoWhere</code>.
-Whenever a user inputted command is entered, it is stored internally in a list in <code>commandHistory</code> component of <code>Storage</code>.
+<p>The up and down key mechanism is facilitated by the <code>logic</code> component of MoneyGoWhere.
+Whenever a user inputs a command, it is stored internally in a list in <code>CommandHistory</code> component of <code>Storage</code>.
 <code>CommandHistory</code> has an internal index to keep track of its current position in the list.</p>
 </div>
 <div class="paragraph">
@@ -462,21 +465,21 @@ Whenever a user inputted command is entered, it is stored internally in a list i
 </ul>
 </div>
 <div class="paragraph">
-<p>The index is initially set to -1, to indicate that that no user input has been inputted.
+<p>The index is initially set to -1, to indicate that there has been no user input.
 Whenever a user inputs a command, the command is stored at the end of the list and
 the index is set to the size of the list, to indicate that there are no commands beyond after this point.</p>
 </div>
 <div class="paragraph">
 <p>Calling <code>getPrevCommand()</code> will cause the index to decrement by 1 and show the user input command stored at that index.
-When the index is currently 0, or the first user command inputted, pressing the up key will cause the index to result in -1.
+When the index is currently 0, or the first user input, pressing the up key will cause the index to result in -1.
 This returns the empty string, since there are no commands before this point. Any further up key press will have the same
-outcome, but the index will stay at -1.</p>
+outcome, but the index will stay at negative one.</p>
 </div>
 <div class="paragraph">
-<p>Calling <code>getNextCommand()</code> will cause the index to increment by 1 and the user inputted command at that index will be returned.
-If the index is currently the last possible value, the last user inputted command, pressing the down key will cause the
+<p>Calling <code>getNextCommand()</code> will cause the index to increment by 1 and the user input at that index will be returned.
+If the index is currently the last possible value, the last user input, pressing the down key will cause the
 index to increment by 1, which is outside the list, the empty string will be returned. Any further down key press
-will have the same outcome but the index will stay the list size or last possible index + 1.</p>
+will have the same outcome but the index will stay at the list size or one after the last possible index.</p>
 </div>
 <div class="paragraph">
 <p>The following sequence diagram shows how the up/down key mechanism works:</p>
@@ -506,7 +509,7 @@ The only difference is which commands get returned.
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>The user presses the down key.</p>
+<p>The user presses the <code>down</code> key.</p>
 </li>
 <li>
 <p><code>LogicManager</code> calls  <code>StorageManager#getNextCommand()</code>.</p>
@@ -515,7 +518,7 @@ The only difference is which commands get returned.
 <p><code>StorageManager#getNextCommand()</code> calls <code>CommandHistory#getNextCommand()</code></p>
 </li>
 <li>
-<p><code>CommandHistory</code> returns the next user inputted command.</p>
+<p><code>CommandHistory</code> returns the next user input.</p>
 </li>
 <li>
 <p>The returned command is then showed to the user in the <code>CommandBox</code>.</p>
@@ -537,13 +540,13 @@ The only difference is which commands get returned.
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>The user presses the down key.</p>
+<p>The user presses the <code>down</code> key.</p>
 </li>
 <li>
 <p><code>CommandHistory</code> will increment its index.</p>
 </li>
 <li>
-<p>If the index is not out of bounds, the user inputted command at the index will be returned</p>
+<p>If the index is not out of bounds, the user input at the index will be returned</p>
 </li>
 <li>
 <p>Else, the index is set to the size of the list, and an empty string is returned.</p>
@@ -557,4 +560,4 @@ The only difference is whether it returns the next command or the previous comma
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 10:42:09 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 11:04:24 UTC</div></div></div></body></html>

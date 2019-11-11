@@ -33,7 +33,7 @@
 <ul class="sectlevel2">
 <li><a href="#logging">5.1. Logging</a></li>
 <li><a href="#Implementation-Configuration">5.2. Configuration</a></li>
-<li><a href="#Implementation-UpDown">5.3. Up/Down key</a></li>
+<li><a href="#Implementation-commandHistory">5.3. Command History Feature</a></li>
 <li><a href="#Implementation-Find">5.4. Find feature</a></li>
 <li><a href="#Implementation-Sort">5.5. Sort feature</a></li>
 <li><a href="#reminder-feature">5.6. Reminder feature</a></li>
@@ -41,7 +41,7 @@
 <li><a href="#export-feature">5.8. Export Feature</a></li>
 <li><a href="#statistics-feature">5.9. Statistics feature</a></li>
 <li><a href="#graph-feature">5.10. Graph feature</a></li>
-<li><a href="#budget-feature">5.11. Budget Feature</a></li>
+<li><a href="#budget-feature">5.11. Budget feature</a></li>
 <li><a href="#proposed-undo-redo-feature">5.12. [Proposed] Undo/Redo feature</a></li>
 </ul>
 </li>
@@ -92,6 +92,9 @@
 <li><a href="#exporting-spending-data">F.10. Exporting Spending Data</a></li>
 <li><a href="#showing-statistics">F.11. Showing Statistics</a></li>
 <li><a href="#showing-graph">F.12. Showing Graph</a></li>
+<li><a href="#setting-a-new-budget">F.13. Setting a New Budget</a></li>
+<li><a href="#viewing-previous-commands">F.14. Viewing Previous Commands</a></li>
+<li><a href="#viewing-next-commands">F.15. Viewing Next Commands</a></li>
 </ul>
 </li>
 </ul>
@@ -692,15 +695,15 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Spending Book
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-UpDown"><a class="link" href="#Implementation-UpDown">5.3. Up/Down key</a></h3>
+<h3 id="Implementation-commandHistory"><a class="link" href="#Implementation-commandHistory">5.3. Command History Feature</a></h3>
 <div class="paragraph">
-<p>Similar to a typical Command Line Interface(CLI), the up and down key allows the users to cycle through their previous commands.</p>
+<p>Similar to a typical CLI, the up and down key allows the users to cycle through their previous commands.</p>
 </div>
 <div class="sect3">
 <h4 id="implementation-2"><a class="link" href="#implementation-2">5.3.1. Implementation</a></h4>
 <div class="paragraph">
-<p>The up and down key mechanism is facilitated by the <code>logic</code> component of <code>MoneyGoWhere</code>.
-Whenever a user inputted command is entered, it is stored internally in a list in <code>commandHistory</code> component of <code>Storage</code>.
+<p>The up and down key mechanism is facilitated by the <code>logic</code> component of MoneyGoWhere.
+Whenever a user inputs a command, it is stored internally in a list in <code>CommandHistory</code> component of <code>Storage</code>.
 <code>CommandHistory</code> has an internal index to keep track of its current position in the list.</p>
 </div>
 <div class="paragraph">
@@ -717,21 +720,21 @@ Whenever a user inputted command is entered, it is stored internally in a list i
 </ul>
 </div>
 <div class="paragraph">
-<p>The index is initially set to -1, to indicate that that no user input has been inputted.
+<p>The index is initially set to -1, to indicate that there has been no user input.
 Whenever a user inputs a command, the command is stored at the end of the list and
 the index is set to the size of the list, to indicate that there are no commands beyond after this point.</p>
 </div>
 <div class="paragraph">
 <p>Calling <code>getPrevCommand()</code> will cause the index to decrement by 1 and show the user input command stored at that index.
-When the index is currently 0, or the first user command inputted, pressing the up key will cause the index to result in -1.
+When the index is currently 0, or the first user input, pressing the up key will cause the index to result in -1.
 This returns the empty string, since there are no commands before this point. Any further up key press will have the same
-outcome, but the index will stay at -1.</p>
+outcome, but the index will stay at negative one.</p>
 </div>
 <div class="paragraph">
-<p>Calling <code>getNextCommand()</code> will cause the index to increment by 1 and the user inputted command at that index will be returned.
-If the index is currently the last possible value, the last user inputted command, pressing the down key will cause the
+<p>Calling <code>getNextCommand()</code> will cause the index to increment by 1 and the user input at that index will be returned.
+If the index is currently the last possible value, the last user input, pressing the down key will cause the
 index to increment by 1, which is outside the list, the empty string will be returned. Any further down key press
-will have the same outcome but the index will stay the list size or last possible index + 1.</p>
+will have the same outcome but the index will stay at the list size or one after the last possible index.</p>
 </div>
 <div class="paragraph">
 <p>The following sequence diagram shows how the up/down key mechanism works:</p>
@@ -761,7 +764,7 @@ The only difference is which commands get returned.
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>The user presses the down key.</p>
+<p>The user presses the <code>down</code> key.</p>
 </li>
 <li>
 <p><code>LogicManager</code> calls  <code>StorageManager#getNextCommand()</code>.</p>
@@ -770,7 +773,7 @@ The only difference is which commands get returned.
 <p><code>StorageManager#getNextCommand()</code> calls <code>CommandHistory#getNextCommand()</code></p>
 </li>
 <li>
-<p><code>CommandHistory</code> returns the next user inputted command.</p>
+<p><code>CommandHistory</code> returns the next user input.</p>
 </li>
 <li>
 <p>The returned command is then showed to the user in the <code>CommandBox</code>.</p>
@@ -792,13 +795,13 @@ The only difference is which commands get returned.
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>The user presses the down key.</p>
+<p>The user presses the <code>down</code> key.</p>
 </li>
 <li>
 <p><code>CommandHistory</code> will increment its index.</p>
 </li>
 <li>
-<p>If the index is not out of bounds, the user inputted command at the index will be returned</p>
+<p>If the index is not out of bounds, the user input at the index will be returned</p>
 </li>
 <li>
 <p>Else, the index is set to the size of the list, and an empty string is returned.</p>
@@ -1930,7 +1933,7 @@ Difficult to modify one feature without needing to modify the other as well.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="budget-feature"><a class="link" href="#budget-feature">5.11. Budget Feature</a></h3>
+<h3 id="budget-feature"><a class="link" href="#budget-feature">5.11. Budget feature</a></h3>
 <div class="paragraph">
 <p>The <code>Budget</code> component has two core features:</p>
 </div>
@@ -2032,7 +2035,7 @@ to parse the user input.</p>
 Initially, it has totaled up all spending in the save file, and then the value is modified when the <code>add</code>, <code>delete</code> and <code>edit</code> commands are called.</p>
 </div>
 <div class="paragraph">
-<p>The following sequence diagram will demonstrate how Budget modifies its value when the <code>add</code> command is used:</p>
+<p>The following sequence diagram demonstrates how Budget modifies its value when the <code>add</code> command is used:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -3972,5 +3975,65 @@ If there are no spending in the date range to be displayed, an empty graph is sh
 </ol>
 </div>
 </div>
+<div class="sect2">
+<h3 id="setting-a-new-budget"><a class="link" href="#setting-a-new-budget">F.13. Setting a New Budget</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Setting a new budget for the current month</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>budget 1000</code><br>
+Expected: The budget will be set to 1000, which can be seen in the Graphical User Interface</p>
+</li>
+</ol>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 10:42:09 UTC</div></div></div></body></html>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="viewing-previous-commands"><a class="link" href="#viewing-previous-commands">F.14. Viewing Previous Commands</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Traversing previous commands using the up key</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: There should be at least one existing command previously executed.</p>
+</li>
+<li>
+<p>Test case:  Press <code>up</code> key<br>
+Expected: The previous command will be shown in the command box.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="viewing-next-commands"><a class="link" href="#viewing-next-commands">F.15. Viewing Next Commands</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Traversing next commands using the down key</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: There should be at least two existing command previously executed and user has pressed the up key twice.</p>
+</li>
+<li>
+<p>Test case: Press <code>down</code> key<br>
+Expected: The most recent command will be shown in the command box.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 11:04:24 UTC</div></div></div></body></html>
