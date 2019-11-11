@@ -86,10 +86,12 @@
 <li><a href="#sorting-displayed-spending">F.5. Sorting displayed spending</a></li>
 <li><a href="#changing-the-displayed-currency">F.6. Changing the displayed currency</a></li>
 <li><a href="#viewing-exchange-rate-or-conversion-rate">F.7. Viewing exchange rate or conversion rate</a></li>
-<li><a href="#importing-spending-data">F.8. Importing Spending Data</a></li>
-<li><a href="#exporting-spending-data">F.9. Exporting Spending Data</a></li>
-<li><a href="#showing-statistics">F.10. Showing Statistics</a></li>
-<li><a href="#showing-graph">F.11. Showing Graph</a></li>
+<li><a href="#adding-a-reminder">F.8. Adding a Reminder</a></li>
+<li><a href="#deleting-a-reminder">F.9. Deleting a Reminder</a></li>
+<li><a href="#importing-spending-data">F.10. Importing Spending Data</a></li>
+<li><a href="#exporting-spending-data">F.11. Exporting Spending Data</a></li>
+<li><a href="#showing-statistics">F.12. Showing Statistics</a></li>
+<li><a href="#showing-graph">F.13. Showing Graph</a></li>
 </ul>
 </li>
 </ul>
@@ -1076,28 +1078,67 @@ The lifeline for <code>SortCommandParser</code> should end at the destroy marker
 <div class="sect2">
 <h3 id="reminder-feature"><a class="link" href="#reminder-feature">5.6. Reminder feature</a></h3>
 <div class="paragraph">
-<p>With this reminder feature, users can set the reminders of their tasks with deadlines and delete them when completed.</p>
+<p>This feature allows users to set reminders for their tasks with a specified deadline and delete them when respective tasks are completed.</p>
 </div>
 <div class="sect3">
-<h4 id="implementation-5"><a class="link" href="#implementation-5">5.6.1. Implementation</a></h4>
+<h4 id="implementation-for-reminder"><a class="link" href="#implementation-for-reminder">5.6.1. Implementation for Reminder</a></h4>
 <div class="paragraph">
-<p>A reminder is constructed with</p>
+<p>In this feature, a reminder is constructed with following two key information as attributes.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Deadline <code>d/DATE</code></p>
+<p><code>deadline</code> (Deadline of a task)</p>
 </li>
 <li>
-<p>Reminder Message <code>m/MESSAGE</code></p>
+<p><code>reminderMessage</code> (Message to inform user)</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The recorded reminders sorted with deadline in descending order, are displayed on the User Interface(UI) for notification.</p>
+<p>With the given deadline from users, the following two attributes are created further in the reminder constructor.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>type</code> (Type of reminder e.g. Overdue)</p>
+</li>
+<li>
+<p><code>remainingDays</code> (Remaining days before deadline)</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>This feature is implemented with the following operations:</p>
+<p>The purpose of the above two attributes are for sorting reminders based on the number of days between current date and their deadline in ascending order.
+These two attributes are also utilized in formatting how a reminder should be displayed on the <code>UI</code> components.</p>
+</div>
+<div class="paragraph">
+<p>The following class diagram illustrates the summary of the reminder class.</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="images/ReminderClassDiagram.png" alt="ReminderClassDiagram" width="75%">
+</div>
+<div class="title">Figure 16. Class diagram for reminder</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+As indicated in the above diagram, a reminder uses the <code>Date</code> class from spending package as <code>deadline</code> attribute, therefore, it is also supported with Natural Language Processing (NLP).
+Since the <code>remainingDays</code> attribute is of <code>long</code> data type, it is not included in the above diagram.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-for-adding-reminder"><a class="link" href="#implementation-for-adding-reminder">5.6.2. Implementation for Adding Reminder</a></h4>
+<div class="paragraph">
+<p>First of all, for the user to add reminders into MoneyGoWhere, the following command is made available.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1105,6 +1146,86 @@ The lifeline for <code>SortCommandParser</code> should end at the destroy marker
 <p>Adding a reminder <code>reminder add d/DATE m/MESSAGE</code><br>
 e.g. <code>reminder add d/30/08/2020 m/Pay school fee</code> - set reminder to pay school fee by 30th of August 2020</p>
 </li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In this command, the parameter values lead by the prefixes are <code>String</code> values and <code>parser</code> will convert these values into acutual <code>Date</code> and <code>ReminderMessage</code> objects later on.</p>
+</div>
+<div class="paragraph">
+<p>Below is the activity diagram describing the steps take by MoneyGoWhere when it receives <code>AddReminderCommand</code>.</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="images/AddReminderActivityDiagram.png" alt="AddReminderActivityDiagram" width="75%">
+</div>
+<div class="title">Figure 17. Activity diagram for adding a reminder</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In the above diagram, it can be seen that a reminder input from user will only be recorded after it passes all the validation checks.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To illustrate how a reminder is added to the Model component when the user enters <code>AddReminderCommand</code>, the sequence diagram is shown below.</p>
+</div>
+<div id="AddReminderSequenceDiagram" class="imageblock" style="text-align: center">
+<div class="content">
+<img src="images/AddReminderSequenceDiagram.png" alt="AddReminderSequenceDiagram" width="100%">
+</div>
+<div class="title">Figure 18. Sequence diagram when a new reminder is added to the model component.</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The above sequence diagram only demonstrates how an <code>AddReminderCommand</code> is constructed from valid user input and how it is executed. It does not show how a reminder is added into the <code>Storage</code> component and how the <code>UI</code> components are updated.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The following are the brief explanation of <a href="#AddReminderSequenceDiagram">Figure 18, &#8220;Sequence diagram when a new reminder is added to the model component.&#8221;</a></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The user enters <code>reminder add d/today m/Pay bill</code>.</p>
+</li>
+<li>
+<p><code>SpendingBookParser#parseCommand()</code> is called by <code>LogicManager</code></p>
+</li>
+<li>
+<p>This creates <code>ReminderCommandParser</code> and it checks if the given user input is to add a reminder, to delete a reminder or invalid.</p>
+</li>
+<li>
+<p>Next, <code>AddReminderCommandParser</code> is created and it validates the parameters provided by <code>ReminderCommandParser</code>.</p>
+</li>
+<li>
+<p>After successful validation, <code>AddReminderCommand</code> is created and passed back to callers until it reaches to <code>LogicManager</code>.</p>
+</li>
+<li>
+<p><code>LogicManager</code> then executes the command, adding the new reminder to the model through <code>Model#addReminder()</code>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-for-removing-reminder"><a class="link" href="#implementation-for-removing-reminder">5.6.3. Implementation for Removing Reminder</a></h4>
+<div class="paragraph">
+<p>In order for users to delete unwanted reminders, the following command is implemented in MoneyGoWhere application.</p>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p>Deleting a reminder <code>reminder delete INDEX</code><br>
 e.g. <code>reminder delete 1</code> - delete the first reminder in the reminder list shown in UI.</p>
@@ -1112,13 +1233,13 @@ e.g. <code>reminder delete 1</code> - delete the first reminder in the reminder 
 </ul>
 </div>
 <div class="paragraph">
-<p>Below is the activity diagram describing the steps take by MoneyGoWhere when it receives <code>AddReminderCommand</code>.</p>
+<p>Following is the activity diagram which indicates the series of actions performed by MoneyGoWhere when it receives <code>DeleteReminderCommand</code>.</p>
 </div>
-<div class="imageblock">
+<div class="imageblock" style="text-align: center">
 <div class="content">
-<img src="images/AddReminderActivityDiagram.png" alt="AddReminderActivityDiagram" width="75%">
+<img src="images/DeleteReminderActivityDiagram.png" alt="DeleteReminderActivityDiagram" width="90%">
 </div>
-<div class="title">Figure 16. Activity diagram for adding a reminder</div>
+<div class="title">Figure 19. Activity diagram for removing a reminder</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1127,19 +1248,44 @@ e.g. <code>reminder delete 1</code> - delete the first reminder in the reminder 
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-In the above diagram, it can be seen that respective error messages will be shown for invalid inputs.
+The negative index from user input will leads to invalid command format error as shown in the above diagram.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Shown below is the sequence diagram containing the interactions between respective components in MoneyGoWHere when user inputs <code>AddReminderCommand</code>.</p>
+<p>Moreover, the following sequence diagram summarizes the interactions between different components when the user enter <code>DeleteReminderCommand</code>.</p>
 </div>
-<div class="imageblock">
+<div id="DeleteReminderSequenceDiagram" class="imageblock" style="text-align: center">
 <div class="content">
-<img src="images/AddReminderSequenceDiagram.png" alt="AddReminderSequenceDiagram" width="75%">
+<img src="images/DeleteReminderSequenceDiagram.png" alt="DeleteReminderSequenceDiagram" width="100%">
 </div>
-<div class="title">Figure 17. Sequence diagram while user attempts to add a new reminder</div>
+<div class="title">Figure 20. Sequence diagram while user attempt to remove a reminder</div>
+</div>
+<div class="paragraph">
+<p>The following are the brief explanation of <a href="#DeleteReminderSequenceDiagram">Figure 20, &#8220;Sequence diagram while user attempt to remove a reminder&#8221;</a></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The user enters <code>reminder delete 1</code></p>
+</li>
+<li>
+<p><code>SpendingBookParser#parseCommand()</code> called by <code>LogicManager</code>.</p>
+</li>
+<li>
+<p>This creates <code>ReminderCommandParser</code> and it checks if the given user input is to add a reminder or to delete a reminder or is invalid.</p>
+</li>
+<li>
+<p>Next, <code>DeleteReminderCommandParser</code> is created and it validates the parameters provided by <code>ReminderCommandParser</code>.</p>
+</li>
+<li>
+<p>After successful validation, <code>DeleteReminderCommand</code> is created and passed back to callers until it reaches to <code>Logic Manager</code>.</p>
+</li>
+<li>
+<p><code>LogicManager</code> then executes the command, removing the specified reminder from the model through <code>Model#deleteReminder()</code>.</p>
+</li>
+</ol>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1148,40 +1294,75 @@ In the above diagram, it can be seen that respective error messages will be show
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The above sequence diagram demonstrates how a new reminder is constructed from valid user input.
+The above sequence diagram only shows how a <code>DeleteReminderCommand</code> is created and executed. It does not include how a reminder is removed from the storage component and how the UI component is updated.
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Following is the activity diagram including the series of actions performed by MoneyGoWhere when it receives <code>DeleteReminderCommand</code></p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="images/DeleteReminderActivityDiagram.png" alt="DeleteReminderActivityDiagram" width="75%">
+<div class="sect3">
+<h4 id="limitations"><a class="link" href="#limitations">5.6.4. Limitations</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The date value of the <code>deadline</code> attribute is limited to before the end of next year and must be in the future. This prevents users from entering reminder of overdue tasks as inputs.</p>
+</li>
+<li>
+<p>In this feature, the <code>reminderMessage</code> attribute cannot be constructed with empty spaces. The purpose of this limitation is to prevent users from entering a reminder without specifying a message to be displayed.</p>
+</li>
+</ol>
 </div>
-<div class="title">Figure 18. Activity diagram for removing a reminder</div>
 </div>
-<div class="admonitionblock note">
-<table>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">5.6.5. Design Considerations</a></h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
 <tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The negative index from user input will leads to invalid command format error.
-</td>
+<th class="tableblock halign-left valign-top">Aspect</th>
+<th class="tableblock halign-left valign-top">Alternative 1 (Current choice)</th>
+<th class="tableblock halign-left valign-top">Alternative 2</th>
 </tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How reminders are stored</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Store reminders together with other information in <code>moneygowhere.json</code>. <br>
+<br>
+<strong>Pros:</strong><br>
+Allows re-use of existing codes for implementation.<br>
+Only has to manage a single file for storage of user&#8217;s data.<br>
+<br>
+<strong>Cons:</strong><br>
+Could lead to larger file size.<br>
+More data could be lost in cases of file corruption.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Store reminders in a new json file separated from other information.<br>
+<br>
+<strong>Pros:</strong><br>
+Smaller file size compared to alternative 1.<br>
+Lesser data loss in case of file corruption compare to alternative 1.<br>
+<br>
+<strong>Cons:</strong><br>
+Requires additional implementation for storing reminders.<br>
+Has to manage multiple files for storage of user&#8217;s data</p></td>
+</tr>
+</tbody>
 </table>
+<div class="paragraph">
+<p>Alternative 1 from above table, is currently implemented in MoneyGoWhere (v1.4) since it is efficient for the application to access user&#8217;s data from a single storage file.</p>
 </div>
 <div class="paragraph">
-<p>The below sequence diagram summarize the interactions between different components when user enter <code>DeleteReminderCommand</code>.</p>
+<p>The following Architecture Diagram summarizes how different components in MoneyGoWhere application interact with each other while storing a reminder from the valid user input with the current implementation.</p>
 </div>
-<div class="imageblock">
+<div class="imageblock" style="text-align: center">
 <div class="content">
-<img src="images/DeleteReminderSequenceDiagram.png" alt="DeleteReminderSequenceDiagram" width="75%">
+<img src="images/AddReminderArchitectureSequenceDiagram.png" alt="AddReminderArchitectureSequenceDiagram">
 </div>
-<div class="title">Figure 19. Sequence diagram while user attempt to remove a reminder</div>
+<div class="title">Figure 21. Architecture Diagram</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1190,7 +1371,7 @@ The negative index from user input will leads to invalid command format error.
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The above diagram also highlights how logic and model components interact with each other while deleting a reminder.
+The above high-level Architecture Diagram only provides the summarized steps taken by different components while storing a reminder into <code>MoneyGoWhere.json</code>.
 </td>
 </tr>
 </table>
@@ -1218,7 +1399,7 @@ Reminder and budget data will also be imported.</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="implementation-6"><a class="link" href="#implementation-6">5.7.1. Implementation</a></h4>
+<h4 id="implementation-5"><a class="link" href="#implementation-5">5.7.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The import feature allows our users to import data from a comma-separated values (Csv) files.
 It allows users to add their spending in bulk.</p>
@@ -1231,7 +1412,7 @@ It allows users to add their spending in bulk.</p>
 <div class="content">
 <img src="images/ImportSequenceDiagram.png" alt="ImportSequenceDiagram" width="100%">
 </div>
-<div class="title">Figure 20. Interactions Inside the Logic Component for the <code>import</code> Command</div>
+<div class="title">Figure 22. Interactions Inside the Logic Component for the <code>import</code> Command</div>
 </div>
 <div class="paragraph">
 <p>The Import Feature has one main component, which is the <code>ImportCommand.java</code> file. This file contains the main logic behind the feature.
@@ -1248,7 +1429,7 @@ Following that, the application will then prints an output, showing the result o
 <div class="content">
 <img src="images/ImportActivityDiagram.png" alt="ImportActivityDiagram" width="25%">
 </div>
-<div class="title">Figure 21. Import Feature Activity Diagram</div>
+<div class="title">Figure 23. Import Feature Activity Diagram</div>
 </div>
 <div class="paragraph">
 <p>When a user calls the <code>import</code> command and inputs a valid Csv file, the application will read and parses all the data inside the file and save them to the <code>SpendingBookList</code> and <code>moneygowhere.json</code>.</p>
@@ -1308,7 +1489,7 @@ There should be 5 columns specified for <code>Name</code>, <code>Cost</code>, <c
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">5.7.3. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">5.7.3. Design Considerations</a></h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 20%;">
@@ -1373,7 +1554,7 @@ Reminder and budget data will also be exported.</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="implementation-7"><a class="link" href="#implementation-7">5.8.1. Implementation</a></h4>
+<h4 id="implementation-6"><a class="link" href="#implementation-6">5.8.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The export feature allows our  users to export their spending into a comma-separated values(Csv) files.
 It allows users to export their spending allowing the spending data to be portable.</p>
@@ -1385,7 +1566,7 @@ It allows users to export their spending allowing the spending data to be portab
 <div class="content">
 <img src="images/ExportSequenceDiagram.png" alt="ExportSequenceDiagram" width="100%">
 </div>
-<div class="title">Figure 22. Interactions Inside the Logic Component for the `export' Command</div>
+<div class="title">Figure 24. Interactions Inside the Logic Component for the `export' Command</div>
 </div>
 <div class="paragraph">
 <p>The export feature has one main component, which is the <code>ExportCommand.java</code> file. This file contains the main logic behind the feature.
@@ -1400,7 +1581,7 @@ After the data has been successfully exported, the application will then prints 
 <div class="content">
 <img src="images/ExportActivityDiagram.png" alt="ExportActivityDiagram" width="25%">
 </div>
-<div class="title">Figure 23. Export Feature Activity Diagram</div>
+<div class="title">Figure 25. Export Feature Activity Diagram</div>
 </div>
 <div class="paragraph">
 <p>When a user calls the <code>export</code> command and inputs a valid folder path, the application will convert all the spending data into a Csv file and export it to <code>moneygowhere.csv</code></p>
@@ -1431,7 +1612,7 @@ After the data has been successfully exported, the application will then prints 
 <div class="content">
 <img src="images/StatsActivityDiagram.png" alt="StatsActivityDiagram" width="600">
 </div>
-<div class="title">Figure 24. Activity Diagram showing behaviour of StatsCommandParser</div>
+<div class="title">Figure 26. Activity Diagram showing behaviour of StatsCommandParser</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -1459,7 +1640,7 @@ The following sequence diagram shows how <code>stats</code> command works during
 <div class="content">
 <img src="images/StatsSequenceDiagram.png" alt="StatsSequenceDiagram">
 </div>
-<div class="title">Figure 25. Sequence Diagram demonstrating the preparation stage of Statistics feature</div>
+<div class="title">Figure 27. Sequence Diagram demonstrating the preparation stage of Statistics feature</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1514,7 +1695,7 @@ Below is the UML sequence diagram and a step-by-step explanation.</p>
 <div class="content">
 <img src="images/StatsDataSequenceDiagram.png" alt="StatsDataSequenceDiagram" width="400">
 </div>
-<div class="title">Figure 26. Sequence Diagram demonstrating the execution stage of Statistics feature</div>
+<div class="title">Figure 28. Sequence Diagram demonstrating the execution stage of Statistics feature</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -1535,7 +1716,7 @@ Below is the UML sequence diagram and a step-by-step explanation.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">5.9.2. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">5.9.2. Design Considerations</a></h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 20%;">
@@ -1587,7 +1768,7 @@ Below is the UML sequence diagram and a step-by-step explanation.</p>
 <div class="content">
 <img src="images/GraphActivityDiagram.png" alt="GraphActivityDiagram" width="600">
 </div>
-<div class="title">Figure 27. Activity Diagram showing behaviour of GraphCommandParser</div>
+<div class="title">Figure 29. Activity Diagram showing behaviour of GraphCommandParser</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -1615,7 +1796,7 @@ The following sequence diagram shows how <code>graph</code> command works during
 <div class="content">
 <img src="images/GraphSequenceDiagram.png" alt="GraphSequenceDiagram">
 </div>
-<div class="title">Figure 28. Sequence Diagram demonstrating the preparation stage of Graph feature</div>
+<div class="title">Figure 30. Sequence Diagram demonstrating the preparation stage of Graph feature</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1670,7 +1851,7 @@ Below is the UML sequence diagram and a step-by-step explanation.</p>
 <div class="content">
 <img src="images/GraphDataSequenceDiagram.png" alt="GraphDataSequenceDiagram" width="400">
 </div>
-<div class="title">Figure 29. Sequence Diagram demonstrating the execution stage of Graph feature</div>
+<div class="title">Figure 31. Sequence Diagram demonstrating the execution stage of Graph feature</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -1691,7 +1872,7 @@ Below is the UML sequence diagram and a step-by-step explanation.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">5.10.2. Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">5.10.2. Design Considerations</a></h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 20%;">
@@ -1794,7 +1975,7 @@ The sequence diagram below demonstrates how the budget command is executed:</p>
 <div class="content">
 <img src="images/SetBudgetSequenceDiagram.png" alt="SetBudgetSequenceDiagram">
 </div>
-<div class="title">Figure 30. Sequence Diagram when setting Budget</div>
+<div class="title">Figure 32. Sequence Diagram when setting Budget</div>
 </div>
 <div class="paragraph">
 <p>The figure above shows the sequence of events that occur to set the monthly budget:</p>
@@ -1830,7 +2011,7 @@ Initially, it has totaled up all spending in the save file, and then the value i
 <div class="content">
 <img src="images/BudgetAddSpendingSequenceDiagram.png" alt="BudgetAddSpendingSequenceDiagram">
 </div>
-<div class="title">Figure 31. Sequence Diagram for <code>Budget</code> when <code>add</code> command is called</div>
+<div class="title">Figure 33. Sequence Diagram for <code>Budget</code> when <code>add</code> command is called</div>
 </div>
 <div class="paragraph">
 <p>The diagram above shows what happens when an <code>addCommand</code> is being executed. It focuses only on the components that affect <code>Budget</code>.</p>
@@ -2040,7 +2221,7 @@ If the <code>currentStatePointer</code> is at index <code>spendingBookStateList.
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">5.12.2. Design Considerations</a></h4>
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">5.12.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
@@ -2160,7 +2341,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 32. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 34. Saving documentation as PDF files in Chrome</div>
 </div>
 </div>
 <div class="sect2">
@@ -2393,7 +2574,7 @@ e.g. <code>seedu.moneygowhere.logic.LogicManagerTest</code></p>
 <div class="content">
 <img src="images/testfx-idea-accessibility-permissions.png" alt="testfx idea accessibility permissions" width="600">
 </div>
-<div class="title">Figure 33. <code>Accessibility</code> permission is granted to <code>IntelliJ IDEA</code></div>
+<div class="title">Figure 35. <code>Accessibility</code> permission is granted to <code>IntelliJ IDEA</code></div>
 </div>
 </div>
 </div>
@@ -3615,7 +3796,62 @@ Expected: All exchange rates stored by the application are displayed.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="importing-spending-data"><a class="link" href="#importing-spending-data">F.8. Importing Spending Data</a></h3>
+<h3 id="adding-a-reminder"><a class="link" href="#adding-a-reminder">F.8. Adding a Reminder</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Adding a reminder into the reminder list</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>reminder add d/tomorrow m/Pay school fee</code><br>
+Expected: A reminder to pay school fee by tomorrow, is added into the current reminder list and success message together with the details of newly added reminder is shown in the results display.</p>
+</li>
+<li>
+<p>Test case: <code>reminder add m/Pay phone bill</code><br>
+Expected: No reminder is added. Error details shown in the results display.</p>
+</li>
+<li>
+<p>Test case: <code>reminder add d/today</code>
+Expected: No reminder is added. Error details shown in the results display.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-reminder"><a class="link" href="#deleting-a-reminder">F.9. Deleting a Reminder</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Deleting a reminder while there is at least one reminder</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: There is at least one reminder in the reminder list being displayed on the User Interface.</p>
+</li>
+<li>
+<p>Test case: <code>reminder delete 1</code><br>
+Expected: First reminder is deleted from the reminder list. Details of the deleted reminder shown in the display.</p>
+</li>
+<li>
+<p>Test case: <code>reminder delete 0</code><br>
+Expected: No reminder is deleted. Error details shown in the results display.</p>
+</li>
+<li>
+<p>Other incorrect delete reminder commands to try: <code>reminder delete</code>, <code>reminder delete x</code> (where x is larger than the list size) <em>{give more}</em><br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="importing-spending-data"><a class="link" href="#importing-spending-data">F.10. Importing Spending Data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3651,7 +3887,7 @@ Expected: Only valid spending will be added to the spending list, whereas error 
 </div>
 </div>
 <div class="sect2">
-<h3 id="exporting-spending-data"><a class="link" href="#exporting-spending-data">F.9. Exporting Spending Data</a></h3>
+<h3 id="exporting-spending-data"><a class="link" href="#exporting-spending-data">F.11. Exporting Spending Data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3673,7 +3909,7 @@ Expected: All spending data will be exported into <code>C:\Users\user\Documents\
 </div>
 </div>
 <div class="sect2">
-<h3 id="showing-statistics"><a class="link" href="#showing-statistics">F.10. Showing Statistics</a></h3>
+<h3 id="showing-statistics"><a class="link" href="#showing-statistics">F.12. Showing Statistics</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3700,7 +3936,7 @@ If there are no spending in the date range to be displayed, MoneyGoWhere will di
 </div>
 </div>
 <div class="sect2">
-<h3 id="showing-graph"><a class="link" href="#showing-graph">F.11. Showing Graph</a></h3>
+<h3 id="showing-graph"><a class="link" href="#showing-graph">F.13. Showing Graph</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3727,4 +3963,4 @@ If there are no spending in the date range to be displayed, an empty graph is sh
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 09:54:57 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 10:32:34 UTC</div></div></div></body></html>

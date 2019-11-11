@@ -137,7 +137,7 @@ Moreover, since the user interaction is mainly through command line interface (C
 <p>Created use cases and updated them into Developer Guide. (Pull Requests: <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/pull/40">#40</a>)</p>
 </li>
 <li>
-<p>Updated the existing Developer Guide of Address book for MoneyGoWhere application. (Pull Requests: <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/pull/95">#95</a>)</p>
+<p>Updated the existing Developer Guide of Address book for MoneyGoWhere application. (Pull Requests: <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/pull/95">#95</a>, <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/pull/269">#269</a>)</p>
 </li>
 </ul>
 </div>
@@ -157,7 +157,7 @@ Moreover, since the user interaction is mainly through command line interface (C
 <div class="ulist">
 <ul>
 <li>
-<p>Contributed in implementing solutions for flaws and bugs found in the application. (Pull Requests: <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/pull/203">#203</a>, <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/pull/219">#219</a>)</p>
+<p>Contributed in implementing solutions for flaws and bugs found in the application. (Pull Requests: <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/pull/203">#203</a>, <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/pull/219">#219</a> , <a href="https://github.com/AY1920S1-CS2103T-F13-3/main/pull/251">#251</a>)</p>
 </li>
 </ul>
 </div>
@@ -216,10 +216,24 @@ Represents important information to be noted.
 <div class="sect2">
 <h3 id="adding-a-reminder-code-reminder-add-code"><a class="link" href="#adding-a-reminder-code-reminder-add-code">Adding a reminder: <code>reminder add</code></a></h3>
 <div class="paragraph">
-<p>Adds a reminder to the reminder list when the user enters a new reminder. Key information such as deadline and message are recorded.</p>
+<p>Adds a reminder to the reminder list when you enters a new reminder. Key information such as deadline and message are recorded.</p>
 </div>
 <div class="paragraph">
 <p><strong>Format:</strong> <code>reminder add d/DATE m/MESSAGE</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Your reminders are sorted based on how close they are to their respective deadline.</p>
+</li>
+<li>
+<p>The closer it is to the deadline, the higher position it takes in the reminder list.</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -228,7 +242,7 @@ Represents important information to be noted.
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The date of the deadline in a reminder must be in the future before the end of next year. In other words, MoneyGoWhere will accept dates starting from today until the end of next year as deadlines.
+Please ensure that the date of the deadline must be in the future before the end of next year. In other words, MoneyGoWhere will accept dates starting from today until the end of next year as deadlines.
 </td>
 </tr>
 </table>
@@ -299,7 +313,7 @@ Deletes the second reminder in the list based on the current results shown.</p>
 <div class="sect2">
 <h3 id="clear-all-data-code-clear-code"><a class="link" href="#clear-all-data-code-clear-code">Clear all data : <code>clear</code></a></h3>
 <div class="paragraph">
-<p>Clears all entries from the application.<br>
+<p>You can clear all your saved data from this application using this command.<br>
 <strong>Format:</strong> <code>clear</code></p>
 </div>
 <div class="admonitionblock note">
@@ -339,28 +353,67 @@ This command clears all stored reminders and spending from the application, and 
 <div class="sect2">
 <h3 id="reminder-feature"><a class="link" href="#reminder-feature">Reminder feature</a></h3>
 <div class="paragraph">
-<p>With this reminder feature, users can set the reminders of their tasks with deadlines and delete them when completed.</p>
+<p>This feature allows users to set reminders for their tasks with a specified deadline and delete them when respective tasks are completed.</p>
 </div>
 <div class="sect3">
-<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<h4 id="implementation-for-reminder"><a class="link" href="#implementation-for-reminder">Implementation for Reminder</a></h4>
 <div class="paragraph">
-<p>A reminder is constructed with</p>
+<p>In this feature, a reminder is constructed with following two key information as attributes.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Deadline <code>d/DATE</code></p>
+<p><code>deadline</code> (Deadline of a task)</p>
 </li>
 <li>
-<p>Reminder Message <code>m/MESSAGE</code></p>
+<p><code>reminderMessage</code> (Message to inform user)</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The recorded reminders sorted with deadline in descending order, are displayed on the User Interface(UI) for notification.</p>
+<p>With the given deadline from users, the following two attributes are created further in the reminder constructor.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>type</code> (Type of reminder e.g. Overdue)</p>
+</li>
+<li>
+<p><code>remainingDays</code> (Remaining days before deadline)</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>This feature is implemented with the following operations:</p>
+<p>The purpose of the above two attributes are for sorting reminders based on the number of days between current date and their deadline in ascending order.
+These two attributes are also utilized in formatting how a reminder should be displayed on the <code>UI</code> components.</p>
+</div>
+<div class="paragraph">
+<p>The following class diagram illustrates the summary of the reminder class.</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="../images/ReminderClassDiagram.png" alt="ReminderClassDiagram" width="75%">
+</div>
+<div class="title">Figure 1. Class diagram for reminder</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+As indicated in the above diagram, a reminder uses the <code>Date</code> class from spending package as <code>deadline</code> attribute, therefore, it is also supported with Natural Language Processing (NLP).
+Since the <code>remainingDays</code> attribute is of <code>long</code> data type, it is not included in the above diagram.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-for-adding-reminder"><a class="link" href="#implementation-for-adding-reminder">Implementation for Adding Reminder</a></h4>
+<div class="paragraph">
+<p>First of all, for the user to add reminders into MoneyGoWhere, the following command is made available.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -368,6 +421,86 @@ This command clears all stored reminders and spending from the application, and 
 <p>Adding a reminder <code>reminder add d/DATE m/MESSAGE</code><br>
 e.g. <code>reminder add d/30/08/2020 m/Pay school fee</code> - set reminder to pay school fee by 30th of August 2020</p>
 </li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In this command, the parameter values lead by the prefixes are <code>String</code> values and <code>parser</code> will convert these values into acutual <code>Date</code> and <code>ReminderMessage</code> objects later on.</p>
+</div>
+<div class="paragraph">
+<p>Below is the activity diagram describing the steps take by MoneyGoWhere when it receives <code>AddReminderCommand</code>.</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="../images/AddReminderActivityDiagram.png" alt="AddReminderActivityDiagram" width="75%">
+</div>
+<div class="title">Figure 2. Activity diagram for adding a reminder</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In the above diagram, it can be seen that a reminder input from user will only be recorded after it passes all the validation checks.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To illustrate how a reminder is added to the Model component when the user enters <code>AddReminderCommand</code>, the sequence diagram is shown below.</p>
+</div>
+<div id="AddReminderSequenceDiagram" class="imageblock" style="text-align: center">
+<div class="content">
+<img src="../images/AddReminderSequenceDiagram.png" alt="AddReminderSequenceDiagram" width="100%">
+</div>
+<div class="title">Figure 3. Sequence diagram when a new reminder is added to the model component.</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The above sequence diagram only demonstrates how an <code>AddReminderCommand</code> is constructed from valid user input and how it is executed. It does not show how a reminder is added into the <code>Storage</code> component and how the <code>UI</code> components are updated.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The following are the brief explanation of <a href="#AddReminderSequenceDiagram">Figure 3, &#8220;Sequence diagram when a new reminder is added to the model component.&#8221;</a></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The user enters <code>reminder add d/today m/Pay bill</code>.</p>
+</li>
+<li>
+<p><code>SpendingBookParser#parseCommand()</code> is called by <code>LogicManager</code></p>
+</li>
+<li>
+<p>This creates <code>ReminderCommandParser</code> and it checks if the given user input is to add a reminder, to delete a reminder or invalid.</p>
+</li>
+<li>
+<p>Next, <code>AddReminderCommandParser</code> is created and it validates the parameters provided by <code>ReminderCommandParser</code>.</p>
+</li>
+<li>
+<p>After successful validation, <code>AddReminderCommand</code> is created and passed back to callers until it reaches to <code>LogicManager</code>.</p>
+</li>
+<li>
+<p><code>LogicManager</code> then executes the command, adding the new reminder to the model through <code>Model#addReminder()</code>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-for-removing-reminder"><a class="link" href="#implementation-for-removing-reminder">Implementation for Removing Reminder</a></h4>
+<div class="paragraph">
+<p>In order for users to delete unwanted reminders, the following command is implemented in MoneyGoWhere application.</p>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p>Deleting a reminder <code>reminder delete INDEX</code><br>
 e.g. <code>reminder delete 1</code> - delete the first reminder in the reminder list shown in UI.</p>
@@ -375,13 +508,13 @@ e.g. <code>reminder delete 1</code> - delete the first reminder in the reminder 
 </ul>
 </div>
 <div class="paragraph">
-<p>Below is the activity diagram describing the steps take by MoneyGoWhere when it receives <code>AddReminderCommand</code>.</p>
+<p>Following is the activity diagram which indicates the series of actions performed by MoneyGoWhere when it receives <code>DeleteReminderCommand</code>.</p>
 </div>
-<div class="imageblock">
+<div class="imageblock" style="text-align: center">
 <div class="content">
-<img src="../images/AddReminderActivityDiagram.png" alt="AddReminderActivityDiagram" width="75%">
+<img src="../images/DeleteReminderActivityDiagram.png" alt="DeleteReminderActivityDiagram" width="90%">
 </div>
-<div class="title">Figure 1. Activity diagram for adding a reminder</div>
+<div class="title">Figure 4. Activity diagram for removing a reminder</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -390,40 +523,44 @@ e.g. <code>reminder delete 1</code> - delete the first reminder in the reminder 
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-In the above diagram, it can be seen that respective error messages will be shown for invalid inputs.
+The negative index from user input will leads to invalid command format error as shown in the above diagram.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Shown below is the sequence diagram containing the interactions between respective components in MoneyGoWHere when user inputs <code>AddReminderCommand</code>.</p>
+<p>Moreover, the following sequence diagram summarizes the interactions between different components when the user enter <code>DeleteReminderCommand</code>.</p>
 </div>
-<div class="imageblock">
+<div id="DeleteReminderSequenceDiagram" class="imageblock" style="text-align: center">
 <div class="content">
-<img src="../images/AddReminderSequenceDiagram.png" alt="AddReminderSequenceDiagram" width="75%">
+<img src="../images/DeleteReminderSequenceDiagram.png" alt="DeleteReminderSequenceDiagram" width="100%">
 </div>
-<div class="title">Figure 2. Sequence diagram while user attempts to add a new reminder</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The above sequence diagram demonstrates how a new reminder is constructed from valid user input.
-</td>
-</tr>
-</table>
+<div class="title">Figure 5. Sequence diagram while user attempt to remove a reminder</div>
 </div>
 <div class="paragraph">
-<p>Following is the activity diagram including the series of actions performed by MoneyGoWhere when it receives <code>DeleteReminderCommand</code></p>
+<p>The following are the brief explanation of <a href="#DeleteReminderSequenceDiagram">Figure 5, &#8220;Sequence diagram while user attempt to remove a reminder&#8221;</a></p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/DeleteReminderActivityDiagram.png" alt="DeleteReminderActivityDiagram" width="75%">
-</div>
-<div class="title">Figure 3. Activity diagram for removing a reminder</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The user enters <code>reminder delete 1</code></p>
+</li>
+<li>
+<p><code>SpendingBookParser#parseCommand()</code> called by <code>LogicManager</code>.</p>
+</li>
+<li>
+<p>This creates <code>ReminderCommandParser</code> and it checks if the given user input is to add a reminder or to delete a reminder or is invalid.</p>
+</li>
+<li>
+<p>Next, <code>DeleteReminderCommandParser</code> is created and it validates the parameters provided by <code>ReminderCommandParser</code>.</p>
+</li>
+<li>
+<p>After successful validation, <code>DeleteReminderCommand</code> is created and passed back to callers until it reaches to <code>Logic Manager</code>.</p>
+</li>
+<li>
+<p><code>LogicManager</code> then executes the command, removing the specified reminder from the model through <code>Model#deleteReminder()</code>.</p>
+</li>
+</ol>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -432,19 +569,75 @@ The above sequence diagram demonstrates how a new reminder is constructed from v
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The negative index from user input will leads to invalid command format error.
+The above sequence diagram only shows how a <code>DeleteReminderCommand</code> is created and executed. It does not include how a reminder is removed from the storage component and how the UI component is updated.
 </td>
 </tr>
 </table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="limitations"><a class="link" href="#limitations">Limitations</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The date value of the <code>deadline</code> attribute is limited to before the end of next year and must be in the future. This prevents users from entering reminder of overdue tasks as inputs.</p>
+</li>
+<li>
+<p>In this feature, the <code>reminderMessage</code> attribute cannot be constructed with empty spaces. The purpose of this limitation is to prevent users from entering a reminder without specifying a message to be displayed.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Aspect</th>
+<th class="tableblock halign-left valign-top">Alternative 1 (Current choice)</th>
+<th class="tableblock halign-left valign-top">Alternative 2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How reminders are stored</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Store reminders together with other information in <code>moneygowhere.json</code>. <br>
+<br>
+<strong>Pros:</strong><br>
+Allows re-use of existing codes for implementation.<br>
+Only has to manage a single file for storage of user&#8217;s data.<br>
+<br>
+<strong>Cons:</strong><br>
+Could lead to larger file size.<br>
+More data could be lost in cases of file corruption.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Store reminders in a new json file separated from other information.<br>
+<br>
+<strong>Pros:</strong><br>
+Smaller file size compared to alternative 1.<br>
+Lesser data loss in case of file corruption compare to alternative 1.<br>
+<br>
+<strong>Cons:</strong><br>
+Requires additional implementation for storing reminders.<br>
+Has to manage multiple files for storage of user&#8217;s data</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Alternative 1 from above table, is currently implemented in MoneyGoWhere (v1.4) since it is efficient for the application to access user&#8217;s data from a single storage file.</p>
 </div>
 <div class="paragraph">
-<p>The below sequence diagram summarize the interactions between different components when user enter <code>DeleteReminderCommand</code>.</p>
+<p>The following Architecture Diagram summarizes how different components in MoneyGoWhere application interact with each other while storing a reminder from the valid user input with the current implementation.</p>
 </div>
-<div class="imageblock">
+<div class="imageblock" style="text-align: center">
 <div class="content">
-<img src="../images/DeleteReminderSequenceDiagram.png" alt="DeleteReminderSequenceDiagram" width="75%">
+<img src="../images/AddReminderArchitectureSequenceDiagram.png" alt="AddReminderArchitectureSequenceDiagram">
 </div>
-<div class="title">Figure 4. Sequence diagram while user attempt to remove a reminder</div>
+<div class="title">Figure 6. Architecture Diagram</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -453,7 +646,7 @@ The negative index from user input will leads to invalid command format error.
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The above diagram also highlights how logic and model components interact with each other while deleting a reminder.
+The above high-level Architecture Diagram only provides the summarized steps taken by different components while storing a reminder into <code>MoneyGoWhere.json</code>.
 </td>
 </tr>
 </table>
@@ -461,4 +654,4 @@ The above diagram also highlights how logic and model components interact with e
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 09:54:57 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 10:32:34 UTC</div></div></div></body></html>
